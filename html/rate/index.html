@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="http://at.alicdn.com/t/font_2109886_e3vgtd56afl.css">
+  <title>rate</title>
+  <style>
+    /* 消除单选框默认样式 */
+    input {
+      appearance: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+    .rate-content {
+      display: flex;  /*弹性容器，按比例继承宽高*/
+      flex-flow: row-reverse; /*元素反向排列*/
+    }
+    /* 选中所有为name属性的选择器 */
+    input[name="rate"] {
+      font-family: "iconfont";
+      font-size: 30px;
+      padding-right: 10px;
+      transition: all 0.4s ease; /*元素变化的过渡时间*/
+    }
+    input[name="rate"]::after {
+      content:"\f2d3";
+      color: #999;
+    }
+    input[name="rate"]:checked::after{
+      content:"\e61a";
+      color: #ffa822;
+    }
+    input[name="rate"]:hover{
+      transform: scale(1.2);   /*缩放*/
+    }
+    input[name="rate"]:hover::after{
+      content:"\e61a";
+      color: #ffa822;
+    }
+    /* 兄弟选择器  选下面所有的兄弟*/
+    input[name="rate"]:checked ~ input[name="rate"]::after {
+      content:"\e61a";
+      color: #ffa822;
+    }
+     input[name="rate"]:hover ~ input[name="rate"]::after {
+      content:"\e61a";
+      color: #ffa822;
+    }
+  </style>
+</head>
+<body>
+  <div class="rate-content">
+    <input type="radio" name="rate">
+    <input type="radio" name="rate">
+    <input type="radio" name="rate">
+    <input type="radio" name="rate">
+    <input type="radio" name="rate">
+    <!-- 具有相同name的单选框只能选一个 -->
+  </div>
+</body>
+</html>
