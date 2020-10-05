@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background:#4c4c4c url('https://unsplash.it/1500/900?image=1021');
+  /*覆盖整个容器*/
+  background-size: cover;
+  /* 最小高度：100视口 */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  /*居中的第一种写法*/
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 850px;
+  display: flex;
+}
+/* .flex {
+  设置在父容器设置了弹性布局后，子容器占父容器宽度多少比例，1为1份
+  flex: 1;
+} */
+.speed {
+  background-color: #ffffff;
+  /* 父容器设置了display: flex;当子容器设置flex: 1;时，子容器会均匀的继承父容器的高度 */
+  flex: 1;
+  /*父容器已定宽度，子容器设置外边距消耗父容器宽度，所以标签变小*/
+  margin: 10px;
+  border-radius: 50px;
+  /* text-align: center; */
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+}
+.speed-bar {
+  /* width: 100%; */  /*h100p和f1可以互换*/
+  flex: 1;
+  height: 16.3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*线性渐变: 从-170deg的位置，由0%高度的#2376ae变化到100%高度的#c16ecf*/
+  /*角度从0开始，从第三个参数的颜色变化到第二个参数的颜色，正值顺时针，负值逆时针*/
+  background: linear-gradient(-170deg, #2376ae 0%, #c16ecf 100%);
+  color: #fff;
+  cursor: pointer;
+}
