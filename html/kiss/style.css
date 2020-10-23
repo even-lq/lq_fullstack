@@ -4,7 +4,6 @@ body {
   background-color: #78e08f;
 }
 .container {
-  border: 1px solid #000;
   width: 232px;
   height: 150px;
   position: absolute;
@@ -91,9 +90,9 @@ body {
 @keyframes face {
   0% { transform: translate(0) rotate(0); }
   10% { transform: translate(0) rotate(0); }
-  20% { transform: translate(5px) rotateX(-2deg); }
+  20% { transform: translate(5px) rotate(-2deg); }
   28% { transform: translate(0) rotate(0); }
-  35% { transform: translate(5px) rotateX(-2deg); }
+  35% { transform: translate(5px) rotate(-2deg); }
   50% { transform: translate(0) rotate(0); }
   100% { transform: translate(0) rotate(0); }
 }

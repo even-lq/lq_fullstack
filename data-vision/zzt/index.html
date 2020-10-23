@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .bargraph {
+      display: grid;/*九宫格布局*/
+      width: 150px;
+      height: 100px;
+      padding: 10px;
+      transform: scaleY(3);
+      /* 网格模板列的分配：分成5份每个占据20% */
+      grid-template-columns: repeat(5, 20%);
+      
+    }
+    .bargraph div {
+      margin: 0 2px;
+    }
+    .bargraph div:nth-child(1) {
+      /* 1.渐变的方向，2.透明色从上往下占据75% */
+      background: linear-gradient(to bottom,  transparent 75%, #37c 0, #37c 85%, #3c7 0);
+      /* 如果渐变参数都是50%，则不会渐变，百分比的意思是：从顶部开始到百分比值为实色，在百分比后开始渐变 */
+      /* background: linear-gradient(to bottom, #37c 50%, #3c7 50%); */
+    }
+    .bargraph div:nth-child(2) {
+      /* 1.渐变的方向，2.透明色从上往下占据75% */
+      background: linear-gradient(to bottom, transparent 74%, #37c 0, #37c 89%, #3c7 0);
+    }
+    .bargraph div:nth-child(3) {
+      /* 1.渐变的方向，2.透明色从上往下占据75% */
+      background: linear-gradient(to bottom, transparent 60%, #37c 0, #37c 83%, #3c7 0);
+    }
+    .bargraph div:nth-child(4) {
+      /* 1.渐变的方向，2.透明色从上往下占据75% */
+      background: linear-gradient(to bottom, transparent 55%, #37c 0, #37c 75%, #3c7 0);
+    }
+    .bargraph div:nth-child(5) {
+      /* 1.渐变的方向，2.透明色从上往下占据75% */
+      background: linear-gradient(to bottom, transparent 32%, #37c 0, #37c 63%, #3c7 0);
+    }
+  </style>
+</head>
+<body>
+  <div class="bargraph">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</body>
+</html>

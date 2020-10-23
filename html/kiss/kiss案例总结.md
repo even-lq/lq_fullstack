@@ -3,11 +3,9 @@
 ## 一、案例构思
 
 1. 利用盒模型来构建元素框架（包括容器和细节元素等）
-
-	2. 利用position实现元素布局
- 	3. 利用伪类构造元素
-
-  		4. 利用CSS3新特性：transform、animation、opacity等实现行为动作
+2. 利用position实现元素布局
+3. 利用伪类构造元素
+4. 利用CSS3新特性：transform、animation、opacity等实现行为动作
 
 ## 二、细节知识点
 
@@ -54,7 +52,9 @@
       }
       ```
 
-      
+    - 文本居中
+
+      让height=line-height；text-align:center;
 
  3. 让块级元素并列的方式
 
@@ -125,5 +125,3 @@
        - 将container的字体大小设为0
        - ``font-size: 0``
        - 设置完成后可以分行写，保持代码整洁
-
-2. 

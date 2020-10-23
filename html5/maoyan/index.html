@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/weui/2.3.0/style/weui.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styl/common.css">
+</head>
+<body>
+  
+  <div class="movie-container">
+    <div class="movie-simple__title">最受好评电影</div>
+    <div class="movie-simple">
+      <div class="movie-simple__item">
+        <img class="movie-simple__pic" alt="我和我的家乡 宁浩"
+          src="https://p1.meituan.net/movie/2897ba13cbeae096e05d2ce9ebea2f8037751.jpg@160w_224h_1e_1c">
+        <span class="wish-bg"></span>
+        <span class="score">观众评分&nbsp;&nbsp;9.5</span>
+        <p class="movie-simple__label">七号房的礼物</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-list" id="movie-list">
+  </div>
+
+
+
+
+
+  <div class="weui-tabbar">
+    <div class="weui-tabbar__item weui-bar__item_on">
+      <div style="display: inline-block; position: relative;">
+        <img src="./images/icon_movie.png" alt="" class="weui-tabbar__icon">
+        <!-- <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">8</span> -->
+      </div>
+      <p class="weui-tabbar__label">微信</p>
+    </div>
+    <div class="weui-tabbar__item">
+      <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+      <p class="weui-tabbar__label">通讯录</p>
+    </div>
+    <div class="weui-tabbar__item">
+      <div style="display: inline-block; position: relative;">
+        <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+        <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;"></span>
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </div>
+    <div class="weui-tabbar__item">
+      <img src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+      <p class="weui-tabbar__label">我</p>
+    </div>
+  </div>
+
+
+  <script src="/lib/template.js"></script>
+  <script>
+    const movieSimple = document.querySelector('.movie-simple')
+    const movieList = document.querySelector('.movie-list')
+    const color = "#3C9FE6"
+    const none = "none"
+    const block = "block"
+    let preShow = new Array();
+    fetch('/data/hot_movies.json')
+      .then(data => data.json())
+      .then(data => {
+        for (let movie of data) {
+          movieSimple.innerHTML += getMovieSimpleTemplate(movie)
+        }
+      })
+
+  fetch('/data/movie_list.json')
+      .then(data => data.json())
+      .then(data => {
+        for(let i in data) {
+         movieList.innerHTML += getMovieListTemplate(data[i])
+         if (data[i].type === 0) {
+            preShow.push(Number(i))
+          }
+        }
+        
+        let btn = movieList.getElementsByClassName("btn")
+        let detail = movieList.getElementsByClassName("detail")
+        let detailInfo = movieList.getElementsByClassName("detail-info")
+        let detailPre = movieList.getElementsByClassName("detail-pre")
+        for (const item of detailPre) {
+          item.style.display = none
+        }
+
+        for (const i in preShow) {
+          btn[preShow[i]].style.backgroundColor = color
+          detailInfo[preShow[i]].style.display = none
+          detailPre[preShow[i]].style.display = block
+        }
+      })
+  </script>
+</body>
+</html>

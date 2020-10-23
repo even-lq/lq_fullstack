@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day01</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      margin-left: 50px;
+      height: 500px;
+      width: 500px;
+      background-color: red;
+    }
+    .p-column {
+      height: 300px;
+      width: 200px;
+      margin: 0 auto;
+      background-color: #ffffff;
+
+      display: flex;
+      flex-direction:column;
+      justify-content: center;
+      align-items:center;
+    }
+    p {
+      width: 125px;
+      text-align: center;
+    }
+    .name {
+      color: #999999;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- .p-column>img.m-column[src="./images/db.png"]+p.description+p.name -->
+  <div class="wrapper">
+    <div class="p-column">
+      <img src="./images/db.png" alt="" class="m-column">
+      <p class="description">美国故事的背景——黑帮电影中的社会、文化与历史</p>
+      <p class="name">音频专栏</p>
+    </div>
+  </div>
+</body>
+</html>

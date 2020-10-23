@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/weui/2.3.0/style/weui.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/styl/common.css">
+</head>
+<body>
+  <!-- <div class="weui-navbar">
+    <div class="weui-navbar__item weui-bar__item_on">
+      商家信息
+    </div>
+    <div class="weui-navbar__item">
+      菜品
+    </div>
+    <div class="weui-navbar__item">
+      评论
+    </div>
+  </div> -->
+
+  <div>
+    <!-- 饿了么头部 -->
+    <div class="ele-header">
+      <div class="content-wrapper">
+        <div class="ele-header__avatar">
+          <img src="" alt="" height="64" width="64">
+        </div>
+    
+        <div class="ele-header__content">
+          <div class="ele-header__title">
+            <div class="ele-header__brand"></div>
+            <div class="ele-header__name"></div>
+          </div>
+        </div>
+    
+        <div class="ele-header__decription"></div>
+        <div class="ele-header__spport"></div>
+      </div>
+    </div>
+    <div class="ele-tab border-1px">
+      <!-- border-1px styl给css提供函数功能  -->
+      <div class="tab-item"><a href="javascript:;">商品</a></div>
+      <div class="tab-item"><a href="javascript:;">评论</a></div>
+      <div class="tab-item"><a href="javascript:;">商家</a></div>
+    </div>
+  </div>
+  
+  <script>
+    // 在父元素上注册事件
+    // JS的事件冒泡：逐层向父元素冒泡 先里后外
+    // true: 捕获型 先捕获外面的，再捕获里面的
+    // false：冒泡型 子元素冒泡到父元素
+    // document
+    //   .querySelector('.weui-navbar')
+    //   .addEventListener('click', function(){
+    //     // 第三个参数有什么用？
+    //     console.log('外面');
+    // }, false);
+
+    // document
+    //   .querySelector('.weui-navbar__item')
+    //   .addEventListener('click', function () {
+    //     // 第三个参数有什么用？
+    //     console.log('里面');
+    // }, false);
+  </script>
+</body>
+</html>

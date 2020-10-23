@@ -1,0 +1,103 @@
+*
+  margin 0
+  padding 0
+.weui-tabbar
+  position fixed
+  left 0
+  right 0
+  bottom 0
+  background-color #fff
+  .weui-tabbar__item
+    color #f03d37
+.movie-container
+  padding 0 13px 20px
+  border-bottom 10px solid #f5f5f5
+  .movie-simple__title
+    padding 15px 0
+  .movie-simple
+    display flex
+    // justify-content space-between
+    overflow-x scroll
+    &::-webkit-scrollbar
+        width 0
+        height 0
+        background-color transparent
+    .movie-simple__item
+      flex 1
+      position relative
+      &:not(:first-child)
+        margin-left 15px
+      .movie-simple__pic
+        width 85px
+        height 115px
+      .wish-bg
+        display inline-block
+        width 100%
+        height 35px
+        position absolute
+        left 0
+        bottom 22px
+        background-image -webkit-linear-gradient(top,rgba(77,77,77,0),#000)
+        background-image linear-gradient(-180deg,rgba(77,77,77,0),#000)
+      .score
+        z-index 2
+        position absolute
+        left 4px
+        bottom 22px
+        font-size 11px
+        font-weight 600
+        color #faaf00
+      .movie-simple__label
+        margin-top 10px
+        font-size 12px
+        font-weight bold
+
+.movie-list
+  margin-top 0
+  padding 0 13px 20px
+  .movie-list__item
+    display flex
+    .movie-pic
+      width 63px
+      height 89px
+      margin-top 15px
+    .movie-list__info
+      width 100%
+      margin-left 8px
+      padding 12px 14px 12px 0
+      border-bottom 1px solid #f0f0f0
+      .title
+        p
+          font-size 20px
+          font-weight bold
+          display inline-block
+        .img
+          width 46px
+          height 15px
+          display inline-block
+          background-size cover
+      .detail
+        width 100%
+        margin-top 5px
+        font-size 14px
+        color #666
+        display flex
+        justify-content space-between
+        position relative
+        .detail-info,.detail-pre
+          p
+            span
+              color #faaf00
+              font-size 15px
+              font-weight 700
+        .btn
+          right 0
+          width 47px
+          height 27px
+          line-height 28px
+          color #ffffff
+          background-color #F03D37
+          text-align center
+          border-radius 4px
+
+

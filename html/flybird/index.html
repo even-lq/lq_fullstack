@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/index.css">
+  <title>flybird</title>
+</head>
+<body>
+  <div id="wrapBg">
+    <!-- 开始标题：让小鸟的图片放在背景图片里面可以控制整体 -->
+    <div id="headTitle">
+      <img src="img/bird0.png" alt="" id="headBird">
+    </div>
+    <!-- 开始按钮 -->
+    <button id="startBtn"></button>
+    <!-- 草地 -->
+    <div class="grassLand" id="grassLand1"></div>
+    <div class="grassLand" id="grassLand2"></div>
+  </div>
+
+  <script src="./js/bird.js"></script>
+  <script src="./js/baseObj.js"></script>
+  <script src="./js/block.js"></script>
+  <script>
+    // 拿到标题的dom结构
+    var jsWrapBg = document.getElementById('wrapBg')
+    var jsHeadTitle = document.getElementById('headTitle')
+    var jsHeadBird = document.getElementById('headBird')
+    var blockArr = []
+    var blockDistance = baseObj.randomNum(120, 350)
+    
+    // setInterval(() => {
+      
+    // }, interval);
+    var Y = 3 // 标题摆动的幅度：97和100来回切换
+    var index = 0
+    // var index = -1
+    var imgArr = ['img/bird0.png','img/bird1.png'] //保存两张图片的路径
+    // 定时器
+    var headWaveTimer = setInterval(headWave, 200)
+    function headWave() {
+      Y *= -1
+      // index *= -1
+      //设置top值
+      jsHeadTitle.style.top = jsHeadTitle.offsetTop + Y + 'px'
+      //切换bird图片(修改属性不用style.) 1.三目运算符写法
+      jsHeadBird.src = imgArr[index++]
+      // jsHeadBird.src = imgArr[index > 0 ? 0 : 1]
+      // 2.判断写法
+      if(index == 2){
+        index = 0
+      }
+
+    }
+
+    // 草地动画
+    var jsGrassLand1 = document.getElementById('grassLand1')
+    var jsGrassLand2 = document.getElementById('grassLand2')
+    // 草地的移动
+    var landTimer = setInterval(landRun, 30);
+    function landRun() {
+      if (jsGrassLand1.offsetLeft <= -343) {
+        jsGrassLand1.style.left = "343px";
+      }
+      if (jsGrassLand2.offsetLeft <= -343) {
+        jsGrassLand2.style.left = "343px";
+      }
+      jsGrassLand1.style.left = jsGrassLand1.offsetLeft - 3 + 'px'
+      jsGrassLand2.style.left = jsGrassLand2.offsetLeft - 3 + 'px'
+
+      // 管道的移动(与草地移动的速度一致)
+      if (blockArr.length) {
+        for (var i = 0; i < blockArr.length; i++) {
+          blockArr[i].moveBlock()
+          console.log(blockArr[i].upDivWrap.offsetTop)
+          console.log(blockArr[i].downDivWrap.offsetTop)
+          var x = baseObj.rectangleCrashExamine(blockArr[i].downDivWrap, bird.div)
+          var y = baseObj.rectangleCrashExamine(blockArr[i].upDivWrap, bird.div)
+          var z = bird.div.offsetTop >= 390
+          if(x || y || z) {
+            clearInterval(landTimer)
+            jsWrapBg.onclick = null
+            bird.fallSpeed = 0
+          }
+        }
+        if (blockArr[blockArr.length - 1].downDivWrap.offsetLeft < (450 - blockDistance)) {
+          var newBlock = new Block()
+          newBlock.createBlock()
+          blockArr.push(newBlock)
+        }
+      }
+    }
+    
+    
+    var jsStartBtn = document.getElementById('startBtn')
+    jsStartBtn.onclick = function() {
+      jsHeadTitle.style.display = 'none'
+      jsStartBtn.style.display = 'none'
+
+      // 注意要清除定时器
+      clearInterval(headWaveTimer)
+
+      // 出现小鸟的思路：1.事先放好一张小鸟的图片（隐藏），当点击开始的时候小鸟出现（显示）
+      //                2. 点击开始的时候创建小鸟的html
+      bird.showBird(jsWrapBg)
+      bird.flyBird()
+      bird.wingWave()
+
+
+      // 点击小鸟时往上飞
+      jsWrapBg.onclick = function() {
+        bird.fallSpeed = -8
+      }
+
+      // // 出现管道: 重复操作
+      // setInterval(() => {
+      var b = new Block()
+      b.createBlock()
+      blockArr.push(b)
+      // }, 1000);
+    }
+    
+  </script>
+</body>
+</html>

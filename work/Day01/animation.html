@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>animation</title>
+  <style>
+    .circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: royalblue;
+      position: relative;
+      animation: mymove 3s ease 2s infinite alternate backwards;
+    }
+
+    @keyframes mymove {
+      from{left: 0;}
+      to{left: 200px;}
+      0%{
+        background: #FFFA90;
+        transform: translateX(0) scale(1);
+      }
+      100%{
+        background: #4cd826;
+        transform: translateX(200px) scale(0.5);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="circle">
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子元素在父元素中水平垂直居中</title>
+    <style>
+        .container {
+            margin-top: 200px;
+            margin-left: 200px;
+            width: 450px;
+            height: 450px;
+            border: 2px solid #be572a;
+            position: relative;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #00f
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box box1">盒子</div>
+    </div>
+</body>
+</html>

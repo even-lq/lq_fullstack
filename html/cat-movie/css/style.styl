@@ -1,0 +1,218 @@
+*
+  margin 0
+  padding 0
+
+ul li
+  list-style none
+#toast
+  display none
+  // transition all .8s ease
+
+.movie
+  width 100%
+  &-head
+    width 100%
+    height 42px
+    line-height 42px
+    background-color #1e2025
+    color #ffffff
+    padding 0 10px
+    box-sizing border-box
+    display flex
+    .iconfont
+      width 16px
+    .title
+      flex 1
+      text-align center
+  &-info
+    padding 15px  
+    background-color #1e2025
+    &__desc
+      display flex
+      width 100%
+      .info-pic
+        width 115px
+        height 165px
+        overflow hidden
+        img
+          width 100%
+      .info-container
+        flex 1
+        color #9b9da2
+        font-size 12px 
+        margin-left 10px
+        .name 
+          color #ffffff
+          font-size 24px
+          font-family Arial,sans-serif
+          font-weight normal
+        .type
+          span 
+            width 40px
+            height 14px
+            display inline-block
+            background url(https://s0.meituan.net/bs/myfe/canary/file/asgard/images/movie/movie-tag-2DIMAX.png)
+            background-size cover
+            vertical-align text-bottom
+        .btn-wrap
+          display flex
+          margin-top 15px
+          .flex
+            flex 1
+            padding 6px 5px
+            border-radius 2px
+            text-align center
+            background-color #58575D
+            color #ffffff
+            // &:nth-child(2)
+            //   margin-left 10px
+            &:first-child
+              margin-right 10px
+            .iconfont
+              font-size 14px
+            & > span 
+              display inline-block
+              margin-left 6px
+    &__rate
+      border-radius 4px
+      background-color #16151b
+      margin-top 15px
+      padding 10px
+      .rate-title
+        color white
+        display flex
+        justify-content space-between
+        // align-items center
+        font-size 15px
+        &__name
+          i 
+            color red
+            background-color #fff
+            border 1px solid  #fff
+            border-radius 50%
+            vertical-align middle
+            margin 0 5px
+        &__people
+          color: #6a696f
+      .rate-detail
+        display flex
+        padding-top 5px
+        align-items center
+        &__left
+          flex 1
+          display flex
+          padding 0 10px
+          box-sizing: border-box
+          .grade
+            color #e9ba34
+            text-align center
+            p 
+              color #a5a4aa
+          .star
+            padding-left 10px
+            text-align right
+            display flex
+            align-items center
+            .list
+              display flex
+              align-items center
+              margin 2px 0
+              .star-num
+                font-size 0
+                width 40px
+                img
+                  display inline-block
+                  width 8px
+                  height 8px
+              .percent
+                width 78px
+                height 4px
+                margin-left 4px
+                background-color #5d5e63
+                border-radius: 10% / 15%;
+                position relative
+                .percent-val
+                  display block
+                  height 100%
+                  position absolute
+                  border-radius: 10% / 15%;
+                  left 0
+                  top 0
+                  background-color #e9ba34
+                  width 80%
+        &__right
+          margin-top 5px
+          img 
+             width 112px
+            // height 46px
+  &-desc
+    padding 15px
+    transition all 1s ease
+    // .content
+      // overflow visible
+    .line-clamp
+      // 将对象作为弹性伸缩盒子模型显示
+      display -webkit-box
+      // 在父元素上设置   子元素排列 vertical (垂直) or horizontal（水平） 
+      -webkit-box-orient vertical
+      // 块元素显示的文本的行数。
+      -webkit-line-clamp 3
+      // 控制长度超过一行的单词是否被拆分换行
+      word-wrap break-word
+      // 控制单词如何被拆分换行:所有单词碰到边界一律拆分换行
+      word-break break-all
+      overflow hidden
+    .arrow
+      text-align center
+      .iconfont
+        display block
+        transform rotateZ(0deg)
+        transition all .3s ease
+      i 
+        font-size 20px
+      .up
+        display block
+        transform rotateZ(-180deg)
+  &-ad
+    height 74px
+    background-color #f6f6f6
+    border-top 1px solid #d9d9d9
+    border-bottom 1px solid #d9d9d9
+    padding 11px 20px
+    .img
+      width 100%
+      height 100%
+      border-radius 10%/50%
+      background url('../img/ad.jpg') no-repeat
+      background-size cover
+  &-cast
+    padding 15px
+    .name
+      font-size 15px
+    .characters
+      display flex
+      padding-top 10px
+      overflow-x scroll
+      &::-webkit-scrollbar
+          width 0
+          height 0
+          background-color transparent
+      .character
+        flex 1
+        text-align center
+        &:not(:first-child)
+          margin-left 8px
+        .img 
+          height 100px
+          width 77px
+        span
+          display block
+          font-size 13px
+        .station
+          color #959595
+
+
+              
+
+            
+

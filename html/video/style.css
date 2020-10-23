@@ -9,8 +9,8 @@ body {
   /* 最小高度：100视口 */
   min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center;/* 沿主轴对齐（水平） */
+  align-items: center;/* 沿交叉轴对其（垂直） */
 }
 .wrapper {
   /*居中的第一种写法*/
@@ -38,7 +38,7 @@ body {
   overflow: hidden;
 }
 .speed-bar {
-  /* width: 100%; */  /*h100p和f1可以互换*/
+  /* width: 100%; */  /*width:100%;和flex: 1;可以互换*/
   flex: 1;
   height: 16.3%;
   display: flex;
