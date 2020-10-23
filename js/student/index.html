@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudentInfo</title>
+  <link rel="stylesheet" href="https://weui.io/style/weui.css">
+</head>
+<body>
+  <div class="weui-cells">
+    <!-- <a class="weui-cell  weui-cell_access" href="javascript:">
+      <div class="weui-cell__bd">
+        <p>cell standard</p>
+      </div>
+      <div class="weui-cell__ft">
+      </div>
+    </a> -->
+  </div>
+
+  <script>
+    let ss = {
+      name: '思思', 
+      hometown: '抚州',
+      isSingle: false
+    }
+    let tlc = {
+      name: '陶汝成',
+      hometown: '南昌'
+    }
+    let students = [ss, tlc];
+    let xm = {
+        name: '小明',
+        hometown: '赣州'
+    }
+    students.push(xm)
+    let container = document.querySelector('.weui-cells')
+    // students.forEach
+    for (let student of students) {
+      // console.log(student)
+      // 构建动态的html
+      // ${} EL表达式 es6中的${}——用于字符串拼接（拼接创建的变量）
+      container.innerHTML += `
+      <a class="weui-cell weui-cell_access" href="javascript:">
+        <div class="weui-cell__bd">
+          <p>${student.name}</p>
+        </div>
+        <div class="weui-cell__ft">
+          ${student.hometown}
+        </div>
+      </a>
+      `
+    }
+  </script>
+</body>
+</html>

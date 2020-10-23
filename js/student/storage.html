@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>storage</title>
+</head>
+<body>
+  <script>
+    // 代码如何运行的？ => 浏览器是宿主环境 => -webkit浏览器内核包含js解析引擎
+    // let 声明关键字 keyword ss变量 =运算符 {}数据类型 根据运算符（=）分割字符串的过程 => 向浏览器申请内存存放对象
+
+    // 1.词法分析：分词，=左右都是一个token
+    //   生效方式：数据结构，构建语法分析树
+    // JSON object => Object => key/value 数据存储不连续
+  
+    // let ss = {
+    //   name: '思思', 
+    //   hometown: '抚州',
+    //   isSingle: false,
+    // }
+    // let tlc = {
+    //   name: '陶汝成',
+    //   hometown: '南昌'
+    // }
+    // 数据持久化
+    // let students = [ss, tlc];
+    //key:studentInfo, value:students
+    //localStorage以字符串形式存储
+    // window.localStorage.setItem('studentInfo', students)
+    // localStorage 类似于 sessionStorage，前者会长久保存后者在页面关闭后清除
+    // 加载完成时
+    window.onload = function() {
+      console.log(
+        window
+        .localStorage
+        .getItem('studentInfo')
+      )
+    }
+  </script>
+</body>
+</html>
