@@ -1,0 +1,27 @@
+<!-- pages/index/index.wxml -->
+<!-- <text>pages/index/index.wxml</text> -->
+<view class="wrapper">
+  <view class="group">
+    <view class="group-bar">
+      <view class="group-title on">今日</view>
+    </view>
+    <view class="group-content">
+      <view class="group-content-item">
+        <view class="group-content-item-desc">为什么聪明的人总能保持冷静？</view>
+        <image mode="aspectFill" class="group-content-item-img" src="https://n1image.hjfile.cn/mh/2017/06/26/9ffa8c56cfd76cf5159011f4017f022e.jpg" />
+      </view>
+    </view>
+  </view>
+  <view class="group">
+    <view class="group-bar">
+      <view class="group-title on">10月20日</view>
+    </view>
+    <view class="group-content">
+      <view class="group-content-item">
+        <view class="group-content-item-desc">为什么聪明的人总能保持冷静？</view>
+        <image mode="aspectFill" class="group-content-item-img" src="https://n1image.hjfile.cn/mh/2017/06/26/9ffa8c56cfd76cf5159011f4017f022e.jpg" />
+      </view>
+    </view>
+  </view>
+  <view class="no-more">展示没有更多内容了</view>
+</view>
