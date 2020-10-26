@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // false从内向外冒泡
+     // JS是单线程语言
+     // callback 是异步的
+     // 1. JS是如何处理事件的？
+     // 先注册事件 异步事件放在事件池中：event loop addEventListener把callback扔到事件池中，声明该callback的归属元素/是什么事件， 触发事件后去事件池执行callback，然偶登记注册
+    document.body.addEventListener('click', function() {
+      alert(2)
+    }, false);
+    document.body.addEventListener('click', function() {
+      alert(3)
+    }, false);
+    document.body.addEventListener('click', function() {
+      alert(4)
+    }, false);
+  </script>
+</body>
+
+</html>

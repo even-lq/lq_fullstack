@@ -2,16 +2,58 @@
 const db = wx.cloud.database() // 引入数据库
 const _ = db.command   // CRUD 增删改查命令 设置为常量
 const productsCollection = db.collection('products')   // 引入数据表
+const photos = db.collection('photos')
 const app = getApp()
 
 Page({
   data: {
     products: [],
+    photos: [],
     avatarUrl: './user-unlogin.png',
     userInfo: {},
     logged: false,
     takeSession: false,
     requestResult: ''
+  },
+  upload() {
+    // 在相机里面选择
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success: res => {
+        // console.log(res);
+        const tempFilePaths = res.tempFilePaths
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          // floor向下取整  ''类型转换
+          let randString = + new Date() + '' + Math.floor(Math.random() * 1000000) + '.png'; // 时间戳  + new Date(); +号类型的转换
+          wx.cloud.uploadFile({
+            cloudPath: randString,
+            filePath: tempFilePaths[i],
+            success: res => {
+              console.log(res);
+              // 图片上传成功的状态码
+              if(res.statusCode == 200) {
+                // 添加字段 promise
+                photos.add({
+                  data: {
+                    image:res.fileID
+                  }
+                })
+                .then(res => {
+                  wx.showToast({
+                    title: '上传成功',
+                    icon:'success'
+                  })
+                })
+              }
+            }
+          })
+          
+          
+        }
+      }
+    })
   },
 
   onLoad: function() {
@@ -20,6 +62,13 @@ Page({
       .then(res => {
         this.setData({
           products: res.data
+        })
+      })
+    photos
+      .get()
+      .then(res => {
+        this.setData({
+          photos: res.data
         })
       })
   },
