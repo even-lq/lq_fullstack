@@ -34,11 +34,11 @@ Page({
       },
       success(res) {
         console.log(res);
-        console.log(res.result.data);
+        // console.log(res.result.data);
         self.setData({
-          groupList: res.result.data
+          groupList: res.result
         })
-        console.log(self.data.groupList);
+        // console.log(self.data.groupList);
       },
       fail(err) {
         console.log(err);

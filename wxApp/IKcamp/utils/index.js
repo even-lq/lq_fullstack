@@ -15,7 +15,8 @@ let util = {
        content = this.isDev && JSON.stringify(content)
     }
 
-    wx.wx.showModal({
+    // 显示模态对话框
+    wx.showModal({
       title: title,
       content: content
     });

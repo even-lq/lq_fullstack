@@ -4,7 +4,7 @@
 // 环境
 const env = 'dev'
 
-// 接口错误淡出文案
+// 接口错误弹出文案
 const defaultAlertMessage = '好像哪里出错了，请再使用一次。'
 
 const defaultBarTitle = {
