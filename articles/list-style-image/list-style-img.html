@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      display: flex;
+      margin-top: 500px;
+      margin-left: 500px;
+    }
+
+    ul li {
+      height: 36px;
+      width: 36px;
+      cursor: pointer;
+      list-style-position: inside;
+      list-style-image: url("./star.png")
+    }
+
+    ul li:hover {
+      height: 36px;
+      width: 36px;
+      list-style-image: url("./goldStar.png")
+    } */
+
+    ul li:hover~li {
+      height: 36px;
+      width: 36px;
+      list-style-image: url("./goldStar.png")
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="ul">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <script>
+    let ul = document.getElementById('ul').children // 获取所有li
+    let length = ul.length // li总数
+    // 图片转换常量
+    let lsi = "list-style-image"
+    let goldStarUrl = `url("./goldStar.png")`
+    let starUrl = `url("./star.png")`
+
+    for (let i in ul) {
+      ul[i].onclick = function () {
+        rate(ul, i, starUrl, goldStarUrl)
+      }
+
+      ul[i].onmouseover = function () {
+        rate(ul, i, starUrl, goldStarUrl)
+      }
+    }
+    // list-style-image地址转换操作
+    function selectStar(ele, star) { ele.style[lsi] = star }
+    // 完成星级评分操作
+    function rate(ul, i, star, gstar) {
+      for (let index = Number.parseInt(i); index >= 0; index--) {
+        selectStar(ul[index], gstar)
+      }
+      for (let j = Number.parseInt(i) + 1; j < length; j++) {
+        selectStar(ul[j], star)
+      }
+    }
+  </script>
+</body>
+
+</html>
