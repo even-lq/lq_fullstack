@@ -1,0 +1,31 @@
+/* components/movieItem/movieItem.wxss */
+/* .itemf不用lex是因为不知道父容器的宽度 */
+.item {
+  display: inline-block;
+}
+.item .info {
+  display: flex;
+  flex-direction: column;
+}
+.item .info .img {
+  width: 201rpx;
+  height: 301rpx;
+  margin-bottom: 20rpx;
+  border-radius: 10rpx;
+}
+.item .info .name {
+  font-size: 32rpx;
+  font-weight: bold;
+  max-width: 200rpx;
+
+  /* 文本超出则打点三属性 */
+  white-space: nowrap; /* 不能换行*/
+  overflow: hidden; /* 超出则隐藏*/
+  text-overflow: ellipsis; /* 文本超出打点*/
+}
+.score-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+}

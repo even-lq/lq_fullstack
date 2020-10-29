@@ -1,0 +1,12 @@
+<!--components/movieItem/movieItem.wxml-->
+<view class="item">
+  <view class="info">
+    <image class="img" src="{{movie.images.large}}"/>
+    <view class="name">{{movie.title}}</view> 
+    <view class="score-wrapper">
+      <!-- 星星组件 -->
+      <ratingStar score="{{movie.numberStars}}"></ratingStar>
+      <view class="score">{{movie.rating.average}}</view>
+    </view>
+  </view>
+</view>
