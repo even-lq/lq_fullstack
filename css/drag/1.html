@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .drag {
+      /* 如果不脱离文档流在拖动drag的时候就会扩大document的区域出现滚动条 */
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- mouseDown mouseMove mouseUp -->
+  <div class="drag">drag1</div>
+  <script>
+    const drag = document.querySelector('.drag');
+    dragEle(drag)
+    function dragEle(ele) {
+      ele.addEventListener('mousedown', () => {
+        // 按下鼠标 
+        // 如果绑定在drag区域，只要超过drag就无法触发mousemove，所以要绑定在document上
+        const onMove = (event) => {
+          // event事件对象
+          // 必须按下mousedown
+          let x = event.clientX, y = event.clientY
+          // 中心点在左上角(0, 0)
+          ele.style.transform = `translate3d(${x}px, ${y}px, 0)`
+        }
+        document.addEventListener('mousemove', onMove)
+        // 第一次拖完之后把上一步事件取消掉
+        document.addEventListener('mouseup', () => {
+          document.removeEventListener('mousemove', onMove)
+        })
+      })
+    }
+    
+    
+  </script>
+</body>
+</html>
