@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      display: flex;
+      list-style: none;
+      /* 1. flex-direction: row-reverse; */
+    }
+    /* .order { */
+      /* 2. order: -1 */
+    /* } */
+  </style>
+</head>
+<body>
+  <ul id="parent"><li>1</li><li class="order">2</li> <li>3</li></ul>
+  <script>
+    // Array.from(array).reverse()
+
+    const parent = document.querySelectorAll('ul')[0]
+    const array = document.querySelectorAll('ul')[0].children
+    parent.insertBefore(array[2], array[1]);
+    
+  </script>
+</body>
+</html>
