@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- ul>li*3>a[href="#"] -->
+  <script>
+    function foo(a) {
+      var b = 2
+      return function bar() {
+        console.log(4);
+      }
+      var c = 3
+    }
+    var test = foo() // 把bar()放到了全局里面
+    test() // 并执行
+  </script>
+</body>
+
+</html>
