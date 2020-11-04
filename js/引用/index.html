@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var stooge = {
+      nickname: 'tim'
+    }
+    var x = stooge;
+    x.nickname = 'curly'
+    var nick = stooge.nickname
+    console.log(nick); // curly
+    // 对象的引用，x和stooge指向同一个地址  
+
+
+    // 浅拷贝
+    let obj = { name: "Joker", title: "my name is Joker" }
+    let newObj = Object.assign({}, obj); //Object.assign({}, 对象名)
+    newObj.name = "newJoker";
+    console.log(newObj);
+    console.log(obj)
+  </script>
+</body>
+
+</html>
