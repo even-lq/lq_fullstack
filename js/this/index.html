@@ -6,6 +6,12 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="./Example.js"></script>
+  <script>
+    'use strict'
+    function foo() {
+      console.log(this); // undefined
+    }
+    foo()
+  </script>
 </body>
 </html>

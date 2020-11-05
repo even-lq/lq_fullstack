@@ -21,3 +21,22 @@ JS + GO => 字节
 - main 入口函数
 - test 测试文件
   go test -v
+
+
+
+go run hello_world.go
+
+go run .\hello_world.go
+
+ go run .\hello_world.go ttt
+
+go build .\hello_world.go 
+
+ .\hello_world.exe 
+
+.\hello_world.exe ttt      
+
+go test -v .\fib_test.go  
+
+go test .\fib_test.go  
+

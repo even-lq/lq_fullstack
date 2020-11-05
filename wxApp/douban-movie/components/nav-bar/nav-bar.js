@@ -37,11 +37,11 @@ Component({
     attached: function () {
       // 在组件实例进入页面节点树时执行
       // properties和data数据源的取法相同
-      let navBarStyle = `background-color: ${this.data.navBarColor};
-      height:${wx.db.navBarHeight}px;color: ${this.data.titleColor}`
-
       let statusBarStyle = `background-color: ${this.data.statusBarColor};
       height:${wx.db.statusBarHeight}px;`
+
+      let navBarStyle = `background-color: ${this.data.navBarColor};
+      height:${wx.db.navBarHeight}px;color: ${this.data.titleColor}`
 
       let topHeight = wx.db.navBarHeight + wx.db.statusBarHeight
 
