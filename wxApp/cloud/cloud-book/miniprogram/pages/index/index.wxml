@@ -1,0 +1,9 @@
+<!-- 上下间隙20 -->
+<!-- 栅格系统24列 -->
+<van-row gutter="20">
+<!--  span：占8列 -->
+<!--  offset：偏移量，0顶格-->
+  <van-col span="8" offset="8">
+    <van-button type="primary" bind:click="scanCode">扫码加书</van-button>
+  </van-col>
+</van-row>  

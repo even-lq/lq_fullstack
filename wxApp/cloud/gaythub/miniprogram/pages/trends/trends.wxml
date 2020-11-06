@@ -1,0 +1,13 @@
+<!-- pages/trends/trends.wxml -->
+<view class='trends page {{theme}}'>
+  <search custom-class='elevation {{ theme }}' placeholder="Search Users or Repositories" bind:search="onSearch"></search>
+  <!-- <trend theme='{{ theme }}' repo='{{item}}' wx:for="{{trends}}" wx:key="{{index}}"></trend> -->
+  <picker class='lang-picker' 
+          mode='multiSelector' 
+          bindchange="changeFilter" 
+          value="{{selectedIndices}}" 
+          range="{{selectorValues}}" 
+          range-key='label'>
+    <button type='primary' size='mini'>{{since.label}} / {{lang.label}}</button>
+  </picker>
+</view>
