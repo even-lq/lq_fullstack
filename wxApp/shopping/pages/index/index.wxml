@@ -13,7 +13,7 @@
     </view>
     <view class="select-top">
       <view class="select-top-small">
-        <navigator url="../list/list">
+        <navigator url="../list/list" open-type="redirect">
           <image src="/image/s1.png" />
         </navigator>
       </view>
