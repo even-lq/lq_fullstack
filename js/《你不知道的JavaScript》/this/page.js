@@ -128,3 +128,124 @@ var obj1 = {
   obj2: obj2
 }
 obj1.obj2.foo()
+
+
+function foo() {
+  console.log(this.a);
+}
+var obj = {
+  a: 3,
+  foo: foo // 第一次引用
+}
+var bar = obj.foo // 第二次引用进入到了全局中
+var a = 'hello'
+bar() // hello 隐式丢失，应用了默认绑定的规则
+// 如果全局没有变量a则打印undefined
+// 变量bar指向了obj.foo的引用，但是bar是在全局作用域执行的，所以如果foo()的语句是
+//  console.log(this);打印的则是window
+
+
+
+
+// 显示绑定
+function foo() {
+  console.log(this.a);
+}
+var bar = {
+  a: 2
+}
+foo() // undefined
+
+
+function foo() {
+  console.log(this.a);
+}
+var bar = {
+  a: 2
+}
+foo.call(bar) // 2
+
+
+
+var a = {
+  user: 'wn',
+  fn: function () {
+    console.log(this);// window 隐式丢失
+    console.log(this.user);// undefined a.fn的引用赋值给了b，b在全局中，但是找不到user，所以会在全局中创建空值var user
+  }
+}
+
+var b = a.fn
+// 把B里面的this指向a
+b.call(a)
+
+
+// call接收参数
+var a = {
+  user: 'wn',
+  fn: function (q, w) {
+    console.log(q + w);
+  }
+}
+
+var b = a.fn
+b.call(a, 2, 3)
+
+
+
+
+// apply传参用数组
+var a = {
+  user: 'wn',
+  fn: function (q, w) {
+    console.log(q + w);
+  }
+}
+
+var b = a.fn
+b.apply(a, [2, 3])
+
+
+
+// bind
+var a = {
+  user: 'wn',
+  fn: function (q, w) {
+    console.log(this.user);
+    console.log(q + w);
+  }
+}
+
+var b = a.fn
+// bind返回的是函数
+// 1. 第一种传参
+var c = b.bind(a, 3, 5)
+c()
+// 2. 第二种传参
+// c(3, 5)
+
+
+
+// 参数为null时指向window，apply也是
+var a = {
+  user: 'wn',
+  fn: function (q, w) {
+    console.log(this);// window
+    console.log(q + w);
+  }
+}
+
+var b = a.fn
+b.call(null)
+
+
+const car = {
+  maker: 'Ford',
+  model: 'Fiesta',
+
+  drive: () => {
+    console.log(this.maker);
+  }
+}
+
+car.drive()

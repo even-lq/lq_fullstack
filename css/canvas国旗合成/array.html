@@ -1,0 +1,41 @@
+<script>
+  let arr = [{ a: 1 }, { a: 2 }]
+  // map将返回值作为新数组的元素，不应该用作循环
+  let newArr = arr.map((item) => {
+    return item.a * 2
+  })
+  let arr1 = arr.map((item) => {
+    // let li = document.createElement()
+    return `<li>${item.a}<li>`
+  })
+  console.log(newArr, arr1);
+  arr.map((item) => {
+    console.log(item);
+  })
+  // forEach 用来循环，不会改变数组
+  arr.forEach((item) => {
+    console.log(item);
+  })
+
+
+
+
+
+  // reduce
+  let arr2 = [1, 2, 3, 4, 5, 6]
+  // pre: => 0
+  let sum = arr2.reduce((pre, item) => {
+    return pre + item;
+  }, 0);
+  console.log(sum);
+
+  let arr3 = [{ a: 1 }, { b: 2 }, { c: 3 }]
+  let arr4 = arr3.reduce((pre, item) => {
+    // 对象属性的合并
+    return {
+      ...pre,
+      ...item
+    }
+    // Object.assign()
+  }, {})
+</script>
