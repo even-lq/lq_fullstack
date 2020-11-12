@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    Grand.prototype.lastName = 'zhang'
+    function Grand() {
+
+    }
+    var grand = new Grand()
+
+    Father.prototype = grand
+    function Father() {
+      this.name = 'zhangsan'
+      this.fortune = {
+        card: 'visa'
+      }
+    }
+    var father = new Father()
+
+    Son.prototype = father
+    function Son() {
+      this.hobbit = 'reading'
+    }
+    var son = new Son()
+
+    // console.log(son.hobbit);
+    // console.log(son.name);
+    // console.log(son.lastName);
+    // console.log(Son.prototype); // Grand {name: "zhangsan"}
+    // console.log(son.__proto__); // Grand {name: "zhangsan"}
+    // console.log(Grand.prototype);
+    // console.log(Grand.prototype.__proto__ === Object.prototype);
+
+    // console.log(son.toString());
+    // console.log(son.fortune);
+    son.fortune.card2 = 'master'
+    console.log(son); // 没有fortune Son {hobbit: "reading"}
+    console.log(father); // Grand {name: "zhangsan", fortune: {…}} 原型被更改 因为Father中的this.fortune是引用类型，引用类型可以被更改
+  </script>
+</body>
+
+</html>

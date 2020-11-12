@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // new 构造函数三部曲
+    function Car() {
+
+    }
+    console.dir(Car);
+    function Person() {
+      // 当构造函数发生new操作时，现在构造含糊内部创建了一个空对象
+      // 让__proto__继承构造函数的原型
+      // 返回这个对象
+
+      // var this = {
+      //   __proto__: Person.prototype
+      // }
+      // return this
+
+    }
+    var person = new Person()
+    console.log(person.constructor);
+    console.log(person);
+    console.log(person.__proto__);
+    console.log(Person.prototype);
+    console.log(Person.prototype.__proto__);
+
+
+    // 普通对象的原型是Object
+    var obj = {
+      name: '蜗牛'
+    }
+    console.log(obj.__proto__);
+    person.__proto__ = obj
+    console.log(person.__proto__);
+  </script>
+
+
+</body>
+
+</html>

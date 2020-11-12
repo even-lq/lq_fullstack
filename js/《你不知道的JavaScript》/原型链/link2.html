@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function Grand() {
+
+    }
+    var grand = new Grand()
+
+    Father.prototype = grand
+    function Father() {
+
+    }
+    var father = new Father()
+
+    Son.prototype = father
+    function Son() {
+    }
+    var son = new Son()
+
+    console.log(son);
+    console.log(father);
+
+
+
+    function Grand() { }
+    var grand = new Grand()
+    Father.prtotype = grand
+    function Father() { }
+    var father = new Father()
+    Son.prototype = father
+    function Son() { }
+    var son = new Son()
+
+    console.log(son);
+    console.log(father);
+
+  </script>
+</body>
+
+</html>
