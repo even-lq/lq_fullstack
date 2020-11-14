@@ -11,7 +11,7 @@ function Car(color, owner) {
   // this.height = 1400
 }
 
-var car = new Car('red', 'tt')
-var car1 = new Car('green', 'ss')
+var car = new Car('red', 'tim')
+var car1 = new Car('green', 'sandy')
 
 console.log(car.name, car1.lang);

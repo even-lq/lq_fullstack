@@ -4,6 +4,9 @@
 // Car.prototype = {
 //   abc: Bus
 // }
+Car.prototype = {
+  constructor: 'Bus'
+}
 function Car() {
 
 }

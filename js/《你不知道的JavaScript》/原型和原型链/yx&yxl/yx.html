@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    Teenager.prototype.type = 'student'
+    Teenager.prototype.name = 'mike'
+    function Teenager() {
+      this.name = 'timy'
+      this.hobbit = {
+        music: 'rock'
+      }
+    }
+    var teenager = new Teenager()
+    Child.prototype = teenager
+    function Child() { }
+    var child = new Child()
+    child.age = 18 // 增加实例对象的name属性，但原型上的name不会被修改
+    Child.prototype.name = 'anna' // 修改构造函数的name
+    Teenager.prototype.type = 'worker' // 修改原型对象的type
+    Child.prototype.__proto__.type = 'free-worker'// 修改原型对象的type
+    console.log(child.name); // anna 如果没有设置则打印timy
+    console.log(child.age); // 18 添加在实例对象上的属性，原型对象不会添加该属性
+    console.log(child);
+    console.log(child.type); // free-worker (最终修改的结果)
+
+  </script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
 var obj = {
-  name: 'lq'
+  name: 'jack'
 }
-console.log(obj.constructor);
+console.log(obj.constructor === Object);

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    Teenager.prototype.type = 'student'
+    Teenager.prototype.name = 'mike'
+    function Teenager() {
+      this.name = 'timy'
+      this.hobbit = {
+        music: 'rock'
+      }
+    }
+    var teenager = new Teenager()
+    Child.prototype = teenager
+    function Child() { }
+    var child = new Child()
+
+    child.hobbit.sport = 'basketball' // hobiit是引用类型，可以增加属性
+    child.hobbit.music = 'pop' // hobiit是引用类型，可以修改属性
+
+    console.log(child);
+  </script>
+</body>
+
+</html>
