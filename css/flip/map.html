@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const app = document.querySelector('#app')
+    let obj = {
+      k1: 'v1',
+      app: 123
+    }
+    // 对象字面量不能把dom结点当作键名，如果当作键名，则变成字符串
+    let map = new Map()
+    map.set('k1', 'v1')
+    map.set(app, 123)
+    map.get(app)
+  </script>
+</body>
+</html>

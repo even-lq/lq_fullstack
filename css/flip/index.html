@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      width: 200px;
+      height: auto;
+    }
+    #app {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">123</div>
+  <script>
+    const app = document.querySelector('#app');
+    let image = new Image();
+    image.src = 'https://pic4.zhimg.com/v2-2103acaf025ceda331a0dd59022443ab_r.jpg'
+    let start = app.getBoundingClientRect();
+    console.log(start);
+    setTimeout(() => {
+      const div = document.createElement('div');
+      // div.style.width = '40px';
+      // div.style.height = '40px';
+      // div.style.backgroundColor = 'red';
+      // document.body.insertBefore(div, app);
+      document.body.insertBefore(image, app)
+      let last = app.getBoundingClientRect();
+      console.log(last);
+
+      // first 123 起点 0
+      // last 123 终点  40
+      // invert 反转    -40 -> 0
+      const frames = [
+        {
+          transform: `translate(${start.left - last.left}px, ${start.top - last.top}px)`
+        },
+        {
+          transform: `translate(0px, 0px)`
+        }
+      ]
+      app.animate(frames, {
+        duration: 500,
+        easing: 'ease-in-out'
+      })
+    }, 1000)
+  </script>
+</body>
+</html> 
