@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 实现三角形的方式 */
+    /* 1. border */
+    /* 2. transform rotate */
+    #d {
+      width: 0;
+      height: 0;
+      margin-top: 100px;
+      margin-left: 100px;
+      border-top: 100px solid transparent;
+      border-bottom: 100px solid #ff0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+    }
+
+    /* .arrow {
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-top-color: red;
+    } */
+    .arrow {
+      width: 10px;
+      height: 10px;
+      border: 1px solid red;
+      transform: rotate(-45deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="d"></div>
+  <div class="arrow"></div>
+</body>
+
+</html>
