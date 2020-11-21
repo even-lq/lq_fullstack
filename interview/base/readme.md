@@ -55,5 +55,10 @@
    除加法外的运算：只要其中一方为数字，另一方一定会转为数字进行运算
 
 9.  == 和 ===  的区别？
+
 10. 什么是闭包？
+
+11. 深浅拷贝
+
+    深拷贝：[JSON.parse(JSON.stringify(obj))](https://www.jianshu.com/p/b084dfaad501) 优缺点
 

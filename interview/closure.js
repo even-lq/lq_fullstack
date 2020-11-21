@@ -25,8 +25,18 @@ for (var i = 0; i <= 5; i++) {
 // 解决方式：
 // 1. let
 // 2. 闭包:
-// (function (j) {
-//   setTimeout(() => {
-//     console.log(j);  //6
-//   }, j * 1000);
-// })(i)
+  // (function (j) {
+  //   setTimeout(() => {
+  //     console.log(j);  //6
+  //   }, j * 1000);
+  // })(i)
+// 原理：
+// 1. 每个自执行函数内部都有保留了形参变量j，所以每个自执行函数内部的j都是独一无二的。
+// 2. 由于定时器定时的性质，使得定时器（形成了闭包）保留了对原来作用域的引用，所以定时器传递的函数可以访问到独一无二的j
+// 3. setTimeout的第三个参数
+  // for (var i = 1; i <= 5; i++) {
+  //   setTimeout(function timer(j) {
+  //     console.log(j);  
+  //   }, i * 1000, i);
+  // }   
+  // 当实参i传入时，timer内部具有形参变量j这时作用域才生效  
