@@ -49,25 +49,35 @@
     <div class="progress"></div>
     <div class="progress-button"></div>
   </div>
+
   <script>
+    
     const btn = document.querySelector('.progress-button')
     const progress = document.querySelector('.progress')
     const progressBar = document.querySelector('.progress-bar')
     const width = progressBar.offsetWidth
     let downX = 0;
+    let downLeft = 0
     btn.addEventListener('touchstart', (event) => {
       // 多指触控只取第一根手指  
       const touch = event.touches[0]
-      let downX = touch.clientX;
+      downX = touch.clientX;
+      downLeft = parseInt(btn.style.left || 0)
       // console.log(downX);
 
     })
     btn.addEventListener('touchmove', (event) => {
       const touch = event.touches[0]
-      const diffx = touch.clientX - downX;
+      let diffx = touch.clientX - downX;
+      let move = diffx + downLeft
+      if (move < 0) {
+        move = 0
+      } else if (move > width) {
+        move = width
+      }
       // console.log(diffx);
-      btn.style.left = `${diffx}px`;
-      progress.style.width = `${diffx / width * 100}%`;
+      btn.style.left = `${move}px`;
+      progress.style.width = `${move / width * 100}%`;
     })
   </script>
 </body>
