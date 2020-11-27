@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://img.alicdn.com/imgextra/i4/6000000002343/O1CN01R93eCl1TB8cPDNEc8_!!6000000002343-0-octopus.jpg" alt="">
+  <iframe src="http://www.baidu.com" frameborder="0"></iframe>
+  <script>
+    // 词法作用域
+    // 动态作用域
+    var a = 'a';
+    var c = 'c';
+    function foo() {
+      console.log(a);
+    }
+    function bar() {
+      var a = 'a1'
+      function baz() {
+        console.log(c);
+      }
+      baz() // baz声明在bar中所以查找顺序是：先访问bar内部再访问全局
+      foo()
+    }
+    bar(); // a 词法作用域生效：访问的变量与其调用位置无关，跟声明位置有关
+  </script>
+</body>
+</html>
