@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="www.baidu.com">百度</a>
+  <div class="wrap"></div>
+  <script>
+    // 手势触发顺序：touchstart -> move -> end -> click
+    // 一定是touchstart先发生，click延迟后发生
+    let wrap = document.querySelector('.wrap')
+    wrap.addEventListener('click', (event) => {
+      console.log('click 发生了');
+    })
+    wrap.addEventListener('touchstart', (event) => {
+      console.log('touchstart 发生了');
+      // 阻止默认事件（只发生touchstart -> move -> end，不发生click）
+      event.preventDefault();
+    })
+
+    // onclick事件不能绑定多个事件，而addEventListener可以
+    document.querySelector('a')
+      .addEventListener('click', (event) => {
+        // 阻止剩余事件，下一个a点击事件不会触发
+        event.stopImmediatePropagation();
+      })
+    document.querySelector('a')
+      .addEventListener('click', (event) => {
+        console.log('下一个a点击事件不会触发');
+      })
+  </script>
+</body>
+
+</html>

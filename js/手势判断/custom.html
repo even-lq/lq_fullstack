@@ -23,11 +23,17 @@
   </div>
   <script>
     // 手势触发顺序：touchstart -> move -> end -> click
+    // 自定义事件
     const wrap = document.querySelector('.wrap');
+    wrap.addEventListener('press', () => {
+      console.log('收到 press 事件了');
+    })
     let timeout = null;
     function start() {
       timeout = setTimeout(() => {
         console.log('press 发生了');
+        let e = new CustomEvent('press')
+        wrap.dispatchEvent(e)
       }, 500)
     }
     wrap.addEventListener('touchstart', () => {
