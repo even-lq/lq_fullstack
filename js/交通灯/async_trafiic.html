@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: grey;
+      display: inline-block;
+      margin: 30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+    }
+
+    .green.light {
+      background-color: green;
+    }
+
+    .yellow.light {
+      background-color: yellow;
+    }
+
+    .red.light {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="green box"></div>
+  <div class="yellow box"></div>
+  <div class="red box"></div>
+  <script src="./index.js"></script>
+  <script>
+    function green() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.green')
+        .classList.add('light')
+    }
+    function red() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.red')
+        .classList.add('light')
+    }
+    function yellow() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.yellow')
+        .classList.add('light')
+    }
+
+    function traffic(selector) {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector(selector)
+        .classList.add('light')
+    }
+
+    let time = (t) => new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
+      }, t);
+    })
+
+    async function light() {
+      // await 可以放在任何位置
+      green();
+      await time(1000) // await 有promise则阻塞后面代码，阻塞的时间就是resolve执行完后的时间
+      // 这里设置的是定时器的时间
+      yellow();
+      await time(1000)
+      red();
+      await time(1000)
+      for (let i = 0; i < 5; i++) {
+        await time(1000)
+        console.log(i);
+      }
+      await foo() // await 后面调用的函数如果没有promise则不会阻塞
+      console.log(2); // 先输出2 再输出1
+    }
+    function foo() {
+      setTimeout(() => {
+        console.log(1);
+      }, 1000);
+    }
+    light()
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      background-color: grey;
+      display: inline-block;
+      margin: 30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+    }
+
+    .green.light {
+      background-color: green;
+    }
+
+    .yellow.light {
+      background-color: yellow;
+    }
+
+    .red.light {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="green box"></div>
+  <div class="yellow box"></div>
+  <div class="red box"></div>
+  <script src="./index.js"></script>
+  <script>
+    function green() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.green')
+        .classList.add('light')
+    }
+    function red() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.red')
+        .classList.add('light')
+    }
+    function yellow() {
+      var lights = document.getElementsByTagName("div");
+      for (var i = 0; i < 3; i++)
+        lights[i].classList.remove("light")
+      document.querySelector('.yellow')
+        .classList.add('light')
+    }
+    // let p = new Promise((resolve, reject) => {
+    //   console.log(' i am p');
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 1000);
+    // })
+    // p.then(() => {
+    //   console.log('1秒后我执行');
+    // })
+    let url = 'https://yanxuan.nosdn.127.net/8ab9d7479cce3fb4517efc81f7f069d1.jpg?type=webp&imageView&quality=95&thumbnail=1920x420'
+    // let img = new Image()
+    // img.src = url;
+    // img.onload = function() {
+    //   console.log(123);
+    // }
+    let p1 = new Promise((resolve, reject) => {
+      let img = new Image();
+      img.src = url;
+      img.onload = function() {
+        resolve('123')
+      }
+      img.onerror = function() {
+        resolve('error')
+      }
+    })
+    p1.then(res => console.log(res))
+      .catch(err => console.log(err))
+    // light(0)
+    // function changeLights() {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       green()
+    //       resolve(yellow)
+    //     }, 1000);
+    //   })
+    // }
+    // changeLights().then(res => {
+    //   return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       res();
+    //       resolve(red)
+    //     }, 1000)
+    //   })
+    // }).then(res => {
+    //   setTimeout(() => {
+    //     res();
+    //   }, 1000)
+    // })
+  </script>
+</body>
+
+</html>
