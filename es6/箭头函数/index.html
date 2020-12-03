@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="btn">click</button>
+  <!--  onclick="click3()" -->
+  <script type="text/javascript">
+    /* 实现点击事件的三种方式
+      第一种：在标签中给onclick属性添加方法，方法名不能是click标识符等
+      第二种：获取标签后调用onclick属性再赋予一个方法 .onclick
+      第三种：添加点击事件.addEventListener
+    */
+    const button = document.getElementById('btn')
+    // button.addEventListener('click', function () {
+    //   this.innerHTML = 'hello'
+    // })
+    button.addEventListener('click', () => {
+      this.innerHTML = 'hello'
+    }) // 箭头函数的this指向window
+    
+    // button.onclick = function() {
+    //   console.log('click2');
+    // }
+    // function click3() {
+    //   console.log('click3');
+    // }
+  </script>
+</body>
+
+</html>
