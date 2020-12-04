@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- input 行块元素 -->
+    <input type="text" id="input"/> 
+    <span id="span">hello</span>
+  </div>
+  <script>
+    const data = {
+      _text: 'text world' // 要加下划线_不然会爆栈
+    }
+    const input = document.getElementById('input')
+    const span = document.getElementById('span') 
+    // input.addEventListener('keyup', (e) => {
+    //   console.log(e.target.value);
+    //   span.innerHTML = e.target.value
+    // })
+
+    // 响应数据方法1：需要按回车键
+    // input.addEventListener('change', (e) => {
+    //   console.log(e.target.value);
+    //   span.innerHTML = e.target.value
+    // })
+
+    // 响应数据方法2 数据劫持：
+    // Object.defineProperty方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+    Object.defineProperty(data, 'text', {
+      get () {
+        // console.log('获取数据'); // 用于判断是否被劫持，如果被劫持了就一定会执行
+        // return 'hello world'
+        return data._text
+      },
+      set (newVal) {
+        // Object.defineProperty 如果设置了set方法，则用对象.属性的方式修改属性值，会被set的参数所劫持
+        console.log(newVal); 
+        span.innerHTML = newVal
+        this._text = newVal
+      }
+    })
+    // data.text = 'www' 
+    // // Object.defineProperty在没有set方法的情况下不能生效，被Object.defineProperty劫持了，只能在Object.defineProperty内部修改
+    // console.log(data.text); // 打印get里面的值
+
+
+    // 使用Object.defineProperty可以减少dom操作，性能更好
+    input.addEventListener('keyup', function(e){
+      data.text = e.target.value // 这里的赋值会被Object.defineProperty劫持，通过set的newVal赋值
+      console.log(data._text);   
+    })
+  </script>
+</body>
+</html>
