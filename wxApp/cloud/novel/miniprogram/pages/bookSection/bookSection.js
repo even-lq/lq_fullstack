@@ -1,58 +1,33 @@
-// miniprogram/pages/bookCity/bookCity.js
+// miniprogram/pages/bookSection/bookSection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    hotData: [],
-    classifyData: []
+
   },
 
-  getList() {
+  getSection(url) {
     wx.showLoading({
-      title: '正在加载',
-      mask: true,
-      success: (result) => {
-        
-      },
-      fail: () => {},
-      complete: () => {}
+      title: '正在加载'
     });
-
     wx.cloud.callFunction({
-      name: 'getList',
-      data: {}
+      name: 'bookSection',
+      data: {
+        url
+      }
     }).then(res => {
       console.log(res);
-      wx.hideLoading();
-      const result = res.result || {}  
-      this.setData({
-        hotData: result.hotData,
-        classifyData: result.classifyData
-      })
-      console.log(this.data.classifyData);
     })
-      
-  },
-  toReading(e) {
-    let url = e.currentTarget.dataset.url 
-    wx.navigateTo({
-      url: `../bookSection/bookSection?url=${url}`,
-      // url: 'https://wap.biqiuge8.com', // 小程序不允许跳转外链
-      success: (result) => {
-        
-      },
-      fail: () => {},
-      complete: () => {}
-    });
-      
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getList()
+    // options可以获得页面跳转的参数
+    const { url } = options // 对象解构
+    this.getSection(url)
   },
 
   /**
