@@ -22,7 +22,19 @@ exports.main = async (event, context) => {
   bookDetailData['lastSection'] = $(bookDetail).find('.book_box').find('dd').eq(3).find('span').find('a').text();//最新章节
   bookDetailData['lastSectionUrl'] = $(bookDetail).find('.book_box').find('dd').eq(3).find('span').find('a').attr('href');//最新章节地址
   bookDetailData['bookDetail'] = $('.book_about').find('dd').text();//小说介绍
+
   // 上一页和下一页的地址
   let pre = $('.listpage').find('.left').find('a').attr('href') || '';
   let next = $('.listpage').find('.right').find('a').attr('href');
+  let pageArray = [] // 所有分页
+  const pageNum = $('.listpage').find('.middle').find('select').find('option');
+  for (let j = 0; j < pageNum.length; j++) {
+    let obj = {};
+    obj['name'] = $(pageNum[j]).attr('value');
+    obj['num'] = j + 1;
+    pageArray.push(obj);
+  }
+
+  
+  // 取最新章节
 }
