@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    bookDetailData: {},
+    lastData: [],
+    pageData: []
   },
 
   getSection(url) {
@@ -19,6 +21,13 @@ Page({
       }
     }).then(res => {
       console.log(res);
+      wx.hideLoading();
+      const { result } = res
+      this.setData({
+        bookDetailData: result.bookDetailData,
+        lastData: result.lastData,
+        pageData: result.pageData
+      })
     })
   },
   /**

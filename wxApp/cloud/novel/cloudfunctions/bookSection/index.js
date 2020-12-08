@@ -35,6 +35,32 @@ exports.main = async (event, context) => {
     pageArray.push(obj);
   }
 
-  
+
   // 取最新章节
+  const lastsection = $('.book_last').eq(0).find('dd')
+  let lastData = []
+  for (let i = 0; i < lastsection.length; i++) {
+    let obj = {}
+    obj['sectionName'] = $(lastsection[i]).find('a').text()
+    obj['sectionUrl'] = $(lastsection[i]).find('a').attr('href')
+    lastData.push(obj)
+  }
+  // 本页章节
+  const pagesection = $('.book_last').eq(1).find('dd');
+  let pageData = [];
+  for (let i = 0; i < pagesection.length; i++) {
+    let obj = {};
+    obj['sectionName'] = $(pagesection[i]).find('a').text();
+    obj['sectionUrl'] = $(pagesection[i]).find('a').attr('href');
+    pageData.push(obj);
+  }
+
+  return {
+    bookDetailData,
+    pre,
+    next,
+    pageArray,
+    lastData,
+    pageData
+  }
 }
