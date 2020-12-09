@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
   const pageNum = $('.listpage').find('.middle').find('select').find('option');
   for (let j = 0; j < pageNum.length; j++) {
     let obj = {};
-    obj['name'] = $(pageNum[j]).attr('value');
+    obj['name'] = $(pageNum[j]).attr('value'); // 每个页面的地址，每个页面有20条数据
     obj['num'] = j + 1;
     pageArray.push(obj);
   }

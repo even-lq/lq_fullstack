@@ -40,11 +40,6 @@ Page({
     wx.navigateTo({
       url: `../bookSection/bookSection?url=${url}`,
       // url: 'https://wap.biqiuge8.com', // 小程序不允许跳转外链
-      success: (result) => {
-        
-      },
-      fail: () => {},
-      complete: () => {}
     });
       
   },

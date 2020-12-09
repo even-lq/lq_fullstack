@@ -7,7 +7,13 @@ Page({
   data: {
     bookDetailData: {},
     lastData: [],
-    pageData: []
+    pageData: [],
+    pageArray: [],
+    page: 1, // 当前页
+    pre: '',
+    next: '',
+    preAble: false,
+    nextAble: false,
   },
 
   getSection(url) {
@@ -26,9 +32,38 @@ Page({
       this.setData({
         bookDetailData: result.bookDetailData,
         lastData: result.lastData,
-        pageData: result.pageData
+        pageData: result.pageData,
+        pageArray: result.pageArray,
+        pre: result.pre,
+        next: result.next,
+        preAble: result.pre === '' ? true : false,
+        nextAble: result.next === '' ? true : false,
+        page: Number(result.next.split('/')[2]) - 1 || 1
       })
     })
+  },
+
+  // 上一页
+  prePage() {
+    if (this.data.preAble) return
+    this.getSection(this.data.pre)
+  },
+  // 下一页
+  nextPage() {
+    if (this.data.nextAble) return
+    this.getSection(this.data.next)
+  },
+  // 点击页面跳转
+  bindDateChange(e) {
+    let page = parseInt(e.detail.value)
+    if ((page + 1) !== this.data.page) {
+      console.log(page);
+      console.log(parseInt(e.detail.value));
+      this.setData({
+        page: page + 1
+      })
+      this.getSection(this.data.pageArray[page].name)
+    }
   },
   /**
    * 生命周期函数--监听页面加载

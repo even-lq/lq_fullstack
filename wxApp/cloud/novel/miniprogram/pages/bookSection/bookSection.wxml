@@ -35,14 +35,14 @@
 <!-- 最新章节 -->
 <view class="lastsection">
   <view class="last">最新章节</view>
-  <view class="section" wx:for="{{lastData}}" wx:key="" data-url="{{item.sectionUrl}}" bindtap="navtoUrl">
+  <view class="section" wx:for="{{lastData}}" wx:key="index" data-url="{{item.sectionUrl}}" bindtap="navtoUrl">
     {{item.sectionName}}
   </view>
 </view>
 <!--  所有章节  -->
 <view class="lastsection">
   <view class="last">章节列表</view>
-  <view class="section" wx:for="{{pageData}}" wx:key="" data-url="{{item.sectionUrl}}" bindtap="navtoUrl">
+  <view class="section" wx:for="{{pageData}}" wx:key="index" data-url="{{item.sectionUrl}}" bindtap="navtoUrl">
     {{item.sectionName}}
   </view>
 </view>
@@ -52,6 +52,7 @@
     <button type="warn" size="mini" bindtap="prePage" disabled="{{preAble}}">上一页</button>
   </view>
   <view class="section">
+    <!-- value 表示选择了 range 中的第几个（下标从 0 开始） -->
     <picker mode="selector" value="{{page - 1}}" bindchange="bindDateChange" range="{{pageArray}}" range-key="{{'num'}}">
       <view class="picker">第 {{pageArray[page].num - 1}} 页</view>
     </picker>
