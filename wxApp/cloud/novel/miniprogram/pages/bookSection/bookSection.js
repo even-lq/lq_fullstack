@@ -1,4 +1,6 @@
 // miniprogram/pages/bookSection/bookSection.js
+const db = wx.cloud.database()
+let app = getApp();
 Page({
 
   /**
@@ -38,7 +40,7 @@ Page({
         next: result.next,
         preAble: result.pre === '' ? true : false,
         nextAble: result.next === '' ? true : false,
-        page: Number(result.next.split('/')[2]) - 1 || 1
+        page: result.next.split('/')[2] - 1 || 1
       })
     })
   },
@@ -64,6 +66,76 @@ Page({
       })
       this.getSection(this.data.pageArray[page].name)
     }
+  },
+  // 去看小说
+  navtoUrl(e) {
+    let url = e.currentTarget.dataset.url
+    // 已经存在于书架的书，记录阅读位置
+    if (url) {
+      db.collection('book').where({
+        userId: app.globalData.openid,
+        bookName: this.data.bookDetailData.name
+      }).get().then(res => {
+        console.log(res);
+        let data = res.data || []
+        if (data.length > 0) {
+          if (data[0].bookUrl !== url) {
+            wx.navigateTo({
+              url: `../bookContent/bookContent?url=${data[0].bookUrl}&name=${this.data.bookDetailData.name}&imgUrl=${this.data.bookDetailData.imgurl}`,
+            });
+            return
+          }
+        } else {
+          wx.navigateTo({
+            url: `../bookContent/bookContent?url=${url}&name=${this.data.bookDetailData.name}&imgUrl=${this.data.bookDetailData.imgurl}`,
+          });
+          // const id = data[0]._id || ''
+          // db.collection('book').doc(id).update({
+          //   data: {
+          //     bookUrl: url
+          //   }
+          // }).then(res => {
+          //   console.log(res);
+          // })
+
+        }
+      })
+    }
+
+
+  },
+  joinBook(e) {
+    let url = e.currentTarget.dataset.url
+    db.collection('book').where({
+      userId: app.globalData.openid,
+      bookName: this.data.bookDetailData.name
+    }).get().then(res => {
+      const data = res.data[0] || []
+      if (data.length == 0) {
+        db.collection('book').add({
+          data: {
+            userId: app.globalData.openid,
+            bookName: this.data.bookDetailData.name,
+            bookUrl: url,
+            imgUrl: this.data.bookDetailData.imgurl
+          }
+        }).then(res => {
+          console.log(res);
+          wx.showToast({
+            title: '加入成功',
+            icon: 'success',
+          }, 3000);
+
+        })
+      } else {
+        wx.showToast({
+          title: '已经加入过书架过了哦！',
+          icon: 'none',
+        });
+
+      }
+    })
+
   },
   /**
    * 生命周期函数--监听页面加载

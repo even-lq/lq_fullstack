@@ -3,7 +3,8 @@
     "pages/bookCity/bookCity",
     "pages/list/list",
     "pages/index/index",
-    "pages/bookSection/bookSection"
+    "pages/bookSection/bookSection",
+    "pages/bookContent/bookContent"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

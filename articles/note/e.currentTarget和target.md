@@ -27,3 +27,4 @@ e.currentTarget= <ul>
 ```
 
 所以，e.currentTarget 指向捕获事件的对象； e.target 指向发生这个事件的对象
+
