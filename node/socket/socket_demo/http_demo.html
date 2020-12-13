@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 发起接口请求的时候加载socket源码，可以在请求网络中看到请求socket -->
+  <script src="/socket.io/socket.io.js"></script>
+  <title>Document</title>
+  <style>
+    body {
+      background: #307ac6;
+      text-align: center;
+      color: aliceblue;
+      margin: 10% 10%;
+    }
+
+    input {
+      margin-top: 5vh;
+      width: 200px;
+      height: 40px;
+      border: 1px solid #ffffff;
+      color: #000;
+      padding-left: 10px;
+    }
+
+    button {
+      border: none;
+      background: #ffffff;
+      width: 90px;
+      height: 42px;
+      color: #000;
+    }
+
+    #infos {
+      margin-left: 15vw;
+      width: 300px;
+      height: 400px;
+      overflow: hidden;
+      border: none;
+      background-color: #fff;
+      color: #000;
+    }
+  </style>
+</head>
+
+<body>
+  hello world
+  <h1>hhhh</h1>
+  <div id="infos">
+
+  </div>
+  <input type="text" id="send_info" placeholder="请输入您想说的话">
+  <button type="button" id="btn">发送</button>
+  <script>
+    var socket = io()
+    document.getElementById('btn').onclick = function () {
+      socket.emit('link_to_server', document.getElementById('send_info').value)
+    }
+
+    socket.on('link_to_client', (msg) => {
+      document.getElementById('infos').append(msg)
+    })
+
+    socket.on('test_link', (msg) => {
+      document.getElementById('infos').append(msg)
+    })
+
+    socket.on('test_client_link', (msg) => {
+      document.getElementById('infos').append(msg)
+    })
+
+  </script>
+</body>
+
+</html>
