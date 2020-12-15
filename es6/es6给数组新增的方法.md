@@ -1,4 +1,4 @@
-​	下面的括号的内容为参数取值
+	下面的括号的内容为参数取值
 
 1. Object.keys(数组名)
 
@@ -47,6 +47,42 @@
    }));
    ```
 
-   
+老方法+方法总结
 
+1. 类数组转数组 
+
+   - 解构（具有迭代性质“iterable”的类数组可以解构成数组）
+   - Array.from(也可以用call把数组的方法借给类数组使用，类数组自动变成了数组)
+
+   ```js
+   function a() {
+     console.log(arguments);
+     console.log([...arguments]);
+     console.log(Array.from(arguments));
+     console.log(Array.prototype.shift.call(arguments)); // 会改变传入的参数，传入的参数变成了去除首部的类数组
+   }
+   a(1, 2, 3)
    
+   结果：
+   [Arguments] { '0': 1, '1': 2, '2': 3 }
+   [ 1, 2, 3 ]
+   [ 1, 2, 3 ]
+   1
+   [Arguments] { '0': 2, '1': 3 }
+   object
+   2
+   3
+   ```
+
+2. 分割数组的方法
+
+   shift：改变原始数组
+
+   slice：不改变原数组，参数：左闭右开（切割的开始，切割的结束）
+
+   splice：改变原数组，参数：（切割的开始，切割几位）
+
+
+
+
+
