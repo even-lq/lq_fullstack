@@ -26,8 +26,11 @@ c.call()  // 没有改变作用域，仍然是window
 
 
 function d(params) {
-  console.log(params);
-  const args = [...arguments].slice(1)
-  console.log(args);
+  // console.log(params);
+  // const args = [...arguments].slice(1)
+  // console.log(args);
+  // console.log(Array.prototype.shift.call(arguments));
+  var args = Array.prototype.slice.call(arguments, 1)
+  console.log(args.concat(Array.prototype.slice.call(arguments)));
 }
 d(1, 2, 3)

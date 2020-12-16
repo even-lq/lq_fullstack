@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 让this指向的函数去到obj里面生效  
+    Function.prototype.mybind2 = function (obj) {
+      console.log(obj);
+      const nop = function () {
+        console.log(obj === this);
+      }
+      nop()
+    }
+
+
+    let q = {
+      name: 'lq'
+    }
+    function w(a, b) {
+      this.sex = 'boy'
+      console.log(this.name);
+      console.log(a + b);
+    }
+
+    w.mybind2(w.prototype)
+    // let b = new res()
+    // console.log(b);
+  </script>
+</body>
+
+</html>

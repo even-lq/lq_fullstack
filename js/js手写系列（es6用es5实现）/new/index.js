@@ -4,7 +4,7 @@ Person.prototype.say = function() {
 function Person(name, age) {
   this.name = name
   this.age = age
-  return 123
+  // return 123
 }
 
 let person = new Person('xm', '18')
@@ -26,7 +26,7 @@ function myNew() {
   // call 需要把参数按顺序传递进去，而 apply 则是把参数放在数组里。
 
   let result = Constructor.apply(obj, arguments)
-
+  console.log(typeof result);
   return typeof result === 'object' ? result : obj
 }
 let myPerson = myNew(Person, 'xm')
