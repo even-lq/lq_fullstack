@@ -3,20 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.common.dev.js"></script>
   <title>Document</title>
 </head>
 <body>
   <div id="app">
-    hello world
+    {{msg}}
   </div>
 
   <script>
     // 传统方法
     // let dom = document.getElementById('app') 
     // dom.innerHTML = '你好'
-    let data = {
-      msg: 'hello world'
-    }
+    let app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello world'
+      },
+      created() {
+        this.msg = 'hello vue!'
+      }
+    })
     
   </script>
 </body>
