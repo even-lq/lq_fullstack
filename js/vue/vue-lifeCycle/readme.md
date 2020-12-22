@@ -1,0 +1,5 @@
+beforeMount之前只是解析模板，还不能获取dom结构
+
+beforeMount后创建真实的dom替换挂载的el
+
+mounted时可以拿到dom

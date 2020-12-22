@@ -10,21 +10,15 @@
   <div id="app">
     {{msg}}
   </div>
-
   <script>
-    // 传统方法
-    // let dom = document.getElementById('app') 
-    // dom.innerHTML = '你好'
     let app = new Vue({
       el: '#app',
-      data: {
-        msg: 'hello world'
-      },
-      created() {
-        this.msg = 'hello vue!'
+      data () {
+        return {
+          msg: 'hello vue!'
+        }
       }
     })
-    
   </script>
 </body>
 </html>

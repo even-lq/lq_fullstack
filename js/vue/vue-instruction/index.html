@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.common.dev.js"></script>
+  <title>Document</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    {{msg}}
+    <ul class="news">
+      <li class="item" v-for="(item, index) in news" :key="index">{{item.title}}</li>
+    </ul>
+    {{count}}
+    <button v-on:click="add">加分</button>
+    <button @click="reduce">减分</button>
+    <p>文本内容：{{message}}</p>
+    <input type="text" v-model="message">
+    <div class="img">
+      <img v-bind:src="imgUrl" alt="">
+    </div>
+    <div v-pre>{{msg}}</div>
+    <div v-cloak>{{msg}}</div>
+    <div>
+      <p v-once>第一次绑定的值：{{message}}</p>
+      <input type="text" v-model="message">
+    </div>
+  </div>
+
+  <script>
+    // 传统方法
+    // let dom = document.getElementById('app') 
+    // dom.innerHTML = '你好'
+    let app = new Vue({
+      el: '#app',
+      data: {
+        msg: 'hello world',
+        news: [
+          { title: '"空降"不到一周 韩俊任吉林代省长 曾是刘鹤"副手"' },
+          { title: '上门女婿成村霸，敲诈勒索故意纵火还打伤司法人员' },
+          { title: 'X光显示肚子内有异物 港媒:黄之锋被关医院单人囚室' },
+          { title: '特朗普突然出手，举行了史上最短一次记者会！' }
+        ],
+        count: 0,
+        message: '唉唉唉',
+        imgUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608531919440&di=a15cdefcaa64237c3a774d8ea32ab876&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fbaike%2Fs%3D220%2Fsign%3D75d06f5cb41bb0518b24b42a067bda77%2Fb3fb43166d224f4afc03106d0ef790529822d132.jpg'
+      },
+      methods: {
+        add() { this.count++ },
+        reduce() { this.count-- }
+      },
+      created() {
+        this.msg = 'hello vue!'
+      }
+    })
+
+  </script>
+</body>
+
+</html>
