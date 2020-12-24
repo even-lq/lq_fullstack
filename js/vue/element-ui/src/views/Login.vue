@@ -32,7 +32,8 @@ export default {
   methods: {
     login() {
       if (this.account == "admin" && this.password == "123") {
-        this.$router.push({path: '/home', query: { user : this.account}});
+        this.$router.push('/home');
+        localStorage.setItem('user', this.account)
       } else {
         alert("账号或密码错误！");
       }
