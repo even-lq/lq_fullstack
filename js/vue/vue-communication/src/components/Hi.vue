@@ -1,6 +1,6 @@
 <template>
   <div class="hi">
-    <p></p>
+    <p @click="sendHi">{{hi}}</p>
   </div>
 </template>
 
@@ -8,9 +8,15 @@
 export default {
   data () {
     return {
-      hi: 'hi！ Vue'
+      hi: 'hi！ Vue',
+      hiMsg: 'hi数据'
     }
   },
+  methods: {
+    sendHi () {
+      this.$emit('sendHi', this.hiMsg)
+    }
+  }
 }
 </script>
 

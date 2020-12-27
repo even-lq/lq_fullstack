@@ -1,24 +1,25 @@
 <template>
   <div class="hello">
-    {{message}}
-    <hr/>
-    {{fromHi}}
-    <button @click="send">发送</button>
+    子：{{testSync}}
+    <br>
+    <button @click="send">测试sync修饰符</button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['message', 'fromHi'],
+  props: ['testSync'],
   data () {
     return {
-      msg: '子'
+      // msg: '子'
     }
   },
   methods: {
     send () {
-      this.$emit('sendData', this.msg)
+      this.$emit('update:testSync', !this.testSync)
     }
+  },
+  mounted: {
   }
 }
 </script>
