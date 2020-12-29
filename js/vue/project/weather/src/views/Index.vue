@@ -12,6 +12,8 @@
       <div class="detail">
         <span>风力:3</span> | <span>风向:西北</span> | <span>空气湿度:73%</span></div>
     </div>
+
+    <div class="map-container" ref="mapContainer" ></div>
   </div>
 </template>
 
@@ -27,12 +29,18 @@ export default {
       this.localTime = this.getLocalTime()
     }, 1000)
   },
+  mounted () {
+    this.initMap ()
+  },
   methods: {
     getLocalTime () {
       return new Date().toLocaleTimeString()
     },
     initMap () { // 获取当前城市
-
+      let _this = this
+      var map = new AMap.Map(_this.$refs.mapContainer, {
+        resizeEnable: true
+      })
     },
     getCurrentCityData () { // 查询天气
 
@@ -60,6 +68,9 @@ export default {
         font-style: normal;
       }
     }
+  }
+  .map-container {
+    height: 300px;
   }
 }
 </style>
