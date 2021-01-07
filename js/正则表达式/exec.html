@@ -1,0 +1,12 @@
+<script>
+  // /g 表示该表达式可以进行全局匹配
+  let reg = /a/g 
+  let str = 'aaa'
+  console.log(reg.test(str));
+  console.log(reg.test(str));
+  console.log(reg.test(str));
+  console.log(reg.lastIndex); // lastIndex 代表每次匹配的最后一次位置
+  console.log(reg.test(str)); // 从3开始往后匹配，发现没内容了
+  console.log(reg.test(str)); // 从头开始匹配
+  console.log(/a/g.test(str)); // 这样每次都会从头开始匹配而不会从lastIndex开始匹配
+  </script>

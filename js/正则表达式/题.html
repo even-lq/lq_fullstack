@@ -1,0 +1,32 @@
+<script>
+  let html = `<div>{{name}}<p>{{age}}</p></div>`
+
+  let obj = {
+    name: '小米',
+    age: 19
+  }
+  // {{}} 把双括号的内容提取出来
+  function compiler(str, obj) {
+    // 匹配
+    let reg = /{{([a-z]{1,})}}/g;
+    let info = reg.exec(str);
+    while(info) {
+      // 0 是匹配的结果 1 是分组（括号）的内容
+      console.log(info);
+      let k = info[1] // 代表 {{}} 里面的内容
+      let v = obj[k];
+      str = str.replace(info[0], v)
+      // 加了/g基于上一次的位置匹配
+      // 由于第一次匹配后lastIndex是13，但是在第一次匹配时已经替换了字符串导致13的位置不再
+      // 是原来的位置，所以匹配不到
+      // 解决方式1：让所有reg = /{{([a-z]{1,})}}/
+      // 第二种方式，修改lastIndex
+      reg.lastIndex = 0
+      info = reg.exec(str)
+    }
+    return str;
+  }
+  let res = compiler(html, obj)
+  console.log(res);
+
+</script>

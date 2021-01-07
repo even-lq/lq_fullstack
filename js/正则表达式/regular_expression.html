@@ -1,0 +1,48 @@
+<script>
+  // 量词  数量模糊
+  // {1, 2}匹配字符串长度最小为m，最大为n
+  var reg = /ab{2,5}/
+  // 内容  内容模糊
+  // 匹配ab 或者 ba
+  var reg1 = /ab|ba/
+  var reg2 = /a[123]b/
+  // 匹配a1b a2b a3b
+  var reg3 = /[1-9]/
+  // 匹配范围1到9，去掉横杠代表1或者9
+  var reg4 = /5-9a-z/
+  // 匹配5至9或者a至z
+  // 匹配数组  [0-9]  \d
+  // [0-9a-zA-Z_] \w
+
+
+  // console.log(reg.test('bbbbbbabb'));
+  // console.log(reg1.test('bbbbbbabb'));
+
+
+  // #666
+  // 判断字符串是否符合css颜色16进制的语法
+  let colorReg = /#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}/
+  let colorReg1 = /#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})/
+
+  console.log(colorReg.test('#666'));
+  console.log(colorReg1.test('#666666'));
+
+  // 0：从哪里匹配，匹配的结果 1：括号的内容  index：从哪里匹配到的
+  console.log(colorReg1.exec('123#eeeffff'));
+
+
+  // 0-2或者3，0-5或者9
+  let timeReg0 = /[0-23]:[0-59]/
+  let timeReg = /[0-2][0-9]:[0-5][0-9]/
+  console.log(timeReg.test('18:59'));
+  let timeReg1 = /[01][0-9]|[2][0-3]:[0-5][0-9]/
+  console.log(timeReg1.test('07:08'));
+  console.log(timeReg1.exec('24:13'));
+
+
+  // ^匹配输入字符串的开始位置
+  // $匹配输入字符串的结束位置
+  let yearReg = /^([0-9]{4,})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+
+
+</script>
