@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #watermark {
+      z-index: -1;
+      position: fixed;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item {
+      /* position: relative; */
+      transform: translate3d(0, 0, 0);
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .text {
+      /* 相对于包含块定位 */
+      position: absolute;
+      transform: rotate(-45deg);
+      opacity: 0.2;
+    }
+    #button {
+      /* z-index: 10; */
+    }
+  </style>
+</head>
+
+<body style="">
+  <div id="button" class="">
+    按钮
+  </div>
+  <div id="watermark">
+    <div class="item">
+      <div class="text">001</div>
+    </div>
+    <div class="item">
+      <div class="text">001</div>
+    </div>
+    <div class="item">
+      <div class="text">001</div>
+    </div>
+  </div>
+  <script>
+    const button = document.getElementById('button');
+    const wm = document.getElementById('watermark')
+    button.addEventListener('click', () => {
+      console.log(1);
+    })
+    // MutationObserver 变动观察者
+    // DOM 结构的变更 是可以观察到的
+    const observer = new MutationObserver(callBack)
+    // 当观察的对象发生变化时调用回调函数
+    function callBack(list) {
+      // 输出数组
+      console.log(list);
+      list.forEach(x => {
+        if (x.type === 'childList' &&
+         x.removedNodes.length && x.removedNodes[0] === wm) {
+           // 删除结点时又加回来
+          document.body.appendChild(wm)
+        }
+      })
+    }
+    // 观察body的子节点和属性
+    observer.observe(document.body, {
+      childList: true, // 子节点
+      attributes: true, // 属性
+      subtree: true  // 观察整棵子树
+    })
+  </script>
+</body>
+
+</html>

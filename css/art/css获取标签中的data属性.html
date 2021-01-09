@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1 {
+
+    }
+    h1::before {
+      content: attr(data-name)
+    }
+    h1::after {
+      content: attr(class)
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="hello" data-name="玩转CSS的艺术"></h1>
+  <script>
+    const helloEle = document.querySelector('.hello')
+    // 获取属性
+    console.log(helloEle.getAttribute("data-name"));
+    console.log(helloEle.dataset.name);
+  </script>
+</body>
+
+</html>

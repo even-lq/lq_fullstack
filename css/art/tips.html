@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .hover-tips {
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+      text-decoration: none;
+      border-radius: 10px;
+      height: 40px;
+      line-height: 40px;
+      color: #fff;
+      background-color: #6666ff;
+    }
+
+    .btn-1::after {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: calc(100% + 10px);
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .5);
+      text-align: center;
+      font-size: 12px;
+      content: attr(data-msg);
+      transition: all 300ms;
+    }
+
+    .triangle::before {
+      opacity: 0;
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 100%;
+      border-top: 0;
+      border-left: 0;
+
+      border-top: 5px solid transparent;
+      border-right: 10px solid rgba(0, 0, 0, .5);
+      border-bottom: 5px solid transparent;
+    }
+
+    .triangle:hover::before {
+      opacity: 1;
+
+    }
+
+    .btn-1:hover::after {
+      opacity: 1;
+      left: calc(100% + 10px);
+    }
+  </style>
+</head>
+
+<body>
+  <a href="www.baidu.com " class="hover-tips btn-1 triangle" data-msg="Hello World">提示框</a>
+</body>
+
+</html>

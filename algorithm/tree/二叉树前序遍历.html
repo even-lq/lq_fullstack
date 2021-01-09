@@ -1,0 +1,48 @@
+<script>
+  let root = {
+    val: 1,
+    left: {
+      val: 2,
+      left: { val: 3 },
+      right: { val: 4 }
+    },
+    right: {
+      val: 7,
+      left: { val: 5 },
+      right: { val: 6 } 
+    }
+  }
+  
+  // 前序遍历 根 -> 左 -> 右
+  let arr = []
+  function preorderTraversal(root) {
+    if (!root) return;
+    console.log(root.val);
+    arr.push(root.val)
+    preorderTraversal(root.left)
+    preorderTraversal(root.right)
+    return arr;
+  }
+  preorderTraversal(root)
+
+
+  // 给你二叉树的根节点 root ，返回它节点值的 前序 遍历（数组）。
+  // var preorderTraversal = function (root) {
+  //     const list = [];
+  //     const stack = [];
+
+  //     if (root) stack.push(root)
+  //     while (stack.length > 0) {
+  //       const curNode = stack.pop()
+  //       list.push(curNode.val)
+
+  //       if (curNode.right) {
+  //         stack.push(curNode.right)
+  //       }
+  //       if (curNode.left) {
+  //         stack.push(curNode.left)
+  //       }
+  //     }
+  //     return list;
+  //   };
+</script>

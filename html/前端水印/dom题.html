@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <span>
+      <h2></h2>
+    </span>
+    <h2></h2>
+    <h3></h3>
+  </div>
+  <h2></h2>
+  <script>
+    const app = document.getElementById('app');
+    // app 里面h2的标签有几个 
+    // 法一
+    let nodes = app.querySelectorAll('h2');
+    console.log(nodes);    
+    // app 里面以h开头的标签有几个
+    console.log(app.innerHTML);
+    // 法二
+    let str = app.innerHTML
+    let reg = /(<h)/g
+    // matchAll输出数组，然后解构出来
+    console.log(...str.matchAll(reg));
+
+    //app.childNodes 递归
+    // 法三
+    findH(app)
+    function findH(parent) {
+      console.log(parent.tagName); // app下的每个子孙结点
+      if (parent.childNodes) {
+        for (let child of parent.childNodes) {
+          findH(child)
+        }
+      }
+    }
+  </script>
+</body>
+</html>
