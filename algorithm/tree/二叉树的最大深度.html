@@ -1,0 +1,22 @@
+<script>
+  var maxDepth = function (root) {
+    // 归阶段写法
+    // if (!root) return 0;
+    // // 递
+    // let lh = maxDepth(root.left)
+    // let rh = maxDepth(root.right)
+    // // 归
+    // return Math.max(lh, rh) + 1
+
+    // 递阶段写法
+    let res = 0
+    const fds = (node, l) => {
+      if (!root) return;
+      res = Math.max(res, l)
+      fds(root.left, l + 1)
+      fds(root.right, l + 1)
+    }
+    fds(root, 1)
+    return res;
+  };
+</script>

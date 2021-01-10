@@ -9,20 +9,21 @@
           alt=""
         />
       </div>
+
+      <div class="content">
+        <div class="title">
+          <span class="brand"></span>
+          <span class="name">粥品香坊（回龙观）</span>
+          <span class="brand"></span>
+        </div>
+        <div class="description">蜂鸟专送/38分钟送达</div>
+        <div class="support">
+          <img src="./decrease_1@2x.png" alt="" />
+          <span class="text">在线支付满28减5</span>
+        </div>
+      </div>
     </div>
 
-    <div class="content">
-      <div class="title">
-        <span class="brand"></span>
-        <span class="name">粥品香坊（回龙观）</span>
-        <span class="brand"></span>
-      </div>
-      <div class="description">蜂鸟专送/38分钟送达</div>
-      <div class="support">
-        <img src="./decrease_1@2x.png" alt="">
-        <span class="text">在线支付满28减5</span>
-      </div>
-    </div>
     <div class="bulletin-wrapper"></div>
   </div>
 </template>
@@ -31,5 +32,20 @@
 export default {};
 </script>
 
-<style>
+<style lang="stylus">
+@import '../../common/stylus/variable';
+
+.header 
+  position: relative;
+  overflow: hidden;
+  color: $color-white;
+  background: $color-backgroud-ss;
+  .content-wrapper 
+    position: relative;
+    display: flex;
+    padding: 24px 12px 18px 24px;
+    align-items center
+    .avatar
+      flex 0 0 64px
+      margin-right 16px
 </style>
