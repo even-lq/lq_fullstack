@@ -1,5 +1,6 @@
 <template>
-  <div class="goods">
+  <div class="">
+    <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
         <li
@@ -44,33 +45,65 @@
                   <span class="now">￥{{food.price}}</span>
                   <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                 </div>
+
+                <div class="cartcontrol-wrapper">
+                  <CartControl :food="food"></CartControl>
+                </div>
               </div>
             </li>
           </ul>
         </li>
       </ul>
     </div>
+
+
+    </div>
+
+    <shop-cart></shop-cart>
   </div>
+ 
 </template>
 
 <script>
 import SupportIco from "@/components/support-ico/Support-ico";
+import ShopCart from "@/components/shop-cart/Shop-cart";
+import CartControl from "@/components/cart-control/Cart-control";
+
 import { getGoods } from "@/api";
 import BScroll from "better-scroll";
 export default {
   data() {
     return {
-      currentIndex: 0,
+      // currentIndex: 0,
+      scrollY: 0,
+      menuScrollY: 0,
       goods: [],
       listHeight: []
     };
   },
+  computed: {
+    currentIndex() {
+      for (let i = 0; i < this.listHeight.length; i++) {
+        let height1 =  this.listHeight[i];
+        let height2=  this.listHeight[i + 1];
+        if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+          return i
+        }
+      }
+      return 0
+    },
+    selectFoods() {
+      // let foods = 
+    }
+  },
   components: {
     SupportIco,
+    ShopCart,
+    CartControl
   },
   methods: {
     selectMenu(index) {
-      this.currentIndex = index;
+      // this.currentIndex = index;
       let foodList = this.$refs.foodList
       let el = foodList[index]
       this.foodsScroll.scrollToElement(el, 300)
@@ -78,10 +111,26 @@ export default {
     _initScroll() {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {
         click: true,
+        probeType: 3
       });
       this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
         click: true,
+        probeType: 3
       });
+      this.foodsScroll.on('scroll', pos => {
+        this.scrollY = Math.abs(Math.round(pos.y))
+        let baseIndex = 3
+        if (baseIndex - this.currentIndex === -1) {
+          this.menuScroll.scrollTo(0, -41, 300)
+        } 
+        if (baseIndex - this.currentIndex === 1) {
+          this.menuScroll.scrollTo(0, 0, 300)
+        } 
+        
+      })
+      this.menuScroll.on('scroll', pos => {
+        this.menuScrollY = Math.abs(Math.round(pos.y))
+      })
     },
     _calculateHeight() {
       let foodList = this.$refs.foodList
@@ -150,6 +199,7 @@ export default {
       background $color-background-ssss
     .food-item
       display flex
+      position relative
       margin 18px
       padding-bottom 18px
       &:last-child
@@ -188,4 +238,8 @@ export default {
             text-decoration line-through
             font-size 10px
             color rgb(147, 153, 159)
+        .cartcontrol-wrapper
+          position absolute
+          right 0
+          bottom 12px
 </style>
