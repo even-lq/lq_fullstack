@@ -1,30 +1,150 @@
 <template>
    <div class="">
-     <div class="shop-cart">
-       <div class="content">
+     <div class="shop-cart" ref="logoCart">
+       <div class="content" @click="toggleList">
          <div class="content-left">
-           <div class="logo-wrapper">
-             <div class="logo">
+           <div class="logo-wrapper" ref="logoWrapper">
+             <div class="logo" :class="{'highlight' : totaolCount > 0 }" ref="logo">
                 <!-- highlight -->
-               <i class="icon-shopping_cart"></i>
+               <i class="icon-shopping_cart" :class="{'highlight' : totaolCount > 0 }"></i>
               </div>
-              <div class="num">4</div>
+              <div class="num"
+              ref="num" 
+              v-show="totaolCount > 0"
+              :class="{'circle' : totaolCount < 10}"
+              >{{totaolCount}}</div>
+              <!-- :style="totaolCount > 9 ? 'border-radius: 16px' : 'border-radius: 50%'" -->
+
            </div>
-           <div class="price">￥50</div>
-           <div class="desc">另需配送费￥4元</div>
+           <div class="price" :class="{'highlight' : totaolCount > 0 }">￥{{totaolPrice}}</div>
+           <div class="desc">另需配送费￥{{deliveryPrice}} 元</div>
          </div>
          <div class="content-right">
-           <div class="pay">
-             还差20元起送
+           <div class="pay" :class="payClass">
+             {{priceDesc}}
            </div>
          </div>
        </div>
+       <!-- 购物车列表 -->
+       <transition name="fold">
+         <div class="shopcart-list" v-show="listShow">
+           <div class="list-header">
+             <h1 class="title">购物车</h1>
+             <span class="empty" @click="empty">清空</span>
+           </div>
+           <div class="list-content" ref="listContent">
+             <ul>
+               <li class="food" v-for="(item, index) in selectFoods" :key="index">
+                 <span class="name">{{item.name}}</span>
+                 <div class="price"><span>￥{{item.price * item.count}}</span></div>
+                 <div class="cartcontrol-wrapper">
+                    <CartControl :food="item"></CartControl>
+                  </div>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </transition>
      </div>
    </div>
 </template>
 
 <script>
+import CartControl from "@/components/cart-control/Cart-control";
+import BScroll from "better-scroll";
 export default {
+  props: {
+    selectFoods: {
+      type: Array,
+      default() {
+        return []
+      }
+    },
+    deliveryPrice: {
+      type: Number,
+      default: 0
+    },
+    minPrice: {
+      type: Number,
+    }
+  },
+  data() {
+    return {
+      fold: false
+    }
+  },
+  computed: {
+    totaolCount() {
+      let count = 0
+      this.selectFoods.forEach(food => count += food.count)
+      return count
+    },
+    totaolPrice() {
+      let totaolPrice = 0
+      this.selectFoods.forEach(food => totaolPrice += food.count * food.price)
+      return totaolPrice
+    },
+    priceDesc() {
+      if (this.totaolPrice === 0) {
+        return `还差${this.minPrice}元起送`
+      } else if (this.totaolPrice < this.minPrice) {
+        let diff = this.minPrice - this.totaolPrice
+        return `还差${diff}元起送`
+      } else {
+        return `去结算`
+      }
+    },
+    payClass() {
+      if (this.totaolPrice < this.minPrice) {
+        return 'not-enough'
+      } else {
+        return `enough`
+      }
+    },
+    listShow() {
+      if (!this.totaolCount) {
+        this.fold = true
+        return false
+      }
+      let show = !this.fold
+      if (show) {
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            this.scroll = new BScroll(this.$refs.listContent, {
+              click: true
+            })
+          } else {
+            this.scroll.refresh()
+          }
+        })
+      }
+      return show
+    },
+  },
+
+  components: {
+    CartControl
+  },
+  methods: {
+    toggleList() {
+      if (this.selectFoods.length === 0) {
+        return;
+      }
+      this.fold = !this.fold
+    },
+    empty() {
+      this.fold = false
+      this.selectFoods.forEach(food => food.count = 0)
+      // 父selectFoods也会改变，父selectFoods所有的count都变成0
+    },
+    getShopCartClass() {
+      let dom = {
+        structure: this.$refs.logoWrapper,
+        height: this.$refs.logoCart.offsetHeight,
+      }
+      return dom
+    }
+  }
 
 }
 </script>
@@ -90,6 +210,9 @@ export default {
           // background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
           background: linear-gradient(90deg,#fc9153,#f01414);
           // background: linear-gradient(to right, #f9d423 0%, #ff4e50 100%
+          &.circle
+            width 16px
+            border-radius 50%
       .price
         display inline-block
         line-height 24px
@@ -112,5 +235,62 @@ export default {
         line-height 50px
         text-align center
         font-size $fontsize-small
+        &.not-enough
+          background #2b333b
+        &.enough
+          background $color-green
+          color $color-white
+          font-weight 700
+  .shopcart-list
+    position absolute
+    left 0
+    top 0
+    width 100%
+    z-index -1
+    transform translate3d(0, -100%, 0)
+    &.fold-enter-active, &.fold-leave-active
+      transition all 0.5s
+    &.fold-enter, &.fold-leave-to
+      transform translate3d(0, 0, 0)  
+    .list-header
+      display flex
+      justify-content space-between
+      align-items center
+      padding 0 18px
+      height 40px
+      line-height 40px
+      border-bottom 1px solid $color-background-sss 
+      background $color-background-ssss 
+      .title
+        font-size $fontsize-medium
+        color $color-background
+      .empty
+        font-size $fontsize-small
+        color $color-blue
+    .list-content
+      padding 0 18px
+      max-height 217px
+      overflow hidden
+      background #fff
+      .food
+        position relative
+        padding 12px 0
+        box-sizing border-box
+        .name
+          line-height 24px
+          font-size 14px
+          color rgb(7, 17, 27)
+        .price
+          position absolute
+          right 90px
+          bottom 12px
+          line-height 24px
+          font-size 14px
+          font-weight 700
+          color rgb(240, 20, 20)
+        .cartcontrol-wrapper
+          position absolute
+          right 0
+          bottom 6px
 
 </style>

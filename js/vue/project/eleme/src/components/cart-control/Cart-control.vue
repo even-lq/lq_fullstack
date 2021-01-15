@@ -1,13 +1,13 @@
 <template>
   <div class="cart-control">
     <transition name="move">
-      <div class="cart-decrease" v-show="food.count > 0" @click="decreaseCart">
+      <div class="cart-decrease" v-show="food.count > 0" @click.stop="decreaseCart">
         <span class="inner icon-remove_circle_outline"></span>
       </div>
     </transition>
     
     <div class="cart-count" v-show="food.count > 0">{{food.count}}</div>
-    <div class="cart-add icon-add_circle" @click="addCart"></div>
+    <div class="cart-add icon-add_circle" @click.stop="addCart($event)"></div>
   </div>
 </template>
 
@@ -16,10 +16,20 @@ export default {
   props: {
     food: {
       type: Object
-    }
+    },
+    shopCartDom: {
+      type: Object
+    },
   },
   methods: {
-    addCart() {
+    addCart($event) {
+      console.log($event.pageX, $event.pageY, $event.target.offsetWidth );
+      let x = $event.pageX - $event.target.offsetWidth / 2;
+      let y = $event.pageY - $event.target.offsetWidth / 2;
+      this.$nextTick(() => {
+        this.$emit('getIcon')
+      })
+      this.createBall(x, y)
       if (!this.food.count) {
         this.$set(this.food, 'count', 1)
       } else {
@@ -30,7 +40,33 @@ export default {
       if (this.food.count) {
         this.food.count -- 
       }
+    },
+    createBall(x, y) {
+      let bar = document.createElement('div');
+      bar.style.position = 'absolute'
+      bar.style.left = (x) + 'px'
+      bar.style.top = (y) + 'px'
+      bar.style.width = '0.533333rem'
+      bar.style.height = '0.533333rem'
+      bar.style.borderRadius = '50%'
+      bar.style.backgroundColor = '#02b6fd'
+      bar.style.transition = 'left .6s linear, top .6s cubic-bezier(0.5, -0.5, 1, 1)'
+
+      document.body.appendChild(bar)
+      // 添加动画属性
+      setTimeout(() => {
+          bar.style.left = (this.shopCartDom.offsetLeft + this.shopCartDom.offsetWidth - 16) + 'px'
+          bar.style.top = (this.shopCartDom.offsetTop) + 'px'
+      }, 0);
+
+      /**
+       * 动画结束后，删除自己
+       */
+      bar.ontransitionend = function () {
+          this.remove()
+      }
     }
+        
   }
 }
 </script>

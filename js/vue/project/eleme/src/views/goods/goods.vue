@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="cartcontrol-wrapper">
-                  <CartControl :food="food"></CartControl>
+                  <CartControl :food="food" @getIcon="getIcon" :shopCartDom="shopCartDom"></CartControl>
                 </div>
               </div>
             </li>
@@ -59,7 +59,12 @@
 
     </div>
 
-    <shop-cart></shop-cart>
+    <shop-cart 
+    :selectFoods="selectFoods"
+    :deliveryPrice="seller.deliveryPrice"
+    :minPrice="seller.minPrice"
+    ref="shopCart"
+    ></shop-cart>
   </div>
  
 </template>
@@ -72,11 +77,17 @@ import CartControl from "@/components/cart-control/Cart-control";
 import { getGoods } from "@/api";
 import BScroll from "better-scroll";
 export default {
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data() {
     return {
       // currentIndex: 0,
       scrollY: 0,
       menuScrollY: 0,
+      shopCartDom: {},
       goods: [],
       listHeight: []
     };
@@ -93,7 +104,17 @@ export default {
       return 0
     },
     selectFoods() {
-      // let foods = 
+      let foods = []
+      for (let good of this.goods) {
+        if (good.foods) {
+          for (let food of good.foods) {
+            if (food.count) {
+              foods.push(food)
+            }
+          }
+        }
+      }
+      return foods
     }
   },
   components: {
@@ -142,6 +163,15 @@ export default {
         this.listHeight.push(height)
       }
       console.log(this.listHeight);
+    },
+    getIcon() {
+      let dom = this.$refs.shopCart.getShopCartClass()
+      this.shopCartDom.offsetLeft = dom.structure.offsetLeft
+      this.shopCartDom.offsetTop = document.body.clientHeight - dom.height
+      this.shopCartDom.offsetWidth = dom.structure.offsetWidth
+      console.log(this.shopCartDom.offsetLeft, this.shopCartDom.offsetTop, dom.offsetWidth);
+
+      console.log(dom.offsetLeft, dom.offsetTop, dom.offsetWidth);
     }
   },
   created() {
