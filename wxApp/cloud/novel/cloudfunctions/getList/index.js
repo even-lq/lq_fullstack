@@ -1,7 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 const rp = require('request-promise') // http模块
-const cheerio = require('cheerio') // node环境下的js
+const cheerio = require('cheerio') // node环境下的jquery
 let charset = require('superagent-charset') // 解决乱码
 let superagent = require('superagent') // 发起请求
 charset(superagent) // 解决请求的乱码

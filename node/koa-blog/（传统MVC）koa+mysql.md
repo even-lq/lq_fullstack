@@ -26,12 +26,14 @@
 
    npm i mysql mysql依赖
 
+   npm i md5 加密工具
+
    npm i koa 
 
    ​			koa-bodyparser 表单解析
 
    ​			koa-mysql-session  koa的session
-
+   
    ​			koa-session-minimal koa的session
    
    ​			koa-router 路由
@@ -150,4 +152,29 @@ index.js 页面入口
   module.exports = router
   ```
 
-  
+### CSS
+
+1. input框响应式布局+focus样式
+
+   ```css
+   input {
+       display: block;
+       width: 100%; /*input的外包裹设置百分比宽度即可*/
+       height: 35px;
+       font-size: 18px;
+       padding: 6px 7px;	
+   	border-radius: 4px;   
+   	border: 1px solid #d7dde4;
+   	-webkit-appearance: none;
+   }
+   
+   input:focus,textarea:focus{
+       outline: 0;
+       box-shadow: 0 0 0 2px rgba(51,153,255,.2);
+       border-color: #5cadff;
+   }
+   ```
+
+   
+
+看ejs文件的html和css  c-signup.js
