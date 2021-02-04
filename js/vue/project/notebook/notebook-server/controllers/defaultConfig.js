@@ -1,6 +1,6 @@
 const config = {
   dataBase: {
-    DATABASE: 'noteBook',
+    DATABASE: 'notebook',
     USERNAME: 'root',
     PASSWORD: 'liqing',
     PORT: '3306',

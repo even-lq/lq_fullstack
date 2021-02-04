@@ -19,6 +19,7 @@ koa完整开发（koa脚手架）
    `source e:/study/StudyProjects/lq_fullstack/js/vue/project/notebook/notebook-server/sql/noteBook.sql;`
 
 5. npm i mysql
+6. npm install --save koa2-cors 解决跨域
 
 #### 前端
 
@@ -39,6 +40,8 @@ koa完整开发（koa脚手架）
    ```
 
 4. npm i axios
+
+5. npm install vue-quill-editor --save vue富文本编辑器
 
 ### 项目要点
 
@@ -72,7 +75,21 @@ koa完整开发（koa脚手架）
    Vue.prototype.$http = axios
    ```
 
-   
+4. sessionStorage防止刷新丢失数据
+
+   `    sessionStorage.setItem('userInfo', JSON.stringify(res.data.data))`
+
+5. 路由钩子函数
+
+   修改页面标题
+
+   ```js
+   // main.js
+   router.beforeEach((to, from, next) => {
+     document.title = to.meta.title
+     next()
+   })
+   ```
 
 ##### CSS
 
@@ -82,7 +99,53 @@ koa完整开发（koa脚手架）
     :style="`background-image:url(${avatar})`
    ```
 
+2. 关于图标的高度
+
+   如果图标是i标签，可以在外套一层div用高度和行高撑开div的高度从而看起来使得图标变高
+
+   ```html
+   <header>
+       <div @click="menu"><van-icon name="wap-nav" size="20px" /></div>
+       <div>
+           <van-icon name="like" size="20px" />
+           <van-icon name="search" size="20px" />
+       </div>
+   </header>
+   ```
+
+   ```js
+   header {
+       display: flex;
+       height: 1.2rem;
+       line-height: 1.2rem;
+       justify-content: space-between;
+       margin: 10px 0;
+       .van-icon-like {
+           margin-right: 10px;
+       }
+   }
+   ```
+
+   ![图标外的div高度](E:\study\StudyProjects\lq_fullstack\js\vue\project\notebook\图标外的div高度.png)
+
+   ![图标高度](E:\study\StudyProjects\lq_fullstack\js\vue\project\notebook\图标高度.png)
+
+3. 渲染富文本
+
+   ```html
+   <div class="content" v-html="noteDetail.note_content"></div>
+   ```
+
+4. 富文本编辑
+
 #### 后端
+
+##### 跨域
+
+```js
+const cors = require('koa2-cors');
+app.use(cors());
+```
 
 ##### controllers 控制层
 

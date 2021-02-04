@@ -4,14 +4,54 @@ import StarLogin from '@/views/login/StarLogin'
 Vue.use(VueRouter)
 
 const routes = [
- {
-   path: '/starlogin',
-   name: 'startLogin',
-   component: StarLogin,
-   meta: {
-     title: '登录'
-   }
- }
+  {
+    path: '/starLogin',
+    name: 'startLogin',
+    component: StarLogin,
+    meta: {
+      title: '登录'
+    }
+  },
+  {
+    path: '/starRegister',
+    name: 'starRegister',
+    component: () => import('@/views/register'),
+    meta: {
+      title: '注册'
+    }
+  },
+  {
+    path: '/noteClass',
+    name: 'noteClass',
+    component: () => import('@/views/noteClass'),
+    meta: {
+      title: '笔记分类'
+    }
+  },
+  {
+    path: '/noteList',
+    name: 'noteList',
+    component: () => import('@/views/noteList'),
+    meta: {
+      title: '笔记列表'
+    }
+  },
+  {
+    path: '/noteDetail',
+    name: 'noteDetail',
+    component: () => import('@/views/noteDetail'),
+    meta: {
+      title: '笔记详情'
+    }
+  },
+  {
+    path: '/noteEdit',
+    name: 'noteEdit',
+    component: () => import('@/views/noteEdit'),
+    meta: {
+      title: '笔记编辑'
+    }
+  },
 ]
 
 const router = new VueRouter({

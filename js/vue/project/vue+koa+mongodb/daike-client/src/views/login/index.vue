@@ -10,16 +10,26 @@
         placeholder="请输入密码"
         type="password"
       />
+
+      <van-field
+        v-show="!isLogin"
+        v-model="rePassword"
+        label="重复密码"
+        placeholder="请再次输入密码"
+        type="password"
+      />
     </van-cell-group>
 
     <van-row>
-      <van-button size="small" type="default">注册</van-button>
+      <van-button size="small" type="default" @click="isLogin = !isLogin">{{
+        isLogin ? "注册" : "已有账号"
+      }}</van-button>
       <van-button
         size="small"
         type="primary"
         class="btn-login"
         @click="handleLogin"
-        >登录</van-button
+        >{{ isLogin ? "登录" : "注册并登录" }}</van-button
       >
       <!-- <van-col span="8">span: 8</van-col> -->
     </van-row>
@@ -32,6 +42,8 @@ export default {
     return {
       username: "",
       password: "",
+      rePassword: "",
+      isLogin: true,
     };
   },
   methods: {
@@ -39,17 +51,31 @@ export default {
       this.$toast.loading({
         message: status,
         forbidClick: true,
-        loadingType: 'spinner',
-        duration: 0
+        loadingType: "spinner",
+        duration: 0,
       });
     },
     login() {
-      this.$http.login({
-        username: this.username,
-        password: this.password
-      }).then(res => {
-        console.log(res);
-      })
+      this.$http
+        .login({
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          console.log(res);
+        });
+    },
+    register() {
+      this.$http
+        .register({
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          console.log(res);
+          this.$toast.clear()
+          this.$router.push('/home')
+        })
     },
     handleLogin() {
       // 用户名或密码为空提示
@@ -58,9 +84,19 @@ export default {
         return;
       }
       // 登录提示
-      this.showLoginTip('登陆中...')
-      this.login()
+      if (this.isLogin) {
+        this.showLoginTip("登陆中...");
+        this.login();
+      } else {
+        if (this.rePassword !== this.password) {
+          this.$toast.fail("两次密码有误");
+          return;
+        }
+        this.showLoginTip("注册并登陆中...");
+        this.register();
+      }
     },
+    handleRegister() {},
   },
 };
 </script>
