@@ -1,11 +1,8 @@
 function sub_curry(fn) {
   console.log(fn);
   console.log(arguments);
-  
   let args = [].slice.call(arguments, 1)
-  console.log(args);
   return function () {
-    console.log(arguments, 'sub_curry');
     return fn.apply(this, args.concat([].slice.call(arguments)))
   }
 }
@@ -14,16 +11,10 @@ function curry(fn, length) {
   // arguments代表curry和fn的参数
   let slice = Array.prototype.slice;
   return function () {
-    console.log(length);
     if (arguments.length < length) {
-      console.log(arguments);
-
       let combined = [fn].concat(slice.call(arguments))
-      console.log(combined);
       return curry(sub_curry.apply(this, combined), length - arguments.length)
     } else {
-      console.log(arguments, 'else');
-      console.log(fn.toString());
       return fn.apply(this, arguments)
     }
   }
