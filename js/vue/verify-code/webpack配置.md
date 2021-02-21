@@ -73,7 +73,27 @@
 
 ##### 打包发布
 
-1. npm run lib
-2. npm pack 生成tgz压缩包
-3. 上传到node仓库
+1. 登录
+
+   npm login：出现错误 => 切换回npm源
+
+   `npm config set registry=http://registry.npmjs.org`
+
+2. npm run lib
+
+3. npm publish
+
+   测试
+
+   npm install lq-verify-code-0.1.0.tgz
+
+##### 使用
+
+
+
+
+
+
+
+
 

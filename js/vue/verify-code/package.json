@@ -2,7 +2,7 @@
   "name": "lq-verify-code",
   "version": "0.1.0",
   "private": false,
-  "main":"lib/verigy-code.umd.main.js",
+  "main":"lib/verify-code.umd.main.js",
   "author": "wn",
   "description": "test",
   "keywords": [
@@ -14,7 +14,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name verigy-code --dest lib ./src/main.js"
+    "lib": "vue-cli-service build --target lib --name verify-code --dest lib ./src/main.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",

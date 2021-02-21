@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li><a href="/home">home</a></li>
+    <li><a href="/about">about</a></li>
+  </ul>
+
+  <!-- 渲染对应的ul -->
+  <div id="routeView"></div>
+  <script>
+    let routeView = document.getElementById('routeView')
+
+    window.addEventListener('popState', () => {
+      routeView.innerHTML = location.pathname
+    })
+
+    window.addEventListener('DOMContentLoaded', onload)
+    function onload() {
+      routeView.innerHTML = location.pathname
+      let linkList = document.querySelectorAll('a[href')
+      linkList.forEach(el => el.addEventListener('click', function(e) {
+        e.preventDefault()
+        history.pushState(null, '', el.getAttribute('href'))
+      }))
+
+    } 
+  </script>
+</body>
+
+</html>
