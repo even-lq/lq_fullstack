@@ -1,0 +1,20 @@
+<script>
+  // 构造函数继承
+  function Parent(name) {
+    this.names = ['js', 'ceo']
+    this.name = name
+
+  }
+
+  function Child(name) {
+    Parent.call(this, name)
+  }
+
+  let child1 = new Child('ds')
+  child1.names.push('cong')
+  console.log(child1);
+
+  // 避免了引用类型的属性被实例共享
+  let child2 = new Child('fe')
+  console.log(child2);
+</script>

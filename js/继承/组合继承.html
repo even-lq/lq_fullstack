@@ -1,0 +1,25 @@
+<script>
+  // 构造函数继承
+  function Parent(name) {
+    this.colors = ['red', 'blue', 'green']
+    this.name = name
+
+  }
+
+  Child.prototype = new Parent()
+  function Child(name, age) {
+    Parent.call(this, name)
+    this.age = age
+  }
+
+  let child1 = new Child('ds', '18')
+  child1.colors.push('pink')
+  console.log(child1.name); // ds
+  console.log(child1.age); // 18
+  console.log(child1.colors); // ['red', 'blue', 'green', 'pink']
+
+  let child2 = new Child('dad', '19')
+  console.log(child2.name); // dad
+  console.log(child2.age); // 19
+  console.log(child2.colors); // ['red', 'blue', 'green']
+</script>

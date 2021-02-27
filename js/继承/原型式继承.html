@@ -1,0 +1,29 @@
+<script>
+  // 原型式继承
+
+  // Object.create实现原理
+  function createObj(o) {
+    function F() { }
+    F.prototype = o
+    return new F()
+  }
+
+  let person = {
+    name: 'jiushen',
+    friends: ['ceo', 'cong']
+  }
+
+  let person1 = createObj(person)
+  let person2 = createObj(person)
+
+  // person1是空对象，加上name属性只是给空对象添加新增的name属性，与原型不冲突
+  // 赋值操作，直接在实例身上找，如果没有就添加
+  person1.name = 'z'
+  console.log(person1.name);
+  console.log(person2.name);
+
+  // push需要查找frineds数组，没有就往原型上找，找到则执行push
+  // 优先级： 赋值操作 > 查找操作
+  person1.friends.push('yao')
+  console.log(person2.friends);
+</script>
