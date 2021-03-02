@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul id="container"></ul>
+
+  <script>
+    let ul = document.getElementById('container')
+    let now = Date.now()
+    const total = 100000;
+    let count = 20;
+    let Index = 0
+
+
+
+    function loop(curCount, curIndex) {
+      if (curCount <= 0) return false
+      let pageCount = Math.min(curCount, count)
+      window.requestAnimationFrame(() => {
+        // DocumentFragment 文档片段
+        // 在内存中存在的dom结点而不在dom树中，不会回流
+        let fragment = document.createDocumentFragment()
+        for (let i = 0; i < pageCount; i++) {
+          
+
+          let li = document.createElement('li')
+          // ~~取整的近似值
+          li.innerText = ~~(Math.random() * total)
+          
+          // 每次都回流
+          // ul.appendChild(li)
+
+          // 把20个li挂到文档片段
+          fragment.appendChild(li)
+        }
+        // 每个for只回流一次
+        ul.appendChild(fragment)
+        loop(curCount - pageCount, curIndex + pageCount)
+      });
+
+    }
+
+    loop(total, Index)
+
+
+    // 不代表渲染时间
+    console.log('js运行完', Date.now() - now, 'ms');
+    // 微任务执行完后渲染页面
+    // 执行宏任务时页面渲染完成
+    setTimeout(() => {
+      console.log('总运行时间', Date.now() - now, 'ms');
+    }, 0);
+
+
+
+
+  </script>
+</body>
+
+</html>
