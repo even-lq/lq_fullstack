@@ -25,6 +25,7 @@
       window.requestAnimationFrame(() => {
         // DocumentFragment 文档片段
         // 在内存中存在的dom结点而不在dom树中，不会回流
+        // DocumentFragment不适用于dom比较复杂的情况
         let fragment = document.createDocumentFragment()
         for (let i = 0; i < pageCount; i++) {
           
@@ -32,7 +33,7 @@
           let li = document.createElement('li')
           // ~~取整的近似值
           li.innerText = ~~(Math.random() * total)
-          
+
           // 每次都回流
           // ul.appendChild(li)
 
