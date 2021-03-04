@@ -1,0 +1,23 @@
+<!-- miniprogram/pages/index/index.wxml -->
+<view>
+  <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</van-button>
+  <!-- 绑定点击事件 -->
+  <van-button bindtap="nearby_search">搜索周边大学</van-button>
+  <!-- 地图容器 -->
+  <map id="myMap" markers="{{markers}}" show-location enable-poi style="width:100%;height:300px;" longitude="115.826044" latitude="28.718" scale='16'></map>
+  <view class="map-content">
+    <view class="map-control">
+      <span class="map-control-span">收起地图</span>
+      <van-icon custom-style="display:inline-block;position: absolute;top:30rpx;margin-left:20rpx;font-size:24rpx;" name="arrow-up" />
+    </view>
+        <!-- vertical-align:middle; -->
+    <span style='font-size:40px;color:rgb(0,0,0);font-style:normal;font-weight:normal;'>
+      &#8963;
+    </span>
+    <van-cell-group>
+      <van-field model:value="{{ value }}" placeholder="请输入用户名" border="{{ false }}" />
+    </van-cell-group>
+  </view>
+</view>
+<!-- circles="{{circles}}" 
+display='ALWAYS' -->

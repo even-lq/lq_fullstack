@@ -19,18 +19,21 @@ Page({
       complete: () => { }
     });
 
-    wx.cloud.callFunction({
-      name: 'setCookie',
-      data: {}
-    }).then(res => {
-      console.log(res);
-      wx.hideLoading();
-    })
-    // api.setCookie()
-    //   .then(res => {
-    //     console.log(res);
-    //     wx.hideLoading();
-    //   })
+    // wx.cloud.callFunction({
+    //   name: 'setCookie',
+    //   data: {}
+    // }).then(res => {
+    //   console.log(res);
+    //   wx.hideLoading();
+    // })
+    api.setCookie()
+      .then(res => {
+        console.log(res);
+        api.cookie().then(res => {
+          console.log(res);
+        })
+        wx.hideLoading();
+      })
 
   },
 
