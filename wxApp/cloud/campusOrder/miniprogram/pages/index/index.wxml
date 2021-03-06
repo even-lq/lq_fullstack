@@ -1,23 +1,32 @@
 <!-- miniprogram/pages/index/index.wxml -->
 <view>
-  <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</van-button>
-  <!-- 绑定点击事件 -->
-  <van-button bindtap="nearby_search">搜索周边大学</van-button>
-  <!-- 地图容器 -->
-  <map id="myMap" markers="{{markers}}" show-location enable-poi style="width:100%;height:300px;" longitude="115.826044" latitude="28.718" scale='16'></map>
-  <view class="map-content">
-    <view class="map-control">
-      <span class="map-control-span">收起地图</span>
-      <van-icon custom-style="display:inline-block;position: absolute;top:30rpx;margin-left:20rpx;font-size:24rpx;" name="arrow-up" />
+  <!-- 地图容器height:450rpx; -->
+  <view style="width:100%;height:536rpx;">
+    <view class="map-nav">
+      <!-- <van-button custom-style="{{mapLocatBtn}}" icon="location-o" type="primary">{{markers[0].title}}</van-button> -->
+      <span class="map-nav-title" bind:tap="mapNav">
+        <!-- <span></span> -->
+        <van-icon custom-style="font-size:inherit;" name="location-o" />
+        <text>{{markers[0].title}}</text>
+        <van-icon custom-style="font-size:inherit;padding-left:10rpx;" name="arrow" />
+      </span>
     </view>
-        <!-- vertical-align:middle; -->
-    <span style='font-size:40px;color:rgb(0,0,0);font-style:normal;font-weight:normal;'>
-      &#8963;
-    </span>
-    <van-cell-group>
-      <van-field model:value="{{ value }}" placeholder="请输入用户名" border="{{ false }}" />
-    </van-cell-group>
+    <map id="myMap" markers="{{markers}}" show-location enable-poi style="width:100%;height:450rpx;" longitude="115.826044" latitude="28.718" scale='16' bindtap="maptap"></map>
+        <!-- {{mapFlag === true ? '0rpx':'450rpx' }} -->
+  </view>
+  <view class="map-content" style="transform: {{mapFlag === true ? 'translateY(-450rpx);':'translateY(0rpx);' }}">
+    <view class="map-control" bindtap="mapControl">
+      <span class="map-control-span">收起地图</span>
+      <van-icon style="transform: {{mapFlag === true ? 'rotate(180deg);': 'rotate(0deg);' }};" custom-style="display:inline-block;font-size:24rpx;padding:0 10rpx;transform-origin: center center;" name="arrow-up" />
+    </view>
+    <view style="margin-top: 50rpx;">
+      <scroll-view scroll-y="{{true}}">
+        <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          授权
+        </van-button>
+        <van-button bindtap="nearby_search">搜索周边大学</van-button>
+      </scroll-view>
+      <!-- 绑定点击事件 -->
+    </view>
   </view>
 </view>
-<!-- circles="{{circles}}" 
-display='ALWAYS' -->

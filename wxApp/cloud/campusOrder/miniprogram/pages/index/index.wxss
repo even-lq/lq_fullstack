@@ -1,17 +1,36 @@
 /* miniprogram/pages/index/index.wxss */
-.map-control {
+.map-nav {
+  height: 100rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+}
+.map-nav-title {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  line-height: 100rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-left: 20rpx;
+}
+.map-content {
+  margin-top: 15rpx;
+  transition: all 0.3s linear;
+  height: 100vh;
+  background-color: #F2F2F2;
+  position: relative;
+}
+.map-content .map-control {
   color: #929292;
   background: #fff;
   text-align: center;
-  padding: 22rpx 0;
+  padding: 16rpx 0;
   font-size: 28rpx;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, .1);
-  position: relative;
+  box-shadow: 0px 2rpx 1rpx rgba(0, 0, 0, 0.1);
 }
-.map-control-span {
-  display:inline-block;
-  height:40rpx;
-  line-height:40rpx;
-  
-
+.map-content .map-control-span {
+  display: inline-block;
+  height: 40rpx;
+  line-height: 40rpx;
 }

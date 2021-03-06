@@ -1,0 +1,41 @@
+/* miniprogram/pages/index/index.wxss */
+@import "../../common/less/variable.less";
+.map-nav {
+  height: 100rpx;
+  background-color: @white;
+  font-size: @fontsize-medium;
+ 
+  &-title {
+    display: flex; 
+    align-items: center;
+    height:100%;
+    line-height: 100rpx;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-left: 20rpx;
+  }
+}
+.map-content {
+  margin-top: 15rpx;
+  transition: all .3s linear;
+  height: 100vh;
+  background-color: #F2F2F2;
+  position: relative;
+  .map-control {
+  color: #929292;
+  background: @white;
+  text-align: center;
+  padding: 16rpx 0;
+  font-size: 28rpx;
+  box-shadow: 0px 2rpx 1rpx rgba(0, 0, 0, .1);
+    &-span {
+      display:inline-block;
+      height:40rpx;
+      line-height:40rpx;
+    }
+  }
+}
+
+
+
