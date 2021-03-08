@@ -1,6 +1,7 @@
 // miniprogram/pages/index/index.js
 let QQMapWX = require('../../utils/JavaScriptSDK-v1.2/qqmap-wx-jssdk.js');
 let qqmapsdk;
+const { globalData} = getApp()
 Page({
 
   /**
@@ -9,9 +10,11 @@ Page({
   data: {
     markers: [],
     circles: [],
-    mapFlag: false,
     animation: {},
-    mapLocatBtn: 'color: #000;background-color: #fff;height:100%;border:none;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:20rpx;',
+    mapFlag: false,
+    searchWidth: false,
+    contentHeight: 0,
+    // mapLocatBtn: 'color: #000;background-color: #fff;height:100%;border:none;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:20rpx;',
     location: {
       name: '',
       longitude: '',
@@ -124,6 +127,19 @@ Page({
       }
     })
   },
+  // 地图导航了的搜索框
+  campusSearch() {
+    this.setData({
+      searchWidth: !this.data.searchWidth
+    })
+    // console.log(this.data.searchWidth);
+  },
+  // 显示导航标题栏
+  navTitleShow() {
+    this.setData({
+      searchWidth: !this.data.searchWidth
+    })
+  },
   // 点击地图的某个学校
   maptap(event) {
     let { latitude, longitude } = event.detail
@@ -133,15 +149,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getSystemInfo({
-      success: (res) => {
-        let screenHeight = wx.getSystemInfoSync().windowHeight;
-        console.log(res, screenHeight);
+    // wx.getSystemInfo({
+    //   success: (res) => {
+    //     let screenHeight = wx.getSystemInfoSync().windowHeight;
+    //     console.log(res, screenHeight);
 
-      },
-      fail: () => { },
-      complete: () => { }
-    });
+    //   },
+    //   fail: () => { },
+    //   complete: () => { }
+    // });
+    let self = this
+    console.log(globalData.screenHeight);
+
+    let query = wx.createSelectorQuery();
+    query.select('.map-nav').boundingClientRect()
+
+    query.exec(res => {
+      console.log(res[0].height);
+      console.log(globalData.screenHeight - res[0].height );
+      self.setData({
+        contentHeight: globalData.screenHeight - res[0].height
+      })
+      console.log(this.data.contentHeight);
+    })
+      
 
 
 

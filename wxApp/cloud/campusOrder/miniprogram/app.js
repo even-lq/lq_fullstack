@@ -15,8 +15,19 @@ App({
       })
     }
 
-    
-      
+
+    wx.getSystemInfo({
+      success: (res) => {
+        self.globalData.screenHeight = wx.getSystemInfoSync().screenHeight;
+        console.log(res, self.globalData.screenHeight);
+
+      },
+      fail: () => { },
+      complete: () => { }
+    });
+
+
+
 
     wx.getSetting({
       success: (res) => {
@@ -34,6 +45,9 @@ App({
     });
 
 
-    this.globalData = {}
+    // this.
+  },
+  globalData: {
+    screenHeight: 0,
   }
 })

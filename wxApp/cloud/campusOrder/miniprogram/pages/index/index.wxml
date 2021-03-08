@@ -1,30 +1,84 @@
 <!-- miniprogram/pages/index/index.wxml -->
 <view>
   <!-- 地图容器height:450rpx; -->
-  <view style="width:100%;height:536rpx;">
-    <view class="map-nav">
+  <view class="map-nav">
+    <view class="map-nav_wrapper">
       <!-- <van-button custom-style="{{mapLocatBtn}}" icon="location-o" type="primary">{{markers[0].title}}</van-button> -->
-      <span class="map-nav-title" bind:tap="mapNav">
+      <span wx:if="{{!searchWidth}}" class="map-nav-title" bind:tap="mapNav">
         <!-- <span></span> -->
         <van-icon custom-style="font-size:inherit;" name="location-o" />
-        <text>{{markers[0].title}}</text>
+        <text class="map-nav-title_name">{{markers[0].title}}</text>
         <van-icon custom-style="font-size:inherit;padding-left:10rpx;" name="arrow" />
       </span>
+      <!-- {{searchWidth === true ? 'mapNavShow' : ''}} -->
+      <!-- bindfocus="campusSearch" -->
+      <view class="map-nav-search" style="width: {{searchWidth === true ? '710rpx' : ''}}" bindtap="campusSearch">
+        <view class="map-nav-search_wrapper">
+          <i class="iconfont icon-sousuo"></i>
+          <input class="map-nav-search_input" placeholder-style="color:#BEBEBE;text-align: left;" type="text" placeholder="搜索学校" focus="{{searchWidth}}" bindblur="navTitleShow" />
+        </view>
+      </view>
     </view>
     <map id="myMap" markers="{{markers}}" show-location enable-poi style="width:100%;height:450rpx;" longitude="115.826044" latitude="28.718" scale='16' bindtap="maptap"></map>
-        <!-- {{mapFlag === true ? '0rpx':'450rpx' }} -->
+    <!-- {{mapFlag === true ? '0rpx':'450rpx' }} -->
   </view>
   <view class="map-content" style="transform: {{mapFlag === true ? 'translateY(-450rpx);':'translateY(0rpx);' }}">
     <view class="map-control" bindtap="mapControl">
       <span class="map-control-span">收起地图</span>
       <van-icon style="transform: {{mapFlag === true ? 'rotate(180deg);': 'rotate(0deg);' }};" custom-style="display:inline-block;font-size:24rpx;padding:0 10rpx;transform-origin: center center;" name="arrow-up" />
     </view>
-    <view style="margin-top: 50rpx;">
-      <scroll-view scroll-y="{{true}}">
-        <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-          授权
-        </van-button>
-        <van-button bindtap="nearby_search">搜索周边大学</van-button>
+    <view class="scrollContent">
+      <scroll-view scroll-y="true" style="height: {{contentHeight}}px;" scroll-scroll-with-animation="true">
+        <view style="padding-top: 25rpx;">
+          <!-- <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            授权
+          </van-button>
+          <van-button bindtap="nearby_search">搜索周边大学</van-button> -->
+          <van-index-bar>
+            <view>
+              <van-index-anchor index="A" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="B" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="C" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="D" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="E" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="F" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+            <view>
+              <van-index-anchor index="G" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+              <van-cell title="文本" />
+            </view>
+          </van-index-bar>
+        </view>
       </scroll-view>
       <!-- 绑定点击事件 -->
     </view>

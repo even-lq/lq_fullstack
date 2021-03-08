@@ -4,6 +4,7 @@ text,
 swiper,
 swiper-item,
 image,
+input,
 navigator {
   padding: 0;
   margin: 0;
