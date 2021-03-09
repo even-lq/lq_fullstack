@@ -1,105 +1,239 @@
 /* miniprogram/pages/index/index.wxss */
 @import "../../common/less/variable.less";
-@import "../../common/icon/search.wxss";
+@import "../../common/icon/icon.wxss";
 
 .mapNavShow {
   visibility: hidden;
   z-index: 0;
 }
 
-.map-nav {
-  width: 100%;
-  height: 536rpx;
+.container {
+  height: 100vh;
 
-  &_wrapper {
-    height: 100rpx;
-    background-color: @white;
-    font-size: @fontsize-medium;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  .map-nav {
+    width: 100%;
+    height: 536rpx;
+
+    &_wrapper {
+      height: 100rpx;
+      background-color: @white;
+      font-size: @fontsize-medium;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+
+      .map-nav-title {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        line-height: 100rpx;
+        padding-left: 20rpx;
+
+        &_name {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .map-nav-search {
+        height: 60rpx;
+        width: 200rpx;
+        margin: 0 20rpx;
+        border-radius: 30rpx;
+        background-color: #F4F5F7;
+        font-size: @fontsize-medium;
+        transition: width .2s linear;
+
+        &_wrapper {
+          width: 90%;
+          margin: 0 auto;
+          color: #BEBEBE;
+        }
+
+        .iconfont {
+          font-size: 1.2rem;
+          display: inline-block;
+          height: 60rpx;
+          line-height: 60rpx;
+        }
+
+        .icon-sousuo {
+          position: absolute;
+        }
+
+        &_input {
+          position: relative;
+          display: inline-block;
+          height: 60rpx;
+          line-height: 60rpx;
+          width: 90%;
+          padding-left: 48rpx;
+        }
+      }
+    }
+  }
+
+  .map-content {
+    margin-top: 15rpx;
+    transition: all .3s linear;
+    // height: 100vh;
+    background-color: #F2F2F2;
     position: relative;
 
-    .map-nav-title {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      left: 0;
-      width: 40%;
+    .map-control {
+      color: #929292;
+      background: @white;
+      text-align: center;
+      padding: 16rpx 0;
+      font-size: 28rpx;
+      box-shadow: 0px 2rpx 1rpx rgba(0, 0, 0, .1);
+
+      &-span {
+        display: inline-block;
+        height: 40rpx;
+        line-height: 40rpx;
+      }
+    }
+
+    .scrollContent {
       height: 100%;
-      line-height: 100rpx;
-      padding-left: 20rpx;
 
-      &_name {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      // overflow: hidden;
+      .content-wrapper {
+        padding: 30rpx 40rpx 0;
+
+        .card-wrapper {
+          height: 250rpx;
+          width: 100%;
+          border: 2rpx solid @themeColor;
+          border-radius: 10rpx;
+          background: @white;
+
+
+          .main-card {
+            padding: 35rpx 30rpx 30rpx;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            position: relative;
+
+            &_address {
+              // flex: 0 0 85px;
+              flex: 0 0 60%;
+              width: 60%;
+
+              &-title {
+                height: 84rpx;
+
+                .icon-xuexiao {
+                  font-size: 1.2rem;
+                  color: #bebebe;
+                  display: inline-block;
+                  position: absolute;
+                  vertical-align: middle;
+                }
+
+                .title {
+                  display: inline-block;
+                  color: @black-8;
+                  font-size: @fontsize-large;
+                  font-weight: bold;
+                  letter-spacing: 2rpx;
+                  padding-left: 45rpx;
+                }
+              }
+
+              &-detail {
+                font-size: @fontsize-medium;
+                margin-top: 20rpx;
+                color: #9b9b9b;
+                height: 84rpx;
+
+
+                .icon-shouye {
+                  font-size: 0.9rem;
+                  color: #9b9b9b;
+                  display: inline-block;
+                  margin-top: 2rpx;
+                  position: absolute;
+                }
+
+                .title {
+                  display: inline-block;
+                  letter-spacing: 1rpx;
+                  padding-left: 30rpx;
+                  height: 100%;
+                  -webkit-line-clamp: 2;
+                  /*用来限制在一个块元素显示的文本的行数*/
+                  display: -webkit-box;
+                  /*必须结合的属性，将对象作为弹性伸缩盒子模型显示*/
+                  -webkit-box-orient: vertical;
+                  /*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式*/
+                  overflow: hidden;
+                  word-break: break-all;
+
+                }
+              }
+            }
+
+            &_contact {
+              // flex: 0 0 auto;
+              flex: 1;
+              margin-left: 30rpx;
+              padding: 15rpx 30rpx;
+              border-left: 1rpx solid @black-2;
+              text-align: center;
+
+              &-distance {
+                font-size: @fontsize-medium;
+                color: @themeColor;
+              }
+
+              &-order {
+                margin: 18rpx auto;
+              }
+
+              &-iconWrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+              }
+
+              &-icon {
+                background-color: #f4f5f7;
+                border-radius: 50%;
+                padding: 9rpx 10rpx;
+              }
+
+            }
+
+            // &_address,
+            // &_contact {
+
+            // }
+
+            // .iconfont {
+            //   font-size: 1.2rem;
+            //   display: inline-block;
+            // }
+          }
+        }
+
+        .card-wrapper:not(:nth-child(1)) {
+          margin-top: 30rpx;
+        }
       }
+
+      // :not(:first-child)  
+
     }
-
-    .map-nav-search {
-      height: 60rpx;
-      width: 200rpx;
-      margin: 0 20rpx;
-      border-radius: 30rpx;
-      background-color: #F4F5F7;
-      font-size: @fontsize-medium;
-      transition: width .2s linear;
-
-      &_wrapper {
-        width: 90%;
-        margin: 0 auto;
-        color: #BEBEBE;
-      }
-
-      .iconfont {
-        font-size: 1.2rem;
-        display: inline-block;
-        height: 60rpx;
-        line-height: 60rpx;
-      }
-
-      .icon-sousuo {
-        position: absolute;
-      }
-
-      &_input {
-        position: relative;
-        display: inline-block;
-        height: 60rpx;
-        line-height: 60rpx;
-        width: 90%;
-        padding-left: 48rpx;
-      }
-    }
-  }
-}
-
-.map-content {
-  margin-top: 15rpx;
-  transition: all .3s linear;
-  // height: 100vh;
-  background-color: #F2F2F2;
-  position: relative;
-
-  .map-control {
-    color: #929292;
-    background: @white;
-    text-align: center;
-    padding: 16rpx 0;
-    font-size: 28rpx;
-    box-shadow: 0px 2rpx 1rpx rgba(0, 0, 0, .1);
-
-    &-span {
-      display: inline-block;
-      height: 40rpx;
-      line-height: 40rpx;
-    }
-  }
-
-  .scrollContent {
-    height: 100%;
-    // overflow: hidden;
-
   }
 }

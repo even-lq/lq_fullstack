@@ -1,7 +1,7 @@
 // miniprogram/pages/index/index.js
 let QQMapWX = require('../../utils/JavaScriptSDK-v1.2/qqmap-wx-jssdk.js');
 let qqmapsdk;
-const { globalData} = getApp()
+const { globalData } = getApp()
 Page({
 
   /**
@@ -16,21 +16,26 @@ Page({
     contentHeight: 0,
     // mapLocatBtn: 'color: #000;background-color: #fff;height:100%;border:none;overflow:hidden;white-space: nowrap;text-overflow: ellipsis;padding-left:20rpx;',
     location: {
-      name: '',
-      longitude: '',
-      latitude: '',
+      // name: '',
+      longitude: 0,
+      latitude: 0,
     }
   },
   // 获取地图信息
   getUserInfo(e) {
     console.log(e.detail.userInfo)
   },
-  nearby_search: function () {
+  // 初始化地图
+  mapInit: function () {
     var _this = this;
+    console.log();
     // 调用接口
     qqmapsdk.search({
       keyword: '大学',  //搜索关键词
-      location: '28.718,115.826044',  //设置周边搜索中心点
+      location: {
+        latitude: globalData.location.latitude, 
+        longitude: globalData.location.longitude
+      },  //设置周边搜索中心点
       success: function (res) { //搜索成功后的回调
         var mks = []
         // var ccs = this.data.circles || [];
@@ -38,6 +43,8 @@ Page({
           console.log(res.data[i].title);
           mks.push({ // 获取返回结果，放到mks数组中
             title: res.data[i].title,
+            address: res.data[i].address,
+            _distance: parseInt(res.data[i]._distance),
             id: res.data[i].id,
             latitude: res.data[i].location.lat,
             longitude: res.data[i].location.lng,
@@ -77,10 +84,51 @@ Page({
       }
     });
   },
+  // 计算Dom
+  calculateDom() {
+    let query = wx.createSelectorQuery();
+    query.select('.map-nav').boundingClientRect()
+    query.select('.map-control').boundingClientRect()
+
+    query.exec(res => {
+      console.log(res[0].height);
+      console.log(res[1].height);
+      this.setData({
+        contentHeight: globalData.windowHeight - res[0].height - res[1].height
+      })
+      console.log(this.data.contentHeight, 123);
+    })
+  },
+  // 获取定位
+  getCoordinate() {
+    let self = this
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success(res) {
+        globalData.location.latitude = res.latitude
+        globalData.location.longitude = res.longitude
+        // 初始化地图
+        self.mapInit()
+      }
+    })
+    
+  },
   mapControl() {
     this.setData({
-      mapFlag: !this.data.mapFlag
+      mapFlag: !this.data.mapFlag,
     })
+    if (this.data.mapFlag) {
+      this.setData({
+        contentHeight: this.data.contentHeight + 225
+      })
+    } else {
+      setTimeout(() => {
+        this.setData({
+          contentHeight: this.data.contentHeight - 225
+        })
+      }, 300);
+
+    }
     console.log(this.data.mapFlag);
 
     // this.animation = wx.createAnimation({
@@ -106,7 +154,7 @@ Page({
     //     animation: this.animation.export()
     //   })
     // }
-    
+
   },
   // 点击地图导航栏
   mapNav(event) {
@@ -122,7 +170,10 @@ Page({
           latitude,
           longitude,
           scale: 14,
-          name: self.data.markers[0].title
+          name: self.data.markers[0].title,
+          success(res) {
+            console.log(res);
+          }
         })
       }
     })
@@ -149,39 +200,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.getSystemInfo({
-    //   success: (res) => {
-    //     let screenHeight = wx.getSystemInfoSync().windowHeight;
-    //     console.log(res, screenHeight);
-
-    //   },
-    //   fail: () => { },
-    //   complete: () => { }
-    // });
     let self = this
-    console.log(globalData.screenHeight);
-
-    let query = wx.createSelectorQuery();
-    query.select('.map-nav').boundingClientRect()
-
-    query.exec(res => {
-      console.log(res[0].height);
-      console.log(globalData.screenHeight - res[0].height );
-      self.setData({
-        contentHeight: globalData.screenHeight - res[0].height
-      })
-      console.log(this.data.contentHeight);
-    })
-      
-
-
 
     // 实例化API核心类
     qqmapsdk = new QQMapWX({
       key: 'W5JBZ-EIH3P-T2YDB-LACR3-KL5UE-PGBUE'
     });
 
-    this.nearby_search()
+    // 获取地理位置
+    this.getCoordinate()
+
+    // 计算Dom
+    this.calculateDom()
+
   },
 
   /**

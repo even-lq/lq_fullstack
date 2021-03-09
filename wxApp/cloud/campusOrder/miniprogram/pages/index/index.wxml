@@ -1,5 +1,5 @@
 <!-- miniprogram/pages/index/index.wxml -->
-<view>
+<view class="container">
   <!-- 地图容器height:450rpx; -->
   <view class="map-nav">
     <view class="map-nav_wrapper">
@@ -28,13 +28,130 @@
       <van-icon style="transform: {{mapFlag === true ? 'rotate(180deg);': 'rotate(0deg);' }};" custom-style="display:inline-block;font-size:24rpx;padding:0 10rpx;transform-origin: center center;" name="arrow-up" />
     </view>
     <view class="scrollContent">
-      <scroll-view scroll-y="true" style="height: {{contentHeight}}px;" scroll-scroll-with-animation="true">
-        <view style="padding-top: 25rpx;">
+      <scroll-view enable-flex="true" scroll-y="true" style="height: {{contentHeight}}px;width:100%;" scroll-scroll-with-animation="true">
+        <view class="content-wrapper">
           <!-- <van-button type="primary" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
             授权
           </van-button>
           <van-button bindtap="nearby_search">搜索周边大学</van-button> -->
-          <van-index-bar>
+          <view class="card-wrapper">
+            <view class="main-card">
+              <view class="main-card_address">
+                <view class="main-card_address-title">
+                  <i class="iconfont icon-xuexiao"></i>
+                  <view class="title">
+                    <text>{{markers[0].title}}</text>
+                  </view>
+                </view>
+                <view class="main-card_address-detail">
+                  <i class="iconfont icon-shouye"></i>
+                  <view class="title">{{markers[0].address}}</view>
+                </view>
+              </view>
+              <!-- <view></view> -->
+              <view class="main-card_contact">
+                <view class="main-card_contact-distance">距离{{markers[0]._distance}}m</view>
+                <view class="main-card_contact-order">去下单</view>
+                <view class="main-card_contact-iconWrapper">
+                  <i class="main-card_contact-icon iconfont icon-dianhua"></i>
+                  <i class="main-card_contact-icon iconfont icon-dingwei"></i>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="card-wrapper">
+            <view class="main-card">
+              <view>
+                <p>
+                  <i class="iconfont icon-xuexiao"></i>
+                </p>
+                <p class="">
+                  <i class="iconfont icon-shouye"></i>
+                </p>
+              </view>
+              <!-- <view></view> -->
+              <view>
+                <p class="">距离897m</p>
+                <p class="">去下单</p>
+                <span>
+                  <i class="iconfont icon-dianhua"></i>
+                </span>
+                <span>
+                  <i class="iconfont icon-dingwei"></i>
+                </span>
+              </view>
+            </view>
+          </view>
+          <view class="card-wrapper">
+            <view class="main-card">
+              <view>
+                <p>
+                  <i class="iconfont icon-xuexiao"></i>
+                </p>
+                <p class="">
+                  <i class="iconfont icon-shouye"></i>
+                </p>
+              </view>
+              <!-- <view></view> -->
+              <view>
+                <p class="">距离897m</p>
+                <p class="">去下单</p>
+                <span>
+                  <i class="iconfont icon-dianhua"></i>
+                </span>
+                <span>
+                  <i class="iconfont icon-dingwei"></i>
+                </span>
+              </view>
+            </view>
+          </view>
+          <view class="card-wrapper">
+            <view class="main-card">
+              <view>
+                <p>
+                  <i class="iconfont icon-xuexiao"></i>
+                </p>
+                <p class="">
+                  <i class="iconfont icon-shouye"></i>
+                </p>
+              </view>
+              <!-- <view></view> -->
+              <view>
+                <p class="">距离897m</p>
+                <p class="">去下单</p>
+                <span>
+                  <i class="iconfont icon-dianhua"></i>
+                </span>
+                <span>
+                  <i class="iconfont icon-dingwei"></i>
+                </span>
+              </view>
+            </view>
+          </view>
+          <view class="card-wrapper">
+            <view class="main-card">
+              <view>
+                <p>
+                  <i class="iconfont icon-xuexiao"></i>
+                </p>
+                <p class="">
+                  <i class="iconfont icon-shouye"></i>
+                </p>
+              </view>
+              <!-- <view></view> -->
+              <view>
+                <p class="">距离897m</p>
+                <p class="">去下单</p>
+                <span>
+                  <i class="iconfont icon-dianhua"></i>
+                </span>
+                <span>
+                  <i class="iconfont icon-dingwei"></i>
+                </span>
+              </view>
+            </view>
+          </view>
+          <!-- <van-index-bar>
             <view>
               <van-index-anchor index="A" />
               <van-cell title="文本" />
@@ -77,7 +194,7 @@
               <van-cell title="文本" />
               <van-cell title="文本" />
             </view>
-          </van-index-bar>
+          </van-index-bar> -->
         </view>
       </scroll-view>
       <!-- 绑定点击事件 -->
