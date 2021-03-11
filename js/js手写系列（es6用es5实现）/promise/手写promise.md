@@ -79,3 +79,7 @@ MyPromise.prototype.then = function (onFulfilled, onRejected) {
 因为new里面的回调是异步的，而thenpush的回调是同步的
 
 所以因为异步的关系，其实then会先执行，new后执行
+
+### then会返回promise
+
+- 返回了一个值，那么 `then` 返回的 Promise 将会成为接受状态，并且将返回的值作为接受状态的回调函数的参数值。

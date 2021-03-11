@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="btn">点击发送请求</button>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./axios.js"></script>
+<script>
+  let btn = document.querySelector('.btn')
+  btn.onclick = function () {
+    axios.interceptors.request.use(function(config) {
+      // 请求送达之前拦截
+      config.method = 'get'
+      console.log('拦截请求', config);
+      return config
+    }, function(error) {
+      // 请求错误是
+      return Promise.reject(error)
+    })
+    axios.interceptors.response.use(function (response) {
+      // 响应送达之前做什么
+      console.log('拦截响应');
+      response = {
+        message: '响应123'
+      }
+      return response
+    }, function (error) {
+      // 响应错误是
+      return Promise.reject(error)
+    })
+    // axios.post('/user', {
+    //   firstName: 'Fred',
+    //   lastName: 'Flintstone'
+    // })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+    axios.get('http://localhost:5000/getTest').then(res => {
+      console.log(res);
+    })
+
+
+    // axios({
+    //   method: 'get',
+    //   url: 'http://localhost:5000/getTest'
+    // }).then(res => {
+    //   console.log('ok', res);
+    // })
+
+  }
+</script>
+
+</html>
