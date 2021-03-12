@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="ul">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+
+  <script>
+    // const li = document.getElementById('ul').getElementsByTagName('li')
+    // const liLength = li.length
+    // for (let i = 0; i < liLength; i++) {
+    //   li[i].addEventListener('click', function(e) {
+    //     e.preventDefault();
+    //     alert(`我是${li[i].innerText}`)
+    //   })
+      
+    // }
+
+
+    // 代理模式
+    const ul = document.getElementById('ul')
+    ul.addEventListener('click', function(e) {
+      console.log(e);
+      if (e.target.tagName === 'LI') {
+        e.preventDefault()
+        alert(`我是${e.target.innerText}`)
+      }
+    })
+  </script>
+</body>
+</html>
