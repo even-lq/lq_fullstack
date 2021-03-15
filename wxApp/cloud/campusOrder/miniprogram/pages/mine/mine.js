@@ -1,4 +1,4 @@
-// miniprogram/pages/index/index.js
+// miniprogram/pages/mine/mine.js
 Page({
 
   /**
@@ -7,18 +7,14 @@ Page({
   data: {
 
   },
-  order() {
-    wx.switchTab({
-      url: '/pages/order/order'
-    })
-  },
   tabBar() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 0,
+        selected: 3
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */

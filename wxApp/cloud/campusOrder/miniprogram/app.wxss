@@ -5,14 +5,17 @@ swiper,
 swiper-item,
 image,
 input,
+button,
 navigator {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  border: none;
 }
+
 page {
   /* 定义主题颜色 */
-  --themeColor: #eb4450;
+  background-color: #F4F4F4;
   /* 定义统一字体大小 */
   font-size: 28rpx;
 }

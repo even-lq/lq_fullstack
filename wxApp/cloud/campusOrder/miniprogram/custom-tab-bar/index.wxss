@@ -1,0 +1,19 @@
+/* custom-tab-bar/index.wxss */
+@import "/common/wxss/tabbar.wxss";
+@import "/common/wxss/icon.wxss";
+@import "/common/icon/icon.wxss";
+
+.active {
+  color: #39b54a;
+}
+
+.default {
+  color: #333;
+}
+
+/* .tab {
+  display: fLex;
+  justify-content: space-evenly;
+  coLor: ■white;
+  padding: 30rpx;
+} */

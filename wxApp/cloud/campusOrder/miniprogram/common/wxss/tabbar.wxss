@@ -1,0 +1,48 @@
+.bg-white {
+  background-color: #FEFEFE;
+  color: #929292;
+}
+
+.cu-bar {
+  display: flex;
+  position: relative;
+  align-items: center;
+  min-height: 110rpx;
+  justify-content: space-between;
+}
+.tabbar {
+  box-shadow: 0rpx 0rpx 5rpx rgba(0, 0, 0, .1);
+}
+.cu-bar.tabbar {
+  padding: 0;
+  height: calc(110rpx + env(safe-area-inset-bottom) / 2);
+  padding-bottom: calc(env(safe-area-inset-bottom) / 2);
+}
+
+
+.cu-bar.tabbar .action {
+  font-size: 22rpx;
+  position: relative;
+  flex: 1;
+  text-align: center;
+  padding: 0;
+  display: block;
+  height: auto;
+  line-height: 1;
+  margin: 0;
+  overflow: initial;
+}
+
+.cu-bar.tabbar .action [class*="cuIcon-"],
+.cu-bar.tabbar .action [class*="icon-"],
+.cu-bar.tabbar .action [class*="t-icon-"],
+.cu-bar.tabbar .action [class*="tabIcon-icon-"] {
+  width: 50rpx;
+  position: relative;
+  display: block;
+  height: auto;
+  margin: 0 auto 10rpx;
+  text-align: center;
+  font-size: 40rpx;
+  height: 40rpx;
+}

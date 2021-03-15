@@ -1,4 +1,4 @@
-// miniprogram/pages/index/index.js
+// miniprogram/pages/indent/indent.js
 Page({
 
   /**
@@ -7,15 +7,10 @@ Page({
   data: {
 
   },
-  order() {
-    wx.switchTab({
-      url: '/pages/order/order'
-    })
-  },
   tabBar() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 0,
+        selected: 2
       })
     }
   },

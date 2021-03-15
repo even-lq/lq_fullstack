@@ -17,7 +17,11 @@ App({
 
 
     wx.getSystemInfo({
-      success: () => {
+      success: (res) => {
+        console.log(res);
+        self.globalData.systemInfo = res
+        // console.log(self.globalData.systemInfo);
+        // console.log(wx.getSystemInfoSync());
         self.globalData.screenHeight = wx.getSystemInfoSync().screenHeight;
         self.globalData.windowHeight = wx.getSystemInfoSync().windowHeight;
       },
@@ -35,8 +39,8 @@ App({
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
             success: (result) => {
-              console.log(result);
-              console.log(result.userInfo);
+              // console.log(result);
+              // console.log(result.userInfo);
             },
 
           });
@@ -52,6 +56,7 @@ App({
   globalData: {
     screenHeight: 0,
     windowHeight: 0,
-    location: {}
+    location: {},
+    systemInfo: {}
   }
 })

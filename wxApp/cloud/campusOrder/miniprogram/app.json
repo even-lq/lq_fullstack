@@ -1,19 +1,53 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/order/order",
+    "pages/indent/indent",
+    "pages/mine/mine"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "校园订餐",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
     "van-field": "@vant/weapp/field/index",
     "van-button": "@vant/weapp/button/index",
-    "van-icon": "@vant/weapp/icon/index"
+    "van-icon": "@vant/weapp/icon/index",
+    "iconfont": "/iconfont/iconfont"
+  },
+  "tabBar": {
+    "custom": true,
+    "selectedColor": "#3585f9",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/plus-dark.png",
+        "selectedIconPath": "./images/plus-light.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "点单",
+        "iconPath": "./images/group-dark.png",
+        "selectedIconPath": "./images/group-light.png"
+      },
+      {
+        "pagePath": "pages/indent/indent",
+        "text": "订单",
+        "iconPath": "./images/user-dark.png",
+        "selectedIconPath": "./images/user-light.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "./images/user-dark.png",
+        "selectedIconPath": "./images/user-light.png"
+      }
+    ]
   },
   "permission": {
     "scope.userLocation": {
