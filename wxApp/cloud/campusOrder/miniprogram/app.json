@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/order/order",
     "pages/indent/indent",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/map/map"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -17,7 +18,9 @@
     "van-field": "@vant/weapp/field/index",
     "van-button": "@vant/weapp/button/index",
     "van-icon": "@vant/weapp/icon/index",
-    "iconfont": "/iconfont/iconfont"
+    "loading": "/components/loading/loading",
+    "iconfont": "/iconfont/iconfont",
+    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
   },
   "tabBar": {
     "custom": true,
@@ -30,7 +33,7 @@
         "selectedIconPath": "./images/plus-light.png"
       },
       {
-        "pagePath": "pages/order/order",
+        "pagePath": "pages/map/map",
         "text": "点单",
         "iconPath": "./images/group-dark.png",
         "selectedIconPath": "./images/group-light.png"
@@ -53,5 +56,8 @@
     "scope.userLocation": {
       "desc": "根据所在学校订餐"
     }
+  },
+  "useExtendedLib": {
+    "weui": true
   }
 }

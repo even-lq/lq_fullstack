@@ -8,6 +8,10 @@ Component({
     status: {
       type: Number,
       value: 0 //0 数据加载中， 1数据加载完成 2没有更多数据了， 对外仅可接收1和2
+    },
+    firstLoading: {
+      type: Boolean,
+      value: true
     }
   },
 
@@ -16,6 +20,7 @@ Component({
    */
   data: {
     currentPage: 1,
+    firstLoading: true,
     // showMessage: false,
     // timer: null
   },
@@ -28,13 +33,19 @@ Component({
     scrollToLower() {
       if (this.data.status === 0) {
         this.setData({
-          currentPage: this.data.currentPage + 1
+          currentPage: this.data.currentPage + 1,
         })
         //对外暴露一个getmoredata事件，用户获取下一页对数据
         this.triggerEvent("getmoredata", { currentPage: this.data.currentPage })
       } else if (this.data.status === 2) {
         this.setData({ status: 2 });
       }
+    },
+    // 滑动开始
+    scrollStart() {
+      this.setData({
+        firstLoading: false
+      })
     }
   },
 

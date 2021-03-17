@@ -6,6 +6,13 @@
   z-index: 0;
 }
 
+.myActionSheet [data-index='0'] {
+  color: @black-5;
+  font-size: @fontsize-medium;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .container {
   height: 100vh;
 
@@ -122,35 +129,36 @@
         padding: 30rpx 40rpx 0;
 
         .card-wrapper {
+          transition: all .2s ease;
           height: 250rpx;
           width: 100%;
-          border: 2rpx solid @themeColor;
+          border: 2rpx solid @light-themeColor2;
           border-radius: 10rpx;
           background: @white;
 
 
           .main-card {
-            padding: 35rpx 30rpx 30rpx;
+            padding: 35rpx 10rpx 30rpx 30rpx;
             height: 100%;
             width: 100%;
             display: flex;
             flex-direction: row;
-            position: relative;
 
             &_address {
               // flex: 0 0 85px;
               flex: 0 0 60%;
               width: 60%;
+              position: relative;
 
               &-title {
                 height: 84rpx;
 
                 .icon-xuexiao {
-                  font-size: 1.2rem;
+                  font-size: @fontsize-large;
                   color: #bebebe;
                   display: inline-block;
                   position: absolute;
-                  vertical-align: middle;
+                  top: 0rpx;
                 }
 
                 .title {
@@ -159,29 +167,30 @@
                   font-size: @fontsize-large;
                   font-weight: bold;
                   letter-spacing: 2rpx;
-                  padding-left: 45rpx;
+                  padding-left: 40rpx;
                 }
               }
 
               &-detail {
-                font-size: @fontsize-medium;
+                font-size: @fontsize-medium-x;
                 margin-top: 20rpx;
                 color: #9b9b9b;
                 height: 84rpx;
+                position: relative;
 
 
                 .icon-shouye {
-                  font-size: 0.9rem;
+                  font-size: @fontsize-medium-x;
                   color: #9b9b9b;
                   display: inline-block;
-                  margin-top: 2rpx;
                   position: absolute;
+                  top: 0;
                 }
 
                 .title {
                   display: inline-block;
                   letter-spacing: 1rpx;
-                  padding-left: 30rpx;
+                  padding-left: 35rpx;
                   height: 100%;
                   -webkit-line-clamp: 2;
                   /*用来限制在一个块元素显示的文本的行数*/
@@ -200,13 +209,14 @@
               // flex: 0 0 auto;
               flex: 1;
               margin-left: 30rpx;
-              padding: 15rpx 30rpx;
+              padding: 10rpx 30rpx;
               border-left: 1rpx solid @black-2;
               text-align: center;
 
               &-distance {
+                padding: 0;
                 font-size: @fontsize-medium;
-                color: @themeColor;
+                color: @themeColor2;
               }
 
               &-order {
@@ -218,13 +228,15 @@
                 justify-content: space-between;
                 align-items: center;
                 width: 100%;
+                padding: 0 15rpx;
 
               }
 
               &-icon {
                 background-color: #f4f5f7;
                 border-radius: 50%;
-                padding: 9rpx 10rpx;
+                padding: 2rpx 10rpx;
+                display: block;
               }
 
             }

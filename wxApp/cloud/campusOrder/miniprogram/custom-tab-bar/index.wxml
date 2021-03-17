@@ -1,4 +1,4 @@
-<view class="cu-bar tabbar  bg-white">
+<view class="cu-bar tabbar bg-white">
   <view class="action" data-index="0" bindtap="switchTab">
     <!-- <view class="iconfont icon-shouye1"></view> -->
     <view class="tabIcon-icon-shouye1" wx:if="{{selected === 0}}">
@@ -10,13 +10,15 @@
     首页
   </view>
   <view class="action" data-index="1" bindtap="switchTab">
-    <view class="tabIcon-icon-canyin" wx:if="{{selected === 1}}">
-      <iconfont name="canyin"></iconfont>
-    </view>
-    <view class="tabIcon-icon-canyin" wx:else>
-      <iconfont name="canyin-copy"></iconfont>
-    </view>
-    点单
+    <navigator open-type="navigateTo" url='/pages/order/order' hover-class="none">
+      <view class="tabIcon-icon-canyin" wx:if="{{selected === 1}}">
+        <iconfont name="canyin"></iconfont>
+      </view>
+      <view class="tabIcon-icon-canyin" wx:else>
+        <iconfont name="canyin-copy"></iconfont>
+      </view>
+      点单
+    </navigator>
   </view>
   <view class="action" data-index="2" bindtap="switchTab">
     <view class="tabIcon-icon-dingdan" wx:if="{{selected === 2}}">

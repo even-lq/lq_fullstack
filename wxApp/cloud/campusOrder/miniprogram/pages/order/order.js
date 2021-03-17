@@ -1,6 +1,7 @@
 let QQMapWX = require('../../utils/JavaScriptSDK-v1.2/qqmap-wx-jssdk.js');
 let qqmapsdk;
 const { globalData } = getApp()
+const { mToKm, mapSearch, addProperty, calculateDistance, filterObjectArray} = require('../../utils/utils');
 Page({
 
   /**
@@ -12,74 +13,95 @@ Page({
     animation: {},
     mapFlag: false,
     searchWidth: false,
+    markersID: '', // 控制卡片边框颜色
     dataStatus: 0,//0 数据加载中， 2没有更多数据了， 对外仅可接收1和2， 
     contentHeight: 0,
+    // 地图导航栏的location
     location: {
       longitude: 0,
       latitude: 0,
-    }
+      title: ''
+    },
+    // map标签的经纬度
+    mapLongitude: 0,
+    mapLatitude: 0,
+    showActionsheet: false, // 电话底部菜单
+    groups: []
   },
   // 获取地图信息
   getUserInfo(e) {
     console.log(e.detail.userInfo)
   },
   // 初始化地图
-  mapInit: function () {
-    var _this = this;
-    console.log();
+  mapInit: function (longitude, latitude) {
+    let _this = this;
     // 调用接口
     qqmapsdk.search({
       keyword: '大学',  //搜索关键词
       location: {
-        latitude: globalData.location.latitude,
-        longitude: globalData.location.longitude
+        latitude,
+        longitude
       },  //设置周边搜索中心点
       success: function (res) { //搜索成功后的回调
         var mks = []
-        // var ccs = this.data.circles || [];
-        for (var i = 0; i < res.data.length; i++) {
-          console.log(res.data[i].title);
-          mks.push({ // 获取返回结果，放到mks数组中
-            title: res.data[i].title,
-            address: res.data[i].address,
-            _distance: parseInt(res.data[i]._distance),
-            id: res.data[i].id,
-            latitude: res.data[i].location.lat,
-            longitude: res.data[i].location.lng,
-            iconPath: "/images/university.png", //图标路径
-            callout: {
-              display: 'ALWAYS',
-              content: res.data[i].title,
-              padding: 3,
-              borderRadius: 3,
-              borderWidth: 2,
-              borderColor: '#64B5F6',
-            },
-            width: 20,
-            height: 20
+        // 第一次图片显示的学校
+        _this.setData({
+          mapLongitude: res.data[0].location.lng,
+          mapLatitude: res.data[0].location.lat,
+        });
+        let [ ...location ] = res.data
+        let arr = filterObjectArray(location)
+        let distanceArr = []
+        calculateDistance(globalData.location, arr)
+          .then(res => {
+            distanceArr = res.elements
+            console.log(distanceArr);
+            return Promise.resolve(distanceArr)
+          }).then((distanceArr) => {
+            console.log(distanceArr, res);
+            for (var i = 0; i < res.data.length; i++) {
+              mks.push({ // 获取返回结果，放到mks数组中
+                title: res.data[i].title,
+                address: res.data[i].address,
+                _distance: mToKm(distanceArr[i].distance),
+                tel: res.data[i].tel,
+                id: res.data[i].id,
+                latitude: res.data[i].location.lat,
+                longitude: res.data[i].location.lng,
+                iconPath: "/images/university.png", //图标路径
+                callout: {
+                  display: 'ALWAYS',
+                  content: res.data[i].title,
+                  padding: 3,
+                  borderRadius: 3,
+                  borderWidth: 2,
+                  borderColor: '#64B5F6',
+                },
+                width: 20,
+                height: 20
+              })
+              // ccs.push({
+              //  latitude: res.data[i].location.lat,
+              //  longitude: res.data[i].location.lng,
+              //  color: '#C16F7A',
+              //  fillColor: '#AECFF2',
+              //  radius: 160,
+              //  strokeWidth: 1
+              // })
+            }
+
+            _this.setData({ //设置markers属性，将搜索结果显示在地图中
+              markers: mks,
+              // circles: ccs
+            })
+
           })
 
-          // ccs.push({
-          //   latitude: res.data[i].location.lat,
-          //   longitude: res.data[i].location.lng,
-          //   color: '#C16F7A',
-          //   fillColor: '#AECFF2',
-          //   radius: 160,
-          //   strokeWidth: 1
-          // })
-
-        }
-        _this.setData({ //设置markers属性，将搜索结果显示在地图中
-          markers: mks,
-          // circles: ccs
-        })
       },
       fail: function (res) {
         console.log(res);
       },
-      complete: function (res) {
-        console.log(res);
-      }
+
     });
   },
   // 计算Dom
@@ -89,8 +111,8 @@ Page({
     query.select('.map-control').boundingClientRect()
 
     query.exec(res => {
-      console.log(res[0].height);
-      console.log(res[1].height);
+      // console.log(res[0].height);
+      // console.log(res[1].height);
       this.setData({
         contentHeight: globalData.windowHeight - res[0].height - res[1].height
       })
@@ -105,8 +127,18 @@ Page({
       success(res) {
         globalData.location.latitude = res.latitude
         globalData.location.longitude = res.longitude
-        // 初始化地图
-        self.mapInit()
+
+        let location = {
+          longitude: res.longitude,
+          latitude: res.latitude,
+        }
+        mapSearch(location).then(res => {
+          self.setData({
+            location: addProperty(location, 'title', res.title)
+          })
+          // addProperty(globalData.location, 'title', res.title)
+        })
+        self.mapInit(globalData.location.longitude, globalData.location.latitude)
       }
     })
 
@@ -120,7 +152,7 @@ Page({
       this.setData({
         contentHeight: this.data.contentHeight + 225
       })
-      
+
     } else if (!this.data.mapFlag || !this.data.mapFlagFromPhone) {
       setTimeout(() => {
         this.setData({
@@ -157,35 +189,24 @@ Page({
   },
   // 点击地图导航栏
   mapNav(event) {
-    // wx.choosePoi({
-    //   // latitude,
-    //   // longitude,
-    //   // scale: 14,
-    //   // name: self.data.markers[0].title,
-    //   success(res) {
-    //     console.log(res);
-    //   }
-    // })
-
     let self = this
     console.log(event);
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+
+    wx.chooseLocation({
+      latitude: globalData.location.latitude,
+      longitude: globalData.location.longitude,
+      scale: 14,
+      name: self.data.markers[0].title,
       success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
         console.log(res);
-        wx.chooseLocation({
-          latitude,
-          longitude,
-          scale: 14,
-          name: self.data.markers[0].title,
-          success(res) {
-            console.log(res);
-          }
+        self.setData({
+          mapLongitude: res.longitude,
+          mapLatitude: res.latitude
         })
+        self.mapInit(res.longitude, res.latitude)
       }
     })
+
   },
   // 地图导航栏的搜索框
   campusSearch() {
@@ -208,14 +229,65 @@ Page({
     console.log(latitude, longitude);
   },
   // 加载更多学校的数据
-  getMoreData(event) {
-    console.log(event);
+  getMoreData(e) {
+    if (e.detail.currentPage > 1) {
+      console.log(e.detail.currentPage);
+    }
+  },
+  // 点击某个学校卡片
+  cardTap(e) {
+    let self = this
+    let subScript = e.currentTarget.dataset.sub
+    // 卡片选中态的颜色和地图显示
+    this.setData({
+      markersID: e.currentTarget.dataset.index,
+      mapLongitude: self.data.markers[subScript].longitude,
+      mapLatitude: self.data.markers[subScript].latitude,
+    });
+
+  },
+  // 电话按钮底部弹窗的选项
+  phoneClick(e) {
+    console.log(e);
+    if (e.detail.value) {
+      wx.makePhoneCall({
+        phoneNumber: e.detail.value //仅为示例，并非真实的电话号码
+      })
+    }
+  },
+  //定位按钮
+  iconTap(e) {
+    console.log(e.target.dataset.index);
+    let index = e.target.dataset.index
+    if (e.target.dataset.index === 'tel') {
+      let tel = e.target.dataset.tel === '' ? '暂无联系方式' : e.target.dataset.tel
+      this.setData({
+        groups: [
+          { text: tel, value: 1, },
+          { text: '呼叫', value: tel }
+        ],
+        showActionsheet: true
+      })
+    } else if (typeof e.target.dataset.index === 'number') {
+      // latitude: globalData.location.latitude,
+      //   longitude: globalData.location.longitude
+      wx.openLocation({
+        latitude: this.data.markers[e.target.dataset.index].latitude,
+        longitude: this.data.markers[e.target.dataset.index].longitude,
+        scale: 18,
+        name: this.data.markers[index].title,
+        address: this.data.markers[index].address,
+      })
+
+    }
+
   },
   tabBar() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         selected: 1
       })
+
     }
   },
   /**
@@ -248,18 +320,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('order', getCurrentPages());
     this.tabBar()
 
-    qqmapsdk.search({
-      keyword: '大学',
-      page_size: 20,
-      success: function (res) {
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log(res);
-      },
-    })
+
 
 
   },

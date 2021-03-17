@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>10组蓝色风格的纯CSS3 Loading动画图标DEMO演示</title>
+
+  <!-- <link rel="stylesheet" href="css/normalize.min.css"> -->
+  <style>
+    .load-6 {
+      position: relative;
+      width: 100%;
+      /* height: 100%; */
+      height: 25px;
+    }
+
+    .letter-holder {
+      /* padding: 16px; */
+      overflow: hidden;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -moz-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .letter {
+      float: left;
+      font-size: 14px;
+      color: #777;
+    }
+
+
+    /* =Animate the stuff
+------------------------ */
+
+    .load-6 .letter {
+      animation-name: loadingF;
+      animation-duration: 1.7s;
+      animation-iteration-count: infinite;
+      animation-direction: linear;
+    }
+
+    .l-1 {
+      animation-delay: .48s;
+    }
+
+    .l-2 {
+      animation-delay: .6s;
+    }
+
+    .l-3 {
+      animation-delay: .72s;
+    }
+
+    .l-4 {
+      animation-delay: .84s;
+    }
+
+    .l-5 {
+      animation-delay: .96s;
+    }
+
+    .l-6 {
+      animation-delay: 1.08s;
+    }
+
+    .l-7 {
+      animation-delay: 1.2s;
+    }
+
+    .l-8 {
+      animation-delay: 1.32s;
+    }
+
+    .l-9 {
+      animation-delay: 1.44s;
+    }
+
+    .l-10 {
+      animation-delay: 1.56s;
+    }
+
+    .l-11 {
+      animation-delay: 1.68s;
+    }
+
+
+    @keyframes loadingF {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="load-6">
+    <div class="letter-holder">
+      <div class="l-1 letter">正</div>
+      <div class="l-2 letter">在</div>
+      <div class="l-3 letter">加</div>
+      <div class="l-4 letter">载</div>
+      <div class="l-5 letter">中</div>
+      <div class="l-6 letter">.</div>
+      <div class="l-7 letter">.</div>
+      <div class="l-8 letter">.</div>
+      <div class="l-9 letter">.</div>
+      <div class="l-10 letter">.</div>
+      <div class="l-11 letter">.</div>
+    </div>
+  </div>
+
+
+
+</body>
+
+</html>

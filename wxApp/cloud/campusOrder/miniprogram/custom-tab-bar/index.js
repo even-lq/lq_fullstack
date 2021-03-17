@@ -20,7 +20,8 @@ Component({
         "text": "首页"
       },
       {
-        "pagePath": "pages/order/order",
+        // "pagePath": "pages/order/order",
+        "pagePath": "pages/map/map",
         "text": "分类"
       },
       {
@@ -31,22 +32,6 @@ Component({
         "pagePath": "pages/mine/mine",
         "text": "我的"
       }
-      // {
-      //   "pagePath": "pages/index/index",
-      //   "text": "首页"
-      // },
-      // {
-      //   "pagePath": "pages/category/category",
-      //   "text": "分类"
-      // },
-      // {
-      //   "pagePath": "pages/cart/cart",
-      //   "text": "购物车"
-      // },
-      // {
-      //   "pagePath": "pages/user/user",
-      //   "text": "我的"
-      // }
     ]
   },
 
@@ -60,11 +45,23 @@ Component({
       console.log(key);
       let tabList = this.data.tabList;
       // let selected = this.data.selected;
-      
-      wx.switchTab({
-        url: `/${tabList[key].pagePath}`,
-      })
-     
+
+      if (key === 1) {
+         this.setData({
+          selected: key
+        });
+      } else {
+        wx.switchTab({
+          url: `/${tabList[key].pagePath}`,
+          success: (res) => {
+            console.log(res);
+            let page = getCurrentPages()
+            console.log(page);
+          },
+        })
+      }
+
+
 
       // if (selected !== key) {
       //   // this.setData({

@@ -1,4 +1,4 @@
-// miniprogram/pages/index/index.js
+// miniprogram/pages/map/map.js
 Page({
 
   /**
@@ -7,32 +7,20 @@ Page({
   data: {
 
   },
-  order() {
-    wx.navigateTo({
-      url: '/pages/order/order',
-      // success: (result) => {
-        
-      // },
-      // fail: () => {},
-      // complete: () => {}
-    });
-      
-    // wx.switchTab({
-    //   url: '/pages/order/order'
-    // })
-  },
+
   tabBar() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
-        selected: 0,
+        selected: 1
       })
     }
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -47,6 +35,15 @@ Page({
    */
   onShow: function () {
     this.tabBar()
+    // wx.navigateTo({
+    //   url: '/pages/order/order',
+    //   success: (res) => {
+    //     console.log(getCurrentPages());
+    //   },
+    //   fail: () => { },
+    //   complete: () => { }
+    // });
+      
   },
 
   /**

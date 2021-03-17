@@ -1,0 +1,16 @@
+<!-- components/loading/loading.wxml -->
+<view class="load-6" style="{{firstLoading === true ? '' : 'height: 100rpx'}}">
+  <view class="letter-holder">
+    <view class="l-1 letter">正</view>
+    <view class="l-2 letter">在</view>
+    <view class="l-3 letter">加</view>
+    <view class="l-4 letter">载</view>
+    <view class="l-5 letter">中</view>
+    <view class="l-6 letter">.</view>
+    <view class="l-7 letter">.</view>
+    <view class="l-8 letter">.</view>
+    <view class="l-9 letter">.</view>
+    <view class="l-10 letter">.</view>
+    <view class="l-11 letter">.</view>
+  </view>
+</view>
