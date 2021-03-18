@@ -1,8 +1,11 @@
 function partition(arr, left, right) {
+  // 此法需要去第一项为pivot
   let i = left, j = right;
   let pivot = arr[i]
   while (i < j) {
     while (arr[j] >= pivot && i < j) {
+      //  i < j 加上这个条件是因为防止arr[j] >= pivot 但是 i > j 的情况，因为
+      // 我们始终都要保持 arr[i] < pivot < arr[j]
       j--;
     }
     arr[i] = arr[j]
@@ -12,8 +15,10 @@ function partition(arr, left, right) {
     arr[j] = arr[i]
   }
   arr[i] = pivot;
+  // 正面传入的数组nums是会被改变的,所以这里必须要 arr[i] = pivot;
   return i;
 }
+
 var findKthLargest = function (nums, k) {
   let left = 0;
   let right = nums.length - 1;
@@ -31,4 +36,4 @@ var findKthLargest = function (nums, k) {
   console.log(nums);
   return nums[i]
 };
-console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 6));
+console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4));
