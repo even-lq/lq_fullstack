@@ -7,7 +7,7 @@
 //     3. 判断两者是否是string和number，是则把string转为number进行判断
 //     （与四则运算的规则相同（除了加法））
 //     4. 判断一方是否为object，且另一方是string,number,Symbol
-//        是则把object转为原始类型再进行判断  
+//        是则把object转为原始类型再进行判断(如果两个引用类型比较大小也是该方法)
 //  }
 // }
 console.log(1 == `1`);
