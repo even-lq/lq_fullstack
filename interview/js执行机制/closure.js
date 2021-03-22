@@ -18,6 +18,8 @@ var bar = foo() // 全局变量bar引用闭包
 bar.setName('杨宝')
 console.log(bar.getName()); // 1 杨宝
 
-function abc() {
-  let test = foo() // 局部变量引用闭包
-}
+// function abc() {
+//   let test = foo() // 局部变量引用闭包
+// }
+
+// 闭包的内存模型
