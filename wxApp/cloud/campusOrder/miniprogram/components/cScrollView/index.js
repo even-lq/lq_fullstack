@@ -9,10 +9,14 @@ Component({
       type: Number,
       value: 0 //0 数据加载中， 1数据加载完成 2没有更多数据了， 对外仅可接收1和2
     },
-    firstLoading: {
+    isData: {
       type: Boolean,
       value: true
     }
+    // firstLoading: {
+    //   type: Boolean,
+    //   value: true
+    // }
   },
 
   /**
@@ -42,11 +46,14 @@ Component({
       }
     },
     // 滑动开始
-    scrollStart() {
-      this.setData({
-        firstLoading: false
-      })
-    }
+    // scrollStart() {
+    //   if (!this.data.firstLoading) {
+    //     this.setData({
+    //       firstLoading: false
+    //     })
+    //   }
+      
+    // }
   },
 
   /**

@@ -1,13 +1,14 @@
 <!-- components/cScrollView/cScrollView.wxml -->
-<scroll-view scroll-y="true" enhanced style="height: {{height}}px;width:100%;" binddragstart="scrollStart" bindscrolltolower="scrollToLower">
+<scroll-view scroll-y="true" enhanced style="height: {{height}}px;width:100%;" bindscrolltolower="scrollToLower">
+    <!-- binddragstart="scrollStart" -->
   <slot></slot>
   <block wx:if="{{status === 0}}">
-    <loading firstLoading="{{firstLoading}}" />
+    <loading firstLoading="{{isData}}" />
     <!-- <text class="message">数据加载中</text> -->
   </block>
-  <block wx:else>
-    <text class="message">没有更多数据了</text>
-  </block>
+  <!-- <block> -->
+    <span wx:else class="message">没有更多数据了</span>
+  <!-- </block> -->
   <!-- <block wx:if="{{status === 0 && showMessage}}">
     <text class="message">数据加载中</text>
   </block>

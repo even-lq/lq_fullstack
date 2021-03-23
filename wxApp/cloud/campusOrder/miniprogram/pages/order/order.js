@@ -1,7 +1,8 @@
 let QQMapWX = require('../../utils/JavaScriptSDK-v1.2/qqmap-wx-jssdk.js');
 let qqmapsdk;
 const { globalData } = getApp()
-const { mToKm, mapSearch, addProperty, calculateDistance, filterObjectArray} = require('../../utils/utils');
+const { mToKm, addProperty, filterObjectArray } = require('../../utils/utils');
+const { mapSearch, calculateDistance } = require('../../utils/map');
 Page({
 
   /**
@@ -26,6 +27,7 @@ Page({
     mapLongitude: 0,
     mapLatitude: 0,
     showActionsheet: false, // 电话底部菜单
+    isData: true,
     groups: []
   },
   // 获取地图信息
@@ -33,7 +35,8 @@ Page({
     console.log(e.detail.userInfo)
   },
   // 初始化地图
-  mapInit: function (longitude, latitude) {
+  mapInit: function (longitude, latitude, pageIndex = 1) {
+    console.log(pageIndex);
     let _this = this;
     // 调用接口
     qqmapsdk.search({
@@ -42,14 +45,19 @@ Page({
         latitude,
         longitude
       },  //设置周边搜索中心点
+      page_index: pageIndex,
       success: function (res) { //搜索成功后的回调
-        var mks = []
+        let mks = []
+        
         // 第一次图片显示的学校
-        _this.setData({
-          mapLongitude: res.data[0].location.lng,
-          mapLatitude: res.data[0].location.lat,
-        });
-        let [ ...location ] = res.data
+        if (pageIndex === 1) {
+          _this.setData({
+            mapLongitude: res.data[0].location.lng,
+            mapLatitude: res.data[0].location.lat,
+          });
+        }
+
+        let [...location] = res.data
         let arr = filterObjectArray(location)
         let distanceArr = []
         calculateDistance(globalData.location, arr)
@@ -90,10 +98,38 @@ Page({
               // })
             }
 
-            _this.setData({ //设置markers属性，将搜索结果显示在地图中
-              markers: mks,
-              // circles: ccs
-            })
+            
+
+            if (pageIndex === 1) {
+              _this.setData({ //设置markers属性，将搜索结果显示在地图中
+                markers: mks,
+                // circles: ccs
+              })
+
+            } else {
+              if (_this.data.markers) {
+                console.log(mks);
+                console.log(_this.data.markers);
+                let tempMarkers = _this.data.markers
+                mks.forEach(item => {
+                  tempMarkers.push(item)
+                });
+                _this.setData({ //设置markers属性，将搜索结果显示在地图中
+                  markers: tempMarkers,
+                  // circles: ccs
+                })
+              }
+            }
+
+            // 是否第一次加载markers
+            if (_this.data.markers.length !== 0) {
+              _this.setData({
+                isData: false
+              });
+              console.log(_this.data.isData);
+            }
+
+
 
           })
 
@@ -132,7 +168,7 @@ Page({
           longitude: res.longitude,
           latitude: res.latitude,
         }
-        mapSearch(location).then(res => {
+        mapSearch(true, location).then(res => {
           self.setData({
             location: addProperty(location, 'title', res.title)
           })
@@ -232,6 +268,10 @@ Page({
   getMoreData(e) {
     if (e.detail.currentPage > 1) {
       console.log(e.detail.currentPage);
+      this.mapInit(globalData.location.longitude, globalData.location.latitude, e.detail.currentPage)
+      this.setData({
+        dataStatus: 0
+      })
     }
   },
   // 点击某个学校卡片
