@@ -1,6 +1,5 @@
 <!-- components/cScrollView/cScrollView.wxml -->
 <scroll-view scroll-y="true" enhanced style="height: {{height}}px;width:100%;" bindscrolltolower="scrollToLower">
-    <!-- binddragstart="scrollStart" -->
   <slot></slot>
   <block wx:if="{{status === 0}}">
     <loading firstLoading="{{isData}}" />

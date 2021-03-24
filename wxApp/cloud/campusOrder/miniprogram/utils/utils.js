@@ -1,4 +1,3 @@
-
 // 米换算成千米
 function mToKm(distance) {
   if (typeof distance === 'string') {
@@ -32,8 +31,28 @@ function filterObjectArray(objArr) {
   }
   return arr
 }
+
+// 节流
+function throttle(fn, delay) {
+  // , context
+  let prev = Date.now()
+
+  return function() {
+    let now = Date.now()
+    let arg = arguments
+    let context = this
+
+    if (now - prev >= delay) {
+      console.log(now - prev);
+      fn.apply(context, arg)
+
+      prev = Date.now()
+    }
+  }
+}
 module.exports = {
   mToKm,
   addProperty,
-  filterObjectArray
+  filterObjectArray,
+  throttle
 };

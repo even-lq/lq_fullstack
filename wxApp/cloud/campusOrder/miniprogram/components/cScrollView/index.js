@@ -1,4 +1,5 @@
 // components/cScrollView/cScrollView.js
+const { throttle } = require('../../utils/utils');
 Component({
   /**
    * 组件的属性列表
@@ -12,11 +13,7 @@ Component({
     isData: {
       type: Boolean,
       value: true
-    }
-    // firstLoading: {
-    //   type: Boolean,
-    //   value: true
-    // }
+    },
   },
 
   /**
@@ -34,26 +31,20 @@ Component({
    */
   methods: {
     // 滑动到底部事件
-    scrollToLower() {
-      if (this.data.status === 0) {
-        this.setData({
-          currentPage: this.data.currentPage + 1,
-        })
-        //对外暴露一个getmoredata事件，用户获取下一页对数据
-        this.triggerEvent("getmoredata", { currentPage: this.data.currentPage })
-      } else if (this.data.status === 2) {
-        this.setData({ status: 2 });
-      }
-    },
-    // 滑动开始
-    // scrollStart() {
-    //   if (!this.data.firstLoading) {
-    //     this.setData({
-    //       firstLoading: false
-    //     })
-    //   }
+    // 节流
+    scrollToLower: throttle(function() {
+        if (this.data.status === 0) {
+          this.setData({
+            currentPage: this.data.currentPage + 1,
+          })
+          //对外暴露一个getmoredata事件，用户获取下一页对数据
+          this.triggerEvent("getmoredata", { currentPage: this.data.currentPage })
+        } else if (this.data.status === 2) {
+          this.setData({ status: 2 });
+        }
       
-    // }
+    }, 2000),
+    
   },
 
   /**

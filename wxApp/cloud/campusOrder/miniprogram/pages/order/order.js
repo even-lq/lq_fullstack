@@ -27,8 +27,9 @@ Page({
     mapLongitude: 0,
     mapLatitude: 0,
     showActionsheet: false, // 电话底部菜单
-    isData: true,
-    groups: []
+    isData: true, // 判断是否第一次加载makers
+    groups: [],
+    
   },
   // 获取地图信息
   getUserInfo(e) {
@@ -46,7 +47,14 @@ Page({
         longitude
       },  //设置周边搜索中心点
       page_index: pageIndex,
-      success: function (res) { //搜索成功后的回调
+      success: function (res) { // 搜索成功后的回调
+        // 加载完数据了
+        if (res.data.length === 0) {
+          _this.setData({
+            dataStatus: 2
+          });
+          return
+        }
         let mks = []
         
         // 第一次图片显示的学校
@@ -269,9 +277,7 @@ Page({
     if (e.detail.currentPage > 1) {
       console.log(e.detail.currentPage);
       this.mapInit(globalData.location.longitude, globalData.location.latitude, e.detail.currentPage)
-      this.setData({
-        dataStatus: 0
-      })
+      
     }
   },
   // 点击某个学校卡片
@@ -334,6 +340,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     let self = this
 
     // 实例化API核心类
