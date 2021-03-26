@@ -10,20 +10,21 @@ Component({
       type: Number,
       value: 0 //0 数据加载中， 1数据加载完成 2没有更多数据了， 对外仅可接收1和2
     },
-    isData: {
+    isData: { // 正在加载的样式
       type: Boolean,
       value: true
     },
+    currentPage: {
+      type: Number,
+      value: 1 // 页码
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    currentPage: 1,
     firstLoading: true,
-    // showMessage: false,
-    // timer: null
   },
 
   /**

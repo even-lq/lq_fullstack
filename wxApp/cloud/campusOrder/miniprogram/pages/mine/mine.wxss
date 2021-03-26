@@ -1,1 +1,12 @@
-/* miniprogram/pages/mine/mine.wxss */
+.campus-order__mine {
+  min-height: calc(100vh - 110rpx);
+}
+.campus-order__mine-bgImg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 485rpx;
+  background-color: violet;
+}

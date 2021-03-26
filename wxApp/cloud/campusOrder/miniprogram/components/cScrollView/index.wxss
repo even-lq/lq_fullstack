@@ -5,9 +5,9 @@
   display: block;
   text-align: center;
   color: #777;
-  padding: 50rpx 0;
-  line-height: 1;
-  /* height: 100rpx; */
-  /* line-height: 100rpx; */
-  font-size: 12px;
+  /* padding: 50rpx 0; */
+  /* line-height: 1; */
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 28rpx;
 }

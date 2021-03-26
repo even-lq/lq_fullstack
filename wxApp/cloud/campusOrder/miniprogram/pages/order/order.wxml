@@ -29,7 +29,7 @@
       <van-icon style="transform: {{mapFlag === true ? 'rotate(180deg);': 'rotate(0deg);' }};" custom-style="display:inline-block;font-size:24rpx;padding:0 10rpx;transform-origin: center center;" name="arrow-up" />
     </view>
     <view class="scrollContent">
-      <c-scroll-view height="{{contentHeight}}" status="{{dataStatus}}" isData="{{isData}}" bindgetmoredata="getMoreData">
+      <c-scroll-view height="{{contentHeight}}" status="{{dataStatus}}" isData="{{isData}}" currentPage="{{pageNumber}}" bindgetmoredata="getMoreData">
         <view class="content-wrapper">
           <view class="card-wrapper" style="border-color:{{markersID === item.id ? '#2ba4f5' : ''}}" bindtap="cardTap" wx:for="{{markers}}" wx:key="id" data-index="{{item.id}}" data-sub="{{index}}">
             <view class="main-card">

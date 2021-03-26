@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+  margin: 0 auto;
+}
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0rpx 30rpx;
+}
+.card-wrapper .card-item {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2rpx solid #eeee;
+}
+.card-wrapper .card-item .icon-style {
+  padding: 0 20rpx;
+}
+.card-wrapper .card-item .arrow-position {
+  justify-self: flex-end;
+}
+.card-wrapper .card-item .item-content {
+  flex: 1;
+}
+.card-wrapper .card-item:last-child {
+  border-bottom: none;
+}

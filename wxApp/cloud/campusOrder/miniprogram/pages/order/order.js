@@ -16,6 +16,7 @@ Page({
     searchWidth: false,
     markersID: '', // 控制卡片边框颜色
     dataStatus: 0,//0 数据加载中， 2没有更多数据了， 对外仅可接收1和2， 
+    pageNumber: 1, // 页码
     contentHeight: 0,
     // 地图导航栏的location
     location: {
@@ -29,7 +30,7 @@ Page({
     showActionsheet: false, // 电话底部菜单
     isData: true, // 判断是否第一次加载makers
     groups: [],
-    
+
   },
   // 获取地图信息
   getUserInfo(e) {
@@ -56,7 +57,7 @@ Page({
           return
         }
         let mks = []
-        
+
         // 第一次图片显示的学校
         if (pageIndex === 1) {
           _this.setData({
@@ -106,7 +107,7 @@ Page({
               // })
             }
 
-            
+
 
             if (pageIndex === 1) {
               _this.setData({ //设置markers属性，将搜索结果显示在地图中
@@ -129,7 +130,7 @@ Page({
               }
             }
 
-            // 是否第一次加载markers
+            // 是否第一次加载markers，用于缩小正在加载
             if (_this.data.markers.length !== 0) {
               _this.setData({
                 isData: false
@@ -245,7 +246,9 @@ Page({
         console.log(res);
         self.setData({
           mapLongitude: res.longitude,
-          mapLatitude: res.latitude
+          mapLatitude: res.latitud,
+          dataStatus: 0,
+          pageNumber: 1
         })
         self.mapInit(res.longitude, res.latitude)
       }
@@ -277,7 +280,7 @@ Page({
     if (e.detail.currentPage > 1) {
       console.log(e.detail.currentPage);
       this.mapInit(globalData.location.longitude, globalData.location.latitude, e.detail.currentPage)
-      
+
     }
   },
   // 点击某个学校卡片
@@ -340,7 +343,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
     let self = this
 
     // 实例化API核心类

@@ -10,10 +10,3 @@
 .default {
   color: #333;
 }
-
-/* .tab {
-  display: fLex;
-  justify-content: space-evenly;
-  coLor: ■white;
-  padding: 30rpx;
-} */

@@ -1,2 +1,6 @@
-<!--miniprogram/pages/mine/mine.wxml-->
-<text>miniprogram/pages/mine/mine.wxml</text>
+<!-- miniprogram/pages/mine/mine.wxml -->
+<view class="campus-order__mine">
+  <view class="campus-order__mine-bgImg"></view>
+  <card height="320" top="300"></card>
+  <card cell></card>
+</view>

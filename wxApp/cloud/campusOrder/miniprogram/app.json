@@ -19,6 +19,7 @@
     "van-button": "@vant/weapp/button/index",
     "van-icon": "@vant/weapp/icon/index",
     "loading": "/components/loading/loading",
+    "card": "/components/card/card",
     "iconfont": "/iconfont/iconfont",
     "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet"
   },
