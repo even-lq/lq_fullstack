@@ -8,14 +8,18 @@ Component({
       type: Boolean,
       value: false
     },
+    cellArray: {
+      type: Array,
+      value: []
+    },
     width: { // background-color
       type: Number,
       value: 690
     },
     height: { // height
-      type: Number,
-      value: 250
-    },
+      type: String,
+      value: '250'
+    }, 
     top: { // margin-top
       type: Number,
       value: 25
@@ -28,19 +32,32 @@ Component({
       type: String,
       value: '#fff'
     }, 
+    boxShadow: {
+      type: Boolean,
+      value: false
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-
+    cellIndex: null
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    cellStart(e) {
+      this.setData({
+        cellIndex: e.currentTarget.dataset.index
+      })
+    },
+    cellEnd() {
+      this.setData({
+        cellIndex: null
+      })
+    }
   }
 })

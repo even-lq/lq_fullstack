@@ -7,7 +7,7 @@
 @themeColor3: #ab9c1e;
 @light-themeColor3: rgba(171, 156, 30 .1);
 
-@bg-color: #F4F4F4;
+@bg-color: #F4F4F4; // 244,244,244
 @title-gray: #DEDEDE;
 @icon-gray: #DEDEDE;
 @border-gray: #eeee;
@@ -21,8 +21,46 @@
 @black-2: rgba(0, 0, 0, .2);
 @black-1: rgba(0, 0, 0, .1);
 
+@fontsize-large-x: 36rpx;
 @fontsize-large: 32rpx;
 @fontsize-medium: 28rpx;
 @fontsize-medium-x: 24rpx;
 @fontsize-medium-xx: 22rpx;
 @fontsize-small: 14rpx;
+
+.border-line {
+  // 分割线
+  content: '';
+  display: block;
+  height: 2rpx;
+  background-color: @border-gray;
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+}
+
+.border-none {
+  content: '';
+  display: block;
+  height: 0rpx;
+}
+
+.border-right-line {
+  // 分割线
+  content: '';
+  display: block;
+  width: 2rpx;
+  background-color: @border-gray;
+  position: absolute;
+  top: 40rpx;
+  left: 100%;
+  bottom: 40rpx;
+}
+
+.border-right-none {
+  // 分割线
+  content: '';
+  display: block;
+  width: 0rpx;
+}

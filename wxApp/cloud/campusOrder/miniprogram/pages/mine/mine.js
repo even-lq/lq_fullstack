@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    cellArray: [{ // 单元格数组
+      iconLeft: 'service-o',
+      content: '联系客服',
+      iconRight: 'arrow',
+    }, {
+      iconLeft: 'apps-o',
+      content: '关于校园订餐',
+      iconRight: 'arrow',
+    }],
+    mineSelect: [{ value: 0, key: '优惠券' }, { value: 0, key: '储值金(元)' }, { value: 13, key: '积分' }]
   },
   tabBar() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {

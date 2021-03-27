@@ -1,6 +1,22 @@
+.border-line {
+  content: '';
+  display: block;
+  height: 2rpx;
+  background-color: #eeee;
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+}
+.border-none {
+  content: '';
+  display: block;
+  height: 0rpx;
+}
 .card {
   position: relative;
   margin: 0 auto;
+  box-shadow: 0px 10rpx 30rpx #DEDEDE;
 }
 .card-wrapper {
   display: flex;
@@ -8,15 +24,34 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0rpx 30rpx;
 }
 .card-wrapper .card-item {
+  position: relative;
   flex: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  border-bottom: 2rpx solid #eeee;
+  padding: 0rpx 30rpx;
+}
+.card-wrapper .card-item::after {
+  content: '';
+  display: block;
+  height: 2rpx;
+  background-color: #eeee;
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+}
+.card-wrapper .card-item .card-mask {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: rgba(251, 251, 252, 0.4);
+  z-index: 999;
 }
 .card-wrapper .card-item .icon-style {
   padding: 0 20rpx;
@@ -27,6 +62,8 @@
 .card-wrapper .card-item .item-content {
   flex: 1;
 }
-.card-wrapper .card-item:last-child {
-  border-bottom: none;
+.card-wrapper .card-item:last-child::after {
+  content: '';
+  display: block;
+  height: 0rpx;
 }

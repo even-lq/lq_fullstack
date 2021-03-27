@@ -1,6 +1,21 @@
 <!-- miniprogram/pages/mine/mine.wxml -->
 <view class="campus-order__mine">
   <view class="campus-order__mine-bgImg"></view>
-  <card height="320" top="300"></card>
-  <card cell></card>
+  <card top="380" boxShadow>
+    <view class="campus-order__mine-wrapper">
+      <view class="campus-order__mine-profile">
+        <span class="avatar">
+          <image class="img" src="/images/github.jpg" mode="aspectFill" />
+        </span>
+        <span class="nickname">沉宵</span>
+      </view>
+      <view class="campus-order__mine-profile self-height self-flex">
+        <view class="campus-order__mine-profile_column" wx:for="{{mineSelect}}" wx:key="index">
+          <view class="value">{{item.value}}</view>
+          <view class="key">{{item.key}}</view>
+        </view>
+      </view>
+    </view>
+  </card>
+  <card cell cellArray="{{cellArray}}"></card>
 </view>

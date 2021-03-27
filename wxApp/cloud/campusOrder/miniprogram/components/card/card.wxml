@@ -1,16 +1,12 @@
 <!-- components/card/card.wxml -->
-<view class="card" style="margin-top:{{top}}rpx;border-radius: {{bdrs}}rpx;height:{{height}}rpx;background-color:{{color}};width: {{width}}rpx;">
+<view class="card" style="margin-top:{{top}}rpx;border-radius: {{bdrs}}rpx;box-shadow:{{boxShadow === true ? '' : 'none'}};background-color:{{color}};width: {{width}}rpx;">
   <slot></slot>
-  <view class="card-wrapper" wx:if="{{cell}}">
-    <view class="card-item">
-      <van-icon name="service-o" size="48rpx" color="#929292" custom-class="icon-style" />
-      <view class="item-content">联系客服</view>
-      <van-icon name="arrow" size="48rpx" color="#929292" custom-class="arrow-position" />
-    </view>
-    <view class="card-item">
-      <van-icon name="service-o" size="48rpx" color="#929292" custom-class="icon-style" />
-      <view class="item-content">联系客服</view>
-      <van-icon name="arrow" size="48rpx" color="#929292" custom-class="arrow-position" />
+  <view class="card-wrapper" wx:if="{{cell}}" style="height:{{height}}rpx;">
+    <view class="card-item" wx:for="{{cellArray}}" wx:key="index" data-index="{{index}}" bind:touchstart="cellStart" bind:touchend="cellEnd">
+      <view class="card-mask" hidden="{{cellIndex !== index}}"></view>
+      <van-icon name="{{item.iconLeft}}" size="48rpx" color="#929292" custom-class="icon-style" />
+      <view class="item-content">{{item.content}}</view>
+      <van-icon name="{{item.iconRight}}" size="48rpx" color="#929292" custom-class="arrow-position" />
     </view>
   </view>
 </view>
