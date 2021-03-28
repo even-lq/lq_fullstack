@@ -1,2 +1,14 @@
-<!--miniprogram/pages/indent/indent.wxml-->
-<text>miniprogram/pages/indent/indent.wxml</text>
+<!-- miniprogram/pages/indent/indent.wxml -->
+<view class="campus-order__indent">
+  <tab></tab>
+  <my-swiper>
+    <my-swiper-item>
+      <view class="swiper-item_content red">123</view>
+    </my-swiper-item>
+    <my-swiper-item>
+      <view class="swiper-item_content blue">456</view>
+    </my-swiper-item>
+    <!-- <my-swiper-item slot="swiperItem"></my-swiper-item> -->
+    <!-- <my-swiper-item slot="swiperItem"></my-swiper-item> -->
+  </my-swiper>
+</view>

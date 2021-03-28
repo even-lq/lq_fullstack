@@ -1,0 +1,10 @@
+<!-- components/cell/cell.wxml -->
+<view class="cell">
+  <view class="cell-item" wx:for="{{cellArray}}" wx:key="index">
+    <span class="label">{{item.label}}</span>
+    <text class="content">{{item.content}}</text>
+    <button hidden="{{!item.button}}" plain data-index="{{index}}" class="cell-button {{isHighLight === index ? 'highlight' : ''}}" bindtouchstart="highLight" bindtouchend="changeProfile">
+      {{item.btnContent}}
+    </button>
+  </view>
+</view>

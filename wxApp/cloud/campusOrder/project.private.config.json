@@ -21,6 +21,18 @@
         {
           "name": "pages/mine/mine",
           "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/modifyMine/modifyMine",
+          "pathName": "pages/modifyMine/modifyMine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/indent/indent",
+          "pathName": "pages/indent/indent",
           "scene": null
         }
       ]

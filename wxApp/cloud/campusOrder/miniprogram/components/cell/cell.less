@@ -1,0 +1,58 @@
+@import "../../common/less/variable.less";
+
+.cell {
+  width: 100%;
+  padding: 0 15rpx;
+  background-color: @white;
+
+  .cell-item {
+    height: 130rpx;
+    font-size: @fontsize-large;
+    border-bottom: 2rpx solid @border-gray;
+    position: relative;
+
+    .label {
+      padding: 0 60rpx 0 20rpx;
+      line-height: 130rpx;
+      font-weight: bold;
+    }
+
+    .cell-button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 20rpx;
+      display: inline-block;
+      width: 180rpx;
+      line-height: 1;
+      padding-top: 18rpx;
+      padding-bottom: 18rpx;
+      font-size: @fontsize-large-x;
+      color: @themeColor2;
+      border-color: @themeColor2;
+    }
+
+
+    // &::after,
+    // .cell-button {
+    //   display: inline-block;
+    //   vertical-align: middle;
+    // }
+
+    // &::after {
+    //   content: '';
+    //   height: 100%;
+    // }
+
+    .highlight {
+      color: @light-themeColor2-6;
+      border-color: @light-themeColor2-6;
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+
+}

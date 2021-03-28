@@ -1,0 +1,14 @@
+<!-- miniprogram/pages/modifyMine/modifyMine.wxml -->
+<view class="campus-order__modifyMine">
+  <view class="campus-order__modifyMine-avatarWrapper">
+    <view class="avatar">
+      <image class="avatarImg" src="/images/github.jpg" mode="aspectFill" />
+    </view>
+  </view>
+  <view class="campus-order__modifyMine-cellWrapper">
+    <cell cellArray="{{cellArray}}"></cell>
+  </view>
+  <view class="campus-order__modifyMine-saveWrapper">
+    <van-button round size="large" color="linear-gradient(to right,  #6DC0F8, #2ba4f5)">保存</van-button>
+  </view>
+</view>

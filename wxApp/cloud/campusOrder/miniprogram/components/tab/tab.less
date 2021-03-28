@@ -1,0 +1,24 @@
+@import "../../common/less/variable.less";
+
+.tab {
+  height: 88rpx;
+
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-around;
+
+  font-size: @fontsize-large-x;
+
+  &Item {
+    // height: 100%;
+    line-height: 88rpx;
+    text-align: center;
+    flex: 1;
+    -webkit-box-flex: 1;
+  }
+
+  &Item.order {
+    border-bottom: 4rpx solid @themeColor2;
+  }
+}

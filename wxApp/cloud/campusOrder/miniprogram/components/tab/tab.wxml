@@ -1,0 +1,5 @@
+<!--components/tab/tab.wxml-->
+<ul class="tab">
+  <li class="tabItem order">当前订单</li>
+  <li class="tabItem">历史订单</li>
+</ul>

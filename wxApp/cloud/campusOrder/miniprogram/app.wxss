@@ -12,10 +12,14 @@ navigator {
   box-sizing: border-box;
   border: none;
 }
-
+ul,
+li {
+  display: block;
+  list-style-type: none;
+}
 page {
   /* 定义主题颜色 */
-  background-color: #F4F4F4;
+  --themeColor: #eb4450;
   /* 定义统一字体大小 */
   font-size: 28rpx;
 }

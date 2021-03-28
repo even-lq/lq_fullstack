@@ -1,0 +1,10 @@
+.mySwiper {
+  height: calc(100vh - 110rpx - 88rpx);
+  width: 100vw;
+  overflow: hidden;
+}
+.mySwiperList {
+  width: 200%;
+  height: calc(100vh - 110rpx - 88rpx);
+  transform: translateX(0px) translateZ(0px);
+}

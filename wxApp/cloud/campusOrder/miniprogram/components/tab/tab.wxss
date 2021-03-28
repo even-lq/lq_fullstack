@@ -28,15 +28,20 @@
   display: block;
   width: 0rpx;
 }
-.campus-order__indent {
-  min-height: 100vh;
+.tab {
+  height: 88rpx;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 36rpx;
 }
-.campus-order__indent .swiper-item_content {
-  height: calc(100vh - 110rpx - 88rpx);
+.tabItem {
+  line-height: 88rpx;
+  text-align: center;
+  flex: 1;
+  -webkit-box-flex: 1;
 }
-.campus-order__indent .red {
-  background-color: red;
-}
-.campus-order__indent .blue {
-  background-color: blue;
+.tabItem.order {
+  border-bottom: 4rpx solid #2ba4f5;
 }

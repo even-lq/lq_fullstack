@@ -1,0 +1,9 @@
+<!-- components/swiper/swiper.wxml -->
+<view class="mySwiper">
+  <ul class="mySwiperList">
+    <slot></slot>
+  </ul>
+</view>
+<!-- <view class="mySwiper">
+  <slot></slot>
+</view> -->

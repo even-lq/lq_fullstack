@@ -1,39 +1,28 @@
-// miniprogram/pages/mine/mine.js
+// miniprogram/pages/modifyMine/modifyMine.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    cellArray: [{ // 单元格数组
-      iconLeft: 'service-o',
-      content: '联系客服',
-      iconRight: 'arrow',
-    }, {
-      iconLeft: 'apps-o',
-      content: '关于校园订餐',
-      iconRight: 'arrow',
-    }],
-    mineSelect: [{ value: 0, key: '优惠券' }, { value: 0, key: '储值金(元)' }, { value: 13, key: '积分' }]
-  },
-  tabBar() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 3
-      })
-    }
-  },
-
-  modifyMine() {
-    wx.navigateTo({
-      url: '/pages/modifyMine/modifyMine',
-      success: (result) => {
-        console.log(result);
+    cellArray: [
+      {
+        label: '昵称',
+        content: '沉霄',
+        button: true,
+        btnContent: '更新资料',
       },
-      fail: () => {},
-      complete: () => {}
-    });
-      
+      {
+        label: '昵称',
+        content: '沉霄',
+        button: true,
+        btnContent: '更换手机',
+      },
+      {
+        label: '性别',
+        content: '男',
+      }
+    ]
   },
 
   /**
@@ -54,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.tabBar()
+
   },
 
   /**

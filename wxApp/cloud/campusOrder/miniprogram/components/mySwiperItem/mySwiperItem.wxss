@@ -1,0 +1,5 @@
+.mySwiperItem {
+  width: 100vw;
+  height: calc(100vh - 110rpx - 88rpx);
+  float: left;
+}

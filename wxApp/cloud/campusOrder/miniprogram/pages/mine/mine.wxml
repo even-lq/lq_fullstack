@@ -3,7 +3,7 @@
   <view class="campus-order__mine-bgImg"></view>
   <card top="380" boxShadow>
     <view class="campus-order__mine-wrapper">
-      <view class="campus-order__mine-profile">
+      <view class="campus-order__mine-profile" bind:tap="modifyMine">
         <span class="avatar">
           <image class="img" src="/images/github.jpg" mode="aspectFill" />
         </span>
