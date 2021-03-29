@@ -1,3 +1,4 @@
+let { eventBus } = require('./utils/eventBus.js')
 //app.js
 App({
   onLaunch: function () {
@@ -20,10 +21,9 @@ App({
       success: (res) => {
         console.log(res);
         self.globalData.systemInfo = res
-        // console.log(self.globalData.systemInfo);
-        // console.log(wx.getSystemInfoSync());
         self.globalData.screenHeight = wx.getSystemInfoSync().screenHeight;
         self.globalData.windowHeight = wx.getSystemInfoSync().windowHeight;
+        self.globalData.windowWidth = wx.getSystemInfoSync().windowWidth * 2
       },
       fail: () => { },
       complete: () => { }
@@ -56,7 +56,10 @@ App({
   globalData: {
     screenHeight: 0,
     windowHeight: 0,
+    windowWidth: 0,
     location: {},
-    systemInfo: {}
+    systemInfo: {},
+
+    bus: eventBus
   }
 })

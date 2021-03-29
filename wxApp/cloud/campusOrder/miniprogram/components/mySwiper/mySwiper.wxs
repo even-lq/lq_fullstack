@@ -1,0 +1,56 @@
+var startX = 0,
+  translateX = 0,
+  startPoint = null,
+  seconds = ''
+
+// length: 0,
+
+function touchstart(e, ins) {
+  // console.log(e);
+  startPoint = e.changedTouches[0] || e.touches[0]
+  // console.log(e.changedTouches[0].pageX);
+  startX = translateX;
+  ins.selectComponent('.mySwiperList').setStyle({
+    transition: '' + seconds + '',
+    transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
+  })
+  return false
+}
+function touchmove(e, ins) {
+  console.log(e);
+  var diffX = 0;
+  var nowPoint = e.changedTouches[0];
+  if (startPoint) {
+    diffX = (nowPoint.pageX - startPoint.pageX) * 2
+  }
+
+  translateX = startX + diffX
+  ins.selectComponent('.mySwiperList').setStyle({
+    transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
+  })
+  return false
+}
+function touchend(e, ins) {
+  var data = {
+    windowWidth: e.target.dataset.width,
+    len: e.target.dataset.len
+  }
+
+  // 获取手指停止时的X
+  translateX = Math.min(0, translateX) // 第一个不能往左滑
+  translateX = Math.max(-data.windowWidth * (data.len - 1), translateX) // 最后一个不能往右滑
+  var num = Math.round(-translateX / data.windowWidth)
+  // console.log(num);
+  seconds = '.3s'
+  translateX = -num * data.windowWidth
+  ins.selectComponent('.mySwiperList').setStyle({
+    transition: '' + seconds + '',
+    transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
+  })
+  return false
+}
+module.exports = {
+  touchstart: touchstart,
+  touchmove: touchmove,
+  touchend: touchend
+}

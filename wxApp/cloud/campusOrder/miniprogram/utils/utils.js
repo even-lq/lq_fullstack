@@ -7,7 +7,11 @@ function mToKm(distance) {
   return distance >= 1000 ? str[0] + '.' + str[1].substring(0, 2) + 'km' : parseInt(distance) + 'm'
 }
 
-
+// px转rpx
+function getRpx() {
+  var winWidth = wx.getSystemInfoSync().windowWidth;
+  return 750 / winWidth;
+}
 
 // 对象添加属性
 function addProperty(obj, pro, value) {
@@ -54,5 +58,6 @@ module.exports = {
   mToKm,
   addProperty,
   filterObjectArray,
-  throttle
+  throttle,
+  getRpx
 };

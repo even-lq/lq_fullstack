@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 .mySwiperList {
-  width: 200%;
+  width: 100%;
   height: calc(100vh - 110rpx - 88rpx);
-  transform: translateX(0px) translateZ(0px);
+  transform: translateX(0rpx) translateZ(0rpx);
 }

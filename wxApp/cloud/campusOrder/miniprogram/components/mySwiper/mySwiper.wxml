@@ -1,9 +1,12 @@
 <!-- components/swiper/swiper.wxml -->
-<view class="mySwiper">
-  <ul class="mySwiperList">
+<!-- <view class="mySwiper" catch:touchstart="touchstart" catch:touchmove="touchmove" catch:touchend="touchend">
+  <ul class="mySwiperList" style="width: {{length}}00%;transform: translateX({{translateX}}rpx) translateZ({{startZ}}px);transition:{{seconds}};">
+    <slot></slot>
+  </ul>
+</view> -->
+<wxs module="swiper" src="./mySwiper.wxs"></wxs>
+<view class="mySwiper" data-width="{{windowWidth}}" data-len="{{length}}" bindtouchmove="{{swiper.touchmove}}" bindtouchend="{{swiper.touchend}}" bindtouchstart="{{swiper.touchstart}}">
+  <ul class="mySwiperList" style="width: {{length}}00%;">
     <slot></slot>
   </ul>
 </view>
-<!-- <view class="mySwiper">
-  <slot></slot>
-</view> -->

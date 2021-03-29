@@ -1,9 +1,10 @@
 // components/swiperItem/swiperItem.js
+const { bus } = getApp().globalData
 Component({
-  behaviors: ['wx://component-export'],
-  export() {
-    return { myField: 'myValue' }
-  },
+  // behaviors: ['wx://component-export'],
+  // export() {
+  //   return { myField: 'myValue' }
+  // },
   lifetimes: {
     attached: function () {
       // 在组件实例进入页面节点树时执行
@@ -44,7 +45,7 @@ Component({
       query.select('.mySwiperItem').boundingClientRect()
       query.exec(res => {
         console.log(res.length);
-
+        bus.emit('getNode', res.length)
       })
     }
   }
