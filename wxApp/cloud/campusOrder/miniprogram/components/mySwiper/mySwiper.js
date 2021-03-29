@@ -47,10 +47,7 @@ Component({
     // itemNode
     windowWidth: wx.getSystemInfoSync().windowWidth * getRpx(),
     length: 0,
-    startPoint: null,
-    startX: 0,
-    translateX: 0,
-    seconds: '',
+    
   },
 
   /**
@@ -58,44 +55,5 @@ Component({
    */
   methods: {
     
-    touchstart(e) {
-      console.log(e.touches[0], e.changedTouches[0]);
-      this.setData({
-        startPoint: e.changedTouches[0],
-        startX: this.data.translateX,
-        seconds: '',
-      })
-     
-    },
-    touchmove(e) {
-      let startX = this.data.startX,
-        startPoint = this.data.startPoint,
-        diffX = 0;
-      let nowPoint = e.changedTouches[0]
-      if (startPoint) {
-        diffX = (nowPoint.pageX - startPoint.pageX) * 2
-      }
-     
-      this.setData({
-        translateX: startX + diffX
-      })
-    },
-    // 定帧处理
-    touchend() {
-      let len = this.data.length
-      // 获取手指停止时的X
-      let translateX = this.data.translateX
-      translateX = Math.min(0, translateX) // 第一个不能往左滑
-      translateX = Math.max(-windowWidth * (len - 1), translateX) // 最后一个不能往右滑
-      console.log(-windowWidth * (len - 1), translateX);
-      let num = Math.round(-translateX / windowWidth )
-      console.log(num);
-      
-      this.setData({
-        seconds: '.3s',
-        translateX: -num * windowWidth
-      })
-
-    }
   }
 })
