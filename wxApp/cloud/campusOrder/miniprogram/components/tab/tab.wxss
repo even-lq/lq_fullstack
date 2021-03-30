@@ -29,6 +29,7 @@
   width: 0rpx;
 }
 .tab {
+  position: relative;
   height: 88rpx;
   display: flex;
   display: -webkit-flex;
@@ -36,12 +37,20 @@
   justify-content: space-around;
   font-size: 36rpx;
 }
-.tabItem {
+.tab-item {
   line-height: 88rpx;
   text-align: center;
   flex: 1;
   -webkit-box-flex: 1;
 }
-.tabItem.order {
-  border-bottom: 4rpx solid #2ba4f5;
+.tab-line {
+  justify-self: flex-start;
+  position: absolute;
+  bottom: 15rpx;
+  left: 0;
+  z-index: 1;
+  height: 6rpx;
+  background-color: #ee0a24;
+  border-radius: 6rpx;
+  transition: 0.3s;
 }

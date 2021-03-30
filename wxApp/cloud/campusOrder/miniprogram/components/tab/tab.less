@@ -1,6 +1,8 @@
 @import "../../common/less/variable.less";
 
 .tab {
+  position: relative;
+
   height: 88rpx;
 
   display: flex;
@@ -10,7 +12,7 @@
 
   font-size: @fontsize-large-x;
 
-  &Item {
+  &-item {
     // height: 100%;
     line-height: 88rpx;
     text-align: center;
@@ -18,7 +20,21 @@
     -webkit-box-flex: 1;
   }
 
+  &-line {
+    justify-self: flex-start;
+    position: absolute;
+    bottom: 15rpx;
+    left: 0;
+    z-index: 1;
+    
+    height: 6rpx;
+    background-color: #ee0a24;
+    border-radius: 6rpx;
+
+    transition: .3s;
+  }
+
   &Item.order {
-    border-bottom: 4rpx solid @themeColor2;
+    // border-bottom: 4rpx solid @themeColor2;
   }
 }

@@ -1,5 +1,11 @@
-<!--components/tab/tab.wxml-->
-<ul class="tab">
-  <li class="tabItem order">当前订单</li>
-  <li class="tabItem">历史订单</li>
-</ul>
+<!-- components/tab/tab.wxml -->
+<view class="tab">
+  <view class="tab-item">
+    <span class="tab-item__content">当前订单</span>
+  </view>
+  <view class="tab-item" bind:tap="clickTab">
+    <span class="tab-item__content">历史订单</span>
+  </view>
+  <view class="tab-line" style="width: {{tabWidth}}rpx;transform: translateX({{leftMargin[0]}}rpx) translateZ(0)"></view>
+</view>
+        <!--  -->
