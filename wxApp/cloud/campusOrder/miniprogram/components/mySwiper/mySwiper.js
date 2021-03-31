@@ -14,13 +14,17 @@ Component({
       bus.on('getNode', res => {
         self.setData({
           length: self.data.length + res
-        }, function () {
-          console.log(self.data.length);
         })
-
       })
 
-      console.log(this.data.windowWidth);
+      bus.on('getTab', res => {
+        self.setData({
+          'tab.tabWidth': res.tabWidth,
+          'tab.tabMaxWidth': res.maxWidth,
+          'tab.leftMargin': res.leftMargin
+        })
+      })
+
 
 
     },
@@ -47,13 +51,19 @@ Component({
     // itemNode
     windowWidth: wx.getSystemInfoSync().windowWidth * getRpx(),
     length: 0,
-    
+    tab: {
+      tabColor: '#2ba4f5',
+      tabWidth: 0,
+      tabMaxWidth: 0,
+      leftMargin: []
+    }
+
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    
+
   }
 })

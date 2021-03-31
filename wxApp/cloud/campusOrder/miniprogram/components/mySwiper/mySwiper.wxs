@@ -1,24 +1,43 @@
-var startX = 0,
-  translateX = 0,
-  startPoint = null,
-  seconds = ''
-
-// length: 0,
+var startX = 0, // 鼠标按下的X坐标
+  translateX = 0, // 最终X的坐标
+  startPoint = null, // 鼠标按下的实例
+  seconds = '', // transition的秒数
+  isFirstMax = 0, // 是否第一次达到最大值
+  tabWidth = 0, // tab宽度
+  tabMaxPoint = null, // tab到达最大长度后的起始实例
+  tabMaxWidth = 0, // 记录tab最大长度
+  confirmMax = true // 确认是否最大值，false开始缩小
 
 function touchstart(e, ins) {
-  // console.log(e);
   startPoint = e.changedTouches[0] || e.touches[0]
   startX = translateX;
   ins.selectComponent('.mySwiperList').setStyle({
     transition: '' + seconds + '',
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
+
+  var data = {
+    tab: e.target.dataset.tab
+  }
+  tabWidth = data.tab.tabWidth // 初始化tab宽度
+
+  var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
+  tabLine.setStyle({
+    transition: '' + seconds + ''
+
+  })
+
   return false
 }
 function touchmove(e, ins) {
-  console.log(e);
   var diffX = 0;
+  var tabDiffX = 0; // tab到达最大长度后缩小的值
   var nowPoint = e.changedTouches[0];
+
+  var data = {
+    tab: e.target.dataset.tab
+  }
+
   if (startPoint) {
     diffX = (nowPoint.pageX - startPoint.pageX) * 2
   }
@@ -27,25 +46,79 @@ function touchmove(e, ins) {
   ins.selectComponent('.mySwiperList').setStyle({
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
+
+  // 获取tab线的实例
+  var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
+  // 获取tab线CSS的实例
+  var tabCSS = tabLine.getComputedStyle(['width'])
+  var nowTabWidth = tabCSS.width.split('px')[0]
+  if (nowTabWidth <= data.tab.tabMaxWidth && confirmMax) {
+    tabLine.setStyle({
+      background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
+      width: tabWidth + (-diffX) + 'rpx'
+    })
+  } else {
+    tabLine.removeClass('left')
+    tabLine.addClass('right')
+    confirmMax = false
+    isFirstMax ++ 
+    if (isFirstMax === 1) {
+      tabMaxPoint = nowPoint
+      tabMaxWidth = nowTabWidth * 2
+      // console.log(nowTabWidth);  
+
+      tabLine.setStyle({
+        // width: tabMaxWidth + 'rpx',
+        background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
+        width: nowTabWidth + 'px'
+      })
+      return
+    }
+    tabDiffX = (nowPoint.pageX - tabMaxPoint.pageX) * 2
+    // console.log(tabMaxWidth, tabDiffX);
+
+    // 不能超过最后一个tab
+    if (nowTabWidth > (tabWidth / 2)) {
+      tabLine.setStyle({
+        background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
+        width: tabMaxWidth + tabDiffX + 'rpx',
+        transform: 'translateX(' + (-data.tab.leftMargin[0]) + 'rpx) translateZ(0)'
+      })
+    }
+    
+  }
+
+
   return false
 }
 function touchend(e, ins) {
   var data = {
     windowWidth: e.target.dataset.width,
-    len: e.target.dataset.len
+    len: e.target.dataset.len,
+    tab: e.target.dataset.tab
   }
 
   // 获取手指停止时的X
   translateX = Math.min(0, translateX) // 第一个不能往左滑
   translateX = Math.max(-data.windowWidth * (data.len - 1), translateX) // 最后一个不能往右滑
   var num = Math.round(-translateX / data.windowWidth)
-  // console.log(num);
   seconds = '.3s'
   translateX = -num * data.windowWidth
   ins.selectComponent('.mySwiperList').setStyle({
     transition: '' + seconds + '',
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
+
+  // tab线的终点态
+  var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
+  tabLine.setStyle({
+    background: 'linear-gradient(to right,' + data.tab.tabColor + ','+ data.tab.tabColor + ')',
+    transform: 'translateX(' + (-data.tab.leftMargin[num - 1]) + 'rpx) translateZ(0)',
+    width: num * tabWidth + 'rpx',
+    transition: '' + seconds + ''
+  })
+
+
   return false
 }
 module.exports = {

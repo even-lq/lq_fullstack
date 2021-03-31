@@ -23,7 +23,7 @@ App({
         self.globalData.systemInfo = res
         self.globalData.screenHeight = wx.getSystemInfoSync().screenHeight;
         self.globalData.windowHeight = wx.getSystemInfoSync().windowHeight;
-        self.globalData.windowWidth = wx.getSystemInfoSync().windowWidth * 2
+        self.globalData.windowWidth = wx.getSystemInfoSync().windowWidth
       },
       fail: () => { },
       complete: () => { }

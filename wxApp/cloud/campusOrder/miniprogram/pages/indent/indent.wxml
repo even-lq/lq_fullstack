@@ -1,6 +1,6 @@
 <!-- miniprogram/pages/indent/indent.wxml -->
 <view class="campus-order__indent">
-  <tab></tab>
+  <!-- <tab></tab> -->
   <my-swiper>
     <my-swiper-item>
       <view class="swiper-item_content red">123</view>

@@ -1,0 +1,18 @@
+
+function touchstart(e, ins) {
+  
+  return false
+}
+function touchmove(e, ins) {
+  
+  return false
+}
+function touchend(e, ins) {
+  
+  return false
+}
+module.exports = {
+  touchstart: touchstart,
+  touchmove: touchmove,
+  touchend: touchend
+}

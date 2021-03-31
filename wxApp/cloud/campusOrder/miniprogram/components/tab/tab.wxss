@@ -46,11 +46,15 @@
 .tab-line {
   justify-self: flex-start;
   position: absolute;
-  bottom: 15rpx;
-  left: 0;
+  bottom: 8rpx;
   z-index: 1;
   height: 6rpx;
-  background-color: #ee0a24;
   border-radius: 6rpx;
-  transition: 0.3s;
+  background: linear-gradient(to right, #9ED5FA, #9ED5FA);
+}
+.left {
+  left: 0;
+}
+.right {
+  right: 0;
 }

@@ -9,7 +9,8 @@
         <van-icon custom-style="font-size:inherit;padding-left:10rpx;" name="arrow" />
       </span>
 
-      <view class="map-nav-search" style="width: {{searchWidth === true ? '710rpx' : ''}}" bindtap="campusSearch">
+      <view class="map-nav-search" 
+       bindtap="campusSearch">
         <view class="map-nav-search_wrapper">
           <i class="iconfont icon-sousuo"></i>
           <input class="map-nav-search_input" placeholder-style="color:#BEBEBE;text-align: left;" type="text" placeholder="搜索学校" focus="{{searchWidth}}" bindblur="navTitleShow" />

@@ -44,7 +44,7 @@ Component({
       let query = wx.createSelectorQuery().in(this);
       query.select('.mySwiperItem').boundingClientRect()
       query.exec(res => {
-        console.log(res.length);
+        // console.log(res.length);
         bus.emit('getNode', res.length)
       })
     }
