@@ -21,7 +21,8 @@ Component({
         self.setData({
           'tab.tabWidth': res.tabWidth,
           'tab.tabMaxWidth': res.maxWidth,
-          'tab.leftMargin': res.leftMargin
+          'tab.leftMargin': res.leftMargin,
+          'tab.rightMargin': res.rightMargin
         })
       })
 

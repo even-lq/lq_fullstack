@@ -1,7 +1,7 @@
 // components/tab/tab.js
 const { getRpx } = require('../../utils/utils');
 const { bus } = getApp().globalData
-// const { windowWidth } = getApp().globalData;
+const { windowWidth } = getApp().globalData;
 
 Component({
   lifetimes: {
@@ -44,20 +44,49 @@ Component({
       let query = this.createSelectorQuery();
       query.selectAll('.tab-item__content').boundingClientRect()
       query.exec(res => {
-        let [{ left: left1, width: tabWidth }, { left: left2, right: right2, }] = [...res[0]]
-        console.log(right2 - left1);
-        let maxWidth = right2 - left1 // 一次tab所能移动的最大宽度
+        // let tabInfo 
+        let { rightMargin, leftMargin } = self.getMargin([...res[0]]) // 获取左右边距
+        let maxWidth = self.getMaxWidth([...res[0]]) // 一次tab所能移动的最大宽度
+        console.log(maxWidth);
+        let [{ width: tabWidth }] = [...res[0]] // 获取tab宽度
+        tabWidth = tabWidth * getRpx()
+
         this.setData.call(self, {
-          leftMargin: [left1 * getRpx(), left2 * getRpx()], // 收集边距
-          tabWidth: tabWidth * getRpx()
+          leftMargin, // 收集边距
+          tabWidth
         }, function () {
-            bus.emit('getTab', {
-              tabWidth: self.data.tabWidth, 
-              maxWidth,
-              leftMargin: self.data.leftMargin,
-            })
+          bus.emit('getTab', {
+            tabWidth,
+            maxWidth,
+            leftMargin,
+            rightMargin
+          })
         })
       })
+    },
+    getMargin(arr) {
+      let rightMargin = []
+      let leftMargin = []
+      if (arr.length !== 0) {
+        for (let i = 1; i < arr.length; i++) {
+          rightMargin.push((windowWidth - arr[i].right) * getRpx())
+        }
+        for (const item of arr) {
+          leftMargin.push(item.left * getRpx())
+        }
+      }
+
+      return {
+        rightMargin,
+        leftMargin
+      }
+    },
+    getMaxWidth(arr) {
+      if (arr.length !== 0) {
+        return arr[1].right - arr[0].left
+      }
+      return 0
+
     },
     clickTab() {
 

@@ -5,8 +5,9 @@ var startX = 0, // 鼠标按下的X坐标
   isFirstMax = 0, // 是否第一次达到最大值
   tabWidth = 0, // tab宽度
   tabMaxPoint = null, // tab到达最大长度后的起始实例
-  tabMaxWidth = 0, // 记录tab最大长度
-  confirmMax = true // 确认是否最大值，false开始缩小
+  tabMaxWidth = 0, // 记录tab移动的最大长度
+  confirmMax = true, // 确认是否最大值，false开始缩小
+  rightIndex = 0 // rightMargin的下标
 
 function touchstart(e, ins) {
   startPoint = e.changedTouches[0] || e.touches[0]
@@ -20,12 +21,22 @@ function touchstart(e, ins) {
     tab: e.target.dataset.tab
   }
   tabWidth = data.tab.tabWidth // 初始化tab宽度
+  // console.log(data.tab.rightMargin);
 
   var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
-  tabLine.setStyle({
-    transition: '' + seconds + ''
+  var rmLength = data.tab.rightMargin.length
 
-  })
+
+  if (rightIndex === rmLength) {
+    tabLine.setStyle({
+      background: rightIndex === rmLength ? 'linear-gradient(to right, #2ba4f5, ' + data.tab.tabColor + ')' : 'linear-gradient(to right, #9ED5FA, #9ED5FA)',
+      transform: 'translateX(' + (-data.tab.rightMargin[rightIndex - 1]) + 'rpx) translateZ(0)',
+      transition: ''
+    })
+  }
+
+  // test()
+
 
   return false
 }
@@ -47,45 +58,58 @@ function touchmove(e, ins) {
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
 
+  var rmLength = data.tab.rightMargin.length
   // 获取tab线的实例
   var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
   // 获取tab线CSS的实例
   var tabCSS = tabLine.getComputedStyle(['width'])
   var nowTabWidth = tabCSS.width.split('px')[0]
+  // tabWidth不能往右滑动
+  // console.log(rightIndex,  789);
+  
+
   if (nowTabWidth <= data.tab.tabMaxWidth && confirmMax) {
+    // console.log(diffX);
+    var maxTabWidth = Math.max(tabWidth, tabWidth + (-diffX))
     tabLine.setStyle({
-      background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
-      width: tabWidth + (-diffX) + 'rpx'
+      // tabWidth不能比原来的小，如果比原来的小说明是第一个
+      background: rightIndex === rmLength ? (diffX > 0 ? 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')' : 'linear-gradient(to right, #2ba4f5, ' + data.tab.tabColor + ')') : (diffX > 0 ? 'linear-gradient(to right, #9ED5FA, #9ED5FA)' : 'linear-gradient(to right, #9ED5FA,' + data.tab.tabColor + ')'),
+      // 说明是最后一个
+      transform: rightIndex === rmLength ? 'translateX(' + (-data.tab.rightMargin[rightIndex - 1]) + 'rpx) translateZ(0)' : '',
+      width: rightIndex === rmLength ? (diffX > 0 ? tabWidth + diffX : tabWidth) + 'rpx' : maxTabWidth + 'rpx'
+      
     })
   } else {
-    tabLine.removeClass('left')
-    tabLine.addClass('right')
+    // console.log(rightIndex,isFirstMax);
+    rightIndex = ++rightIndex >= rmLength ? rmLength : rightIndex
+    // 初始化tab的最长长度
     confirmMax = false
-    isFirstMax ++ 
+    isFirstMax++
     if (isFirstMax === 1) {
+      tabLine.removeClass('left')
+      tabLine.addClass('right')
       tabMaxPoint = nowPoint
       tabMaxWidth = nowTabWidth * 2
-      // console.log(nowTabWidth);  
+      console.log(nowTabWidth, Math.round(data.tab.tabMaxWidth));
 
       tabLine.setStyle({
-        // width: tabMaxWidth + 'rpx',
         background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
         width: nowTabWidth + 'px'
       })
       return
     }
+    // 达到最长的长度后重新计算
     tabDiffX = (nowPoint.pageX - tabMaxPoint.pageX) * 2
-    // console.log(tabMaxWidth, tabDiffX);
 
     // 不能超过最后一个tab
     if (nowTabWidth > (tabWidth / 2)) {
       tabLine.setStyle({
         background: 'linear-gradient(to right, #9ED5FA, ' + data.tab.tabColor + ')',
         width: tabMaxWidth + tabDiffX + 'rpx',
-        transform: 'translateX(' + (-data.tab.leftMargin[0]) + 'rpx) translateZ(0)'
+        transform: 'translateX(' + (-data.tab.rightMargin[rightIndex - 1]) + 'rpx) translateZ(0)'
       })
     }
-    
+
   }
 
 
@@ -109,17 +133,37 @@ function touchend(e, ins) {
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
 
+
   // tab线的终点态
   var tabLine = ins.selectComponent('#tab').selectComponent('.tab-line')
-  tabLine.setStyle({
-    background: 'linear-gradient(to right,' + data.tab.tabColor + ','+ data.tab.tabColor + ')',
-    transform: 'translateX(' + (-data.tab.leftMargin[num - 1]) + 'rpx) translateZ(0)',
-    width: num * tabWidth + 'rpx',
-    transition: '' + seconds + ''
-  })
+  var tabCSS = tabLine.getComputedStyle(['width'])
+  var nowTabWidth = tabCSS.width.split('px')[0]
+  var rmLength = data.tab.rightMargin.length
 
+
+  if (rightIndex === rmLength) {
+    // console.log(rightIndex, 123);
+    confirmMax = true
+    tabLine.setStyle({
+      background: 'linear-gradient(to right,' + data.tab.tabColor + ',' + data.tab.tabColor + ')',
+      transform: 'translateX(' + (-data.tab.rightMargin[rightIndex - 1]) + 'rpx) translateZ(0)',
+      transition: '' + seconds + ''
+    })
+  } else {
+    // console.log('在这里');
+    // rightIndex--
+    tabLine.setStyle({
+      background: 'linear-gradient(to right,#9ED5FA, #9ED5FA)',
+      transform: 'translateX(' + data.tab.rightMargin[rightIndex] + 'rpx) translateZ(0)',
+      transition: '' + seconds + ''
+    })
+
+  }
 
   return false
+}
+function test() {
+  console.log(123);
 }
 module.exports = {
   touchstart: touchstart,
