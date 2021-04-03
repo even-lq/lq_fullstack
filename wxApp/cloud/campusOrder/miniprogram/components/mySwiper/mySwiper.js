@@ -50,7 +50,7 @@ Component({
    */
   data: {
     // itemNode
-    windowWidth: wx.getSystemInfoSync().windowWidth * getRpx(),
+    windowWidth: wx.getSystemInfoSync().windowWidth,
     length: 0,
     tab: {
       tabColor: '#2ba4f5',
