@@ -1,4 +1,5 @@
-var pxWindowWidth = 0,
+var rpxWindowWidth = 0,
+  pxWindowWidth = 0,
   startX = 0, // 鼠标按下的X坐标
   translateX = 0, // 最终X的坐标
   startPoint = null, // 鼠标按下的实例
@@ -15,54 +16,84 @@ function touchstart(e, ins) {
   var data = {
     windowWidth: e.target.dataset.width
   }
-  pxWindowWidth = data.windowWidth
+  pxWindowWidth = pxWindowWidth || data.windowWidth
+  rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
 
   return false
 }
 function touchmove(e, ins) {
   var diffX = 0;
   var nowPoint = e.changedTouches[0];
+  var data = {
+    len: e.target.dataset.len
+  }
 
   if (startPoint) {
     diffX = (nowPoint.pageX - startPoint.pageX) * getRpx(pxWindowWidth)
   }
 
   translateX = startX + diffX
-  ins.selectComponent('.mySwiperList').setStyle({
-    transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
-  })
-
+  if (translateX >= 0) {
+    // console.log(1);
+    ins.selectComponent('.mySwiperList').setStyle({
+      transform: 'translateX(0rpx) translateZ(0rpx)'
+    })
+  } else if (translateX < -rpxWindowWidth * (data.len - 1)) {
+    // console.log(translateX, -rpxWindowWidth * (data.len - 1));
+    // console.log(2);
+    ins.selectComponent('.mySwiperList').setStyle({
+      transform: 'translateX(' + -rpxWindowWidth * (data.len - 1) + 'rpx) translateZ(0rpx)'
+    })
+  } else {
+    // console.log(3);
+    ins.selectComponent('.mySwiperList').setStyle({
+      transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
+    })
+  }
 
   return false
 }
 function touchend(e, ins) {
   var data = {
-    len: e.target.dataset.len,
-    tab: e.target.dataset.tab
+    len: e.target.dataset.len
   }
-  var rpxWindowWidth = pxWindowWidth * getRpx(pxWindowWidth)
 
   // 获取手指停止时的X
   translateX = Math.min(0, translateX) // 第一个不能往左滑
   translateX = Math.max(-rpxWindowWidth * (data.len - 1), translateX) // 最后一个不能往右滑
-  var num = Math.round(-translateX / rpxWindowWidth)
+  var num = Math.round(translateX / rpxWindowWidth)
   seconds = '.3s'
-  translateX = -num * rpxWindowWidth
+  translateX = num * rpxWindowWidth
   ins.selectComponent('.mySwiperList').setStyle({
     transition: '' + seconds + '',
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
 
-
-
   return false
 }
+function clickTab(e, ins) {
+  ins.callMethod('clickTab', e)
+  var index = e.target.dataset.index
+  pxWindowWidth = pxWindowWidth || ins.selectComponent('.tab').getDataset().width
+  rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
 
+  console.log(ins.selectComponent('.tab').getDataset().width);
+  if (index || index === 0) {
+    index = Number(index)
+    console.log(index);
+    ins.selectComponent('.mySwiperList').setStyle({
+      transition: '.3s',
+      transform: 'translateX(' + (-index * rpxWindowWidth) + 'rpx) translateZ(0rpx)'
+    })
+  }
+
+}
 function getRpx(windowWidth) {
   return 750 / windowWidth
 }
 module.exports = {
   touchstart: touchstart,
   touchmove: touchmove,
-  touchend: touchend
+  touchend: touchend,
+  clickTab: clickTab
 }

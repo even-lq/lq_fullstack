@@ -2,6 +2,4 @@
 <li class="mySwiperItem">
   <slot></slot>
 </li>
-<!-- <view class="mySwiperItem">
-  <slot></slot>
-</view> -->
+

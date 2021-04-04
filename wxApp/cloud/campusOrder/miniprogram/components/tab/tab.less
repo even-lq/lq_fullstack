@@ -3,39 +3,37 @@
 .tab {
   position: relative;
 
-  height: 88rpx;
+  height: 100rpx;
 
   display: flex;
   display: -webkit-flex;
-  align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
-  font-size: @fontsize-large-x;
+  font-size: @fontsize-large;
 
   &-item {
-    // height: 100%;
-    line-height: 88rpx;
+    line-height: 100rpx;
     text-align: center;
-    flex: 1;
-    -webkit-box-flex: 1;
+    flex: 0 0 300rpx;
+    width: 300rpx;
+    color: @tab-gray;
   }
 
   &-line {
     justify-self: flex-start;
     position: absolute;
-    bottom: 8rpx;
+    left: 0;
     z-index: 1;
 
     height: 6rpx;
 
     border-radius: 6rpx;
     background: linear-gradient(to right, #9ED5FA, #9ED5FA);
+    transition: .3s;
   }
 }
 
-.left {
-  left: 0;
-}
-.right {
-  right: 0
+.active {
+  color: #9ED5FA;
+  font-weight: 700;
 }

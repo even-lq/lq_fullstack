@@ -1,10 +1,68 @@
+.border-line {
+  content: '';
+  display: block;
+  height: 2rpx;
+  background-color: #eeee;
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  right: 30rpx;
+}
+.border-none {
+  content: '';
+  display: block;
+  height: 0rpx;
+}
+.border-right-line {
+  content: '';
+  display: block;
+  width: 2rpx;
+  background-color: #eeee;
+  position: absolute;
+  top: 40rpx;
+  left: 100%;
+  bottom: 40rpx;
+}
+.border-right-none {
+  content: '';
+  display: block;
+  width: 0rpx;
+}
 .mySwiper {
-  height: calc(100vh - 110rpx - 88rpx);
+  height: calc(100vh - 110rpx - 100rpx);
   width: 100vw;
   overflow: hidden;
 }
 .mySwiperList {
   width: 100%;
-  height: calc(100vh - 110rpx - 88rpx);
-  transform: translateX(0rpx) translateZ(0rpx);
+  height: calc(100vh - 110rpx - 100rpx);
+}
+.tab {
+  position: relative;
+  height: 100rpx;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  font-size: 32rpx;
+}
+.tab-item {
+  line-height: 100rpx;
+  text-align: center;
+  flex: 0 0 300rpx;
+  width: 300rpx;
+  color: #939393;
+}
+.tab-line {
+  justify-self: flex-start;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  height: 6rpx;
+  border-radius: 6rpx;
+  background: linear-gradient(to right, #9ED5FA, #9ED5FA);
+  transition: 0.3s;
+}
+.active {
+  color: #9ED5FA;
+  font-weight: 700;
 }

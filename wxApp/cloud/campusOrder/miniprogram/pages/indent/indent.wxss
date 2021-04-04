@@ -32,7 +32,7 @@
   min-height: 100vh;
 }
 .campus-order__indent .swiper-item_content {
-  height: calc(100vh - 110rpx - 88rpx);
+  height: calc(100vh - 110rpx - 100rpx);
 }
 .campus-order__indent .red {
   background-color: red;

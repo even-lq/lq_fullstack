@@ -1,12 +1,16 @@
 <!-- components/tab/tab.wxml -->
-<view class="tab">
-  <view class="tab-item">
-    <span class="tab-item__content">当前订单</span>
-  </view>
-  <view class="tab-item" bind:tap="clickTab">
-    <span class="tab-item__content">历史订单</span>
-  </view>
-  <view class="tab-line left" style="width: {{tabWidth}}rpx;transform: translateX({{leftMargin[0]}}rpx) translateZ(0)"></view>
-  <!-- <view class="tab-line" data-width="{{windowWidth}}" data-tabColor="{{tabColor}}" bindtouchmove="{{tab.touchmove}}" bindtouchend="{{tab.touchend}}" bindtouchstart="{{tab.touchstart}}" style="width: {{tabWidth}}rpx;background:linear-gradient(to right, #9ED5FA,{{tabColor}});transform: translateX({{leftMargin[0]}}rpx) translateZ(0)"></view> -->
-    <!-- background:linear-gradient(to right, #9ED5FA,{{tabColor}}); -->
+<!-- <wxs module="tab" src="./tab.wxs"></wxs> -->
+<view class="tabWrapper">
+  <slot ></slot>
 </view>
+<!--   
+<view class="tab" bindtap="clickTab">
+  <view class="tab-item {{tabIndex === '0' ? 'active' : ''}}" data-index='0'>
+    <span class="tab-item__content" data-index='0'>当前订单</span>
+  </view>
+  <view class="tab-item {{tabIndex === '1' ? 'active' : ''}}" data-index='1'>
+    <span class="tab-item__content" data-index='1'>历史订单</span>
+  </view>
+    
+  <view class="tab-line" style="width: {{tabWidth}}rpx;bottom: {{bottom}}rpx;transform: translateX({{translateX}}rpx) translateZ(0)"></view>
+</view> -->

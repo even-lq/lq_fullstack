@@ -1,14 +1,53 @@
+@import "../../common/less/variable.less";
+
 .mySwiper {
-  height: calc(100vh - 110rpx - 88rpx);
+  height: calc(100vh - 110rpx - 100rpx);
   width: 100vw;
   overflow: hidden;
 
   &List {
     width: 100%;
-    height: calc(100vh - 110rpx - 88rpx);
-    transform: translateX(0rpx) translateZ(0rpx);
-   
+    height: calc(100vh - 110rpx - 100rpx);
     // transition: All 0.4s ease;
     // -webkit-transition: All 0.4s ease;
   }
+}
+
+
+.tab {
+  position: relative;
+
+  height: 100rpx;
+
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+
+  font-size: @fontsize-large;
+
+  &-item {
+    line-height: 100rpx;
+    text-align: center;
+    flex: 0 0 300rpx;
+    width: 300rpx;
+    color: @tab-gray;
+  }
+
+  &-line {
+    justify-self: flex-start;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+
+    height: 6rpx;
+
+    border-radius: 6rpx;
+    background: linear-gradient(to right, #9ED5FA, #9ED5FA);
+    transition: .3s;
+  }
+}
+
+.active {
+  color: #9ED5FA;
+  font-weight: 700;
 }

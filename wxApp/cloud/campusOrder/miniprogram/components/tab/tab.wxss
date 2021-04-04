@@ -30,31 +30,30 @@
 }
 .tab {
   position: relative;
-  height: 88rpx;
+  height: 100rpx;
   display: flex;
   display: -webkit-flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 36rpx;
+  justify-content: center;
+  font-size: 32rpx;
 }
 .tab-item {
-  line-height: 88rpx;
+  line-height: 100rpx;
   text-align: center;
-  flex: 1;
-  -webkit-box-flex: 1;
+  flex: 0 0 300rpx;
+  width: 300rpx;
+  color: #939393;
 }
 .tab-line {
   justify-self: flex-start;
   position: absolute;
-  bottom: 8rpx;
+  left: 0;
   z-index: 1;
   height: 6rpx;
   border-radius: 6rpx;
   background: linear-gradient(to right, #9ED5FA, #9ED5FA);
+  transition: 0.3s;
 }
-.left {
-  left: 0;
-}
-.right {
-  right: 0;
+.active {
+  color: #9ED5FA;
+  font-weight: 700;
 }

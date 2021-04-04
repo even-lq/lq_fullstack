@@ -1,9 +1,18 @@
 <!-- components/swiper/swiper.wxml -->
-
 <wxs module="swiper" src="./mySwiper.wxs"></wxs>
-<tab id="tab"></tab>
-<view class="mySwiper" data-tab="{{tab}}" data-width="{{windowWidth}}" data-len="{{length}}" bindtouchmove="{{swiper.touchmove}}" bindtouchend="{{swiper.touchend}}" bindtouchstart="{{swiper.touchstart}}">
-  <ul class="mySwiperList" style="width: {{length}}00%;">
+<tab id="tab">
+  <view class="tab" data-width="{{windowWidth}}" bindtap="{{swiper.clickTab}}">
+    <view class="tab-item {{tabIndex === '0' ? 'active' : ''}}" data-index='0'>
+      <span class="tab-item__content" data-index='0'>当前订单</span>
+    </view>
+    <view class="tab-item {{tabIndex === '1' ? 'active' : ''}}" data-index='1'>
+      <span class="tab-item__content" data-index='1'>历史订单</span>
+    </view>
+    <view class="tab-line" style="width: {{tabWidth}}rpx;bottom: {{bottom}}rpx;transform: translateX({{translateX}}rpx) translateZ(0)"></view>
+  </view>
+</tab>
+<view class="mySwiper" data-width="{{windowWidth}}" data-len="{{length}}" bindtouchmove="{{swiper.touchmove}}" bindtouchend="{{swiper.touchend}}" bindtouchstart="{{swiper.touchstart}}">
+  <ul class="mySwiperList" data-index='zx' style="width: {{length}}00%;">
     <slot></slot>
   </ul>
 </view>
