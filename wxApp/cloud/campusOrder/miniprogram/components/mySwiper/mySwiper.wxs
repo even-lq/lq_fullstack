@@ -1,16 +1,28 @@
 var rpxWindowWidth = 0,
   pxWindowWidth = 0,
-  startX = 0, // 鼠标按下的X坐标
+  diffX = 0; // swiper移动的距离
+startX = 0, // 鼠标按下的X坐标
   translateX = 0, // 最终X的坐标
-  startPoint = null, // 鼠标按下的实例
+  leftMargin = [], // tab边距数组
+  multiple = 0, // tab移动距离相对于swiper的倍数
+  distance = 0, // tab移动的最大距离
+  tabTranslateX = 0; // tab最终X坐标
+startPoint = null, // 鼠标按下的实例
   seconds = '' // transition的秒数
 
 function touchstart(e, ins) {
   startPoint = e.changedTouches[0] || e.touches[0]
   startX = translateX;
+  leftMargin = ins.selectComponent('.tab').getDataset().leftmargin
+  tabTranslateX = tabTranslateX || leftMargin[0]
+  console.log(tabTranslateX, 'start');
   ins.selectComponent('.mySwiperList').setStyle({
     transition: '' + seconds + '',
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
+  })
+  ins.selectComponent('.tab-line').setStyle({
+    transition: '' + seconds + '',
+    transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
   })
 
   var data = {
@@ -19,10 +31,12 @@ function touchstart(e, ins) {
   pxWindowWidth = pxWindowWidth || data.windowWidth
   rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
 
+  distance = (leftMargin[1] - leftMargin[0]) / 2
+
+
   return false
 }
 function touchmove(e, ins) {
-  var diffX = 0;
   var nowPoint = e.changedTouches[0];
   var data = {
     len: e.target.dataset.len
@@ -31,15 +45,20 @@ function touchmove(e, ins) {
   if (startPoint) {
     diffX = (nowPoint.pageX - startPoint.pageX) * getRpx(pxWindowWidth)
   }
+  // console.log(diffX);
 
   translateX = startX + diffX
+
+  var tabItem = ins.selectAllComponents('.tab-item')
+  multiple = (leftMargin[1] - leftMargin[0]) / rpxWindowWidth
+  // console.log(multiple);
+
   if (translateX >= 0) {
     // console.log(1);
     ins.selectComponent('.mySwiperList').setStyle({
       transform: 'translateX(0rpx) translateZ(0rpx)'
     })
   } else if (translateX < -rpxWindowWidth * (data.len - 1)) {
-    // console.log(translateX, -rpxWindowWidth * (data.len - 1));
     // console.log(2);
     ins.selectComponent('.mySwiperList').setStyle({
       transform: 'translateX(' + -rpxWindowWidth * (data.len - 1) + 'rpx) translateZ(0rpx)'
@@ -49,7 +68,37 @@ function touchmove(e, ins) {
     ins.selectComponent('.mySwiperList').setStyle({
       transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
     })
+
+    if (diffX < 0) {
+      tabTranslateX = Math.min(leftMargin[1], leftMargin[0] - multiple * diffX)
+      // console.log(tabTranslateX);
+      ins.selectComponent('.tab-line').setStyle({
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+
+      if (- multiple * diffX >= distance) {
+        tabItem[0].removeClass('active')
+        tabItem[1].addClass('active')
+      }
+
+    }
+
+    if (diffX > 0) {
+      tabTranslateX = Math.max(leftMargin[0], leftMargin[1] - multiple * diffX)
+      ins.selectComponent('.tab-line').setStyle({
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+
+      if (multiple * diffX >= distance) {
+        tabItem[1].removeClass('active')
+        tabItem[0].addClass('active')
+      }
+    }
+
   }
+
+
+
 
   return false
 }
@@ -69,23 +118,81 @@ function touchend(e, ins) {
     transform: 'translateX(' + translateX + 'rpx) translateZ(0rpx)'
   })
 
+  // tab移动到一半就自动过去
+  // tabTranslateX = Math.min(leftMargin[1], leftMargin[0] - multiple * diffX)
+  if (diffX < 0) {
+    
+    if (-multiple * diffX >= distance) {
+      tabTranslateX = leftMargin[1]
+      ins.selectComponent('.tab-line').setStyle({
+        transition: '' + seconds + '',
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+    } else {
+      tabTranslateX = tabTranslateX >= leftMargin[1] ? leftMargin[1] : leftMargin[0]
+      ins.selectComponent('.tab-line').setStyle({
+        transition: '' + seconds + '',
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+    }
+
+  }
+
+  if (diffX > 0) {
+    if (multiple * diffX >= distance) {
+      tabTranslateX = leftMargin[0]
+      ins.selectComponent('.tab-line').setStyle({
+        transition: '' + seconds + '',
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+    } else {
+      tabTranslateX = tabTranslateX <= leftMargin[0] ? leftMargin[0] : leftMargin[1]
+      ins.selectComponent('.tab-line').setStyle({
+        transition: '' + seconds + '',
+        transform: 'translateX(' + tabTranslateX + 'rpx) translateZ(0rpx)'
+      })
+    }
+  }
+
   return false
 }
 function clickTab(e, ins) {
   ins.callMethod('clickTab', e)
   var index = e.target.dataset.index
+  var leftMargin = ins.selectComponent('.tab').getDataset().leftmargin
+  var tabItem = ins.selectAllComponents('.tab-item')
+  // console.log(leftMargin);
   pxWindowWidth = pxWindowWidth || ins.selectComponent('.tab').getDataset().width
   rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
 
-  console.log(ins.selectComponent('.tab').getDataset().width);
-  if (index || index === 0) {
+  // console.log(ins.selectComponent('.tab').getDataset().width);
+  if ((index || index === 0) && leftMargin.length !== 0) {
     index = Number(index)
-    console.log(index);
+    // console.log(index);
+    ins.selectComponent('.tab-line').setStyle({
+      transform: 'translateX(' + leftMargin[index] + 'rpx) translateZ(0rpx)'
+    })
+
+    if (index === 1) {
+      tabItem[1].addClass('active')
+      tabItem[0].removeClass('active')
+    } else {
+      tabItem[0].addClass('active')
+      tabItem[1].removeClass('active')
+    }
+    // for (var i = 0; i < tabItem.length; i++) {
+    //   i === index ? tabItem[i].addClass('active') : tabItem[i].removeClass('active') 
+    // }
+
+    var clickTranslateX = -index * rpxWindowWidth
     ins.selectComponent('.mySwiperList').setStyle({
       transition: '.3s',
-      transform: 'translateX(' + (-index * rpxWindowWidth) + 'rpx) translateZ(0rpx)'
+      transform: 'translateX(' + clickTranslateX + 'rpx) translateZ(0rpx)'
     })
+    tabTranslateX = clickTranslateX < 0 ? leftMargin[1] : leftMargin[0]
+    translateX = -index * rpxWindowWidth
   }
+  return false
 
 }
 function getRpx(windowWidth) {

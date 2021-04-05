@@ -60,7 +60,6 @@
   height: 6rpx;
   border-radius: 6rpx;
   background: linear-gradient(to right, #9ED5FA, #9ED5FA);
-  transition: 0.3s;
 }
 .active {
   color: #9ED5FA;

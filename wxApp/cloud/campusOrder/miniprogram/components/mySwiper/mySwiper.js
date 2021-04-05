@@ -45,7 +45,6 @@ Component({
 
     // tab
     leftMargin: [],
-    translateX: 0,
     tabWidth: 0,
     bottom: 0,
     tabIndex: '0'
@@ -74,8 +73,7 @@ Component({
         this.setData.call(self, {
           leftMargin, // 收集边距
           tabWidth,
-          bottom: top,
-          translateX: leftMargin[0]
+          bottom: top
         })
       })
     },
@@ -90,12 +88,10 @@ Component({
       return leftMargin
     },
     clickTab(e) {
+      // console.log(e);
       let lastIndex = this.data.tabIndex
-      let index = (Number(e.target.dataset.index) || Number(e.target.dataset.index) === 0)  ? Number(e.target.dataset.index) : Number(lastIndex)
-      // console.log(e.target.dataset.index);
       this.setData({
-        tabIndex: e.target.dataset.index ? e.target.dataset.index :lastIndex ,
-        translateX: this.data.leftMargin[index]
+        tabIndex: e.target.dataset.index ? e.target.dataset.index :lastIndex
       })
     }
   }

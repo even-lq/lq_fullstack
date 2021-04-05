@@ -105,3 +105,13 @@ Component({
     }
   }
 })
+
+
+
+
+var clickTranslateX = -index * rpxWindowWidth
+ins.selectComponent('.mySwiperList').setStyle({
+  transition: '.3s',
+  transform: 'translateX(' + clickTranslateX + 'rpx) translateZ(0rpx)'
+})
+tabTranslateX = clickTranslateX < 0 ? leftMargin[1] : leftMargin[0]
