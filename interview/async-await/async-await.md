@@ -6,3 +6,15 @@
 3. 任何await语句后面的promise对象变成reject状态，那么整个async函数都会中断
 4. async函数返回promise对象，必须等到内部所有的await命令后面的promise对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误  
 5. await后的函数会执行并返回带有resolve的promise（不然只返回空promise还是不能把promise捋成同步）
+
+
+
+#### 优缺点
+
+优点：
+
+1. 处理promise.then的作业链，代码更清晰
+
+缺点
+
+滥用await会阻塞代码，导致性能问题

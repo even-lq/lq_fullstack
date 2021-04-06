@@ -19,3 +19,9 @@ class PrimitiveString {
 console.log('hello' instanceof PrimitiveString); // true
 // 与下面的方法相同
 console.log(PrimitiveString[Symbol.hasInstance]('hello')); // true
+
+
+
+// 判断对象类型
+// 1. instanceof
+// 2. Object.prototype.toString.call() [Object, Type]
