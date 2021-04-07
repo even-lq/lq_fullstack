@@ -1,4 +1,5 @@
 let deepCopy = function (obj) {
+  var newObj = obj instanceof Array ? [] : {}
   // 只拷贝对象
   if (typeof obj !== 'object') {
     return;
@@ -11,3 +12,5 @@ let deepCopy = function (obj) {
   }
   return newObj
 }
+
+

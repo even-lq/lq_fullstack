@@ -9,7 +9,7 @@ function MyPromise(fn) {
   self.resolvedCallbacks = [] // then回调
   self.rejectedCallbacks = [] // catch回调
 
-
+  // 在一个promise里面执行了resolve就不会执行reject
   function resolve(value) {
     if (self.state === PENDING) {
       self.state = RESOLVED
@@ -24,7 +24,7 @@ function MyPromise(fn) {
     if (self.state === PENDING) {
       self.state = REJECTED
       self.value = value
-      self.rejectedCallbacks.map(cb => {
+      self.rejectedCallbacks.map(cb => { // 异步执行，保证执行顺序；如果一开始的promise只写了resolve而没有写then，那么错过的then会在then函数里面拿到resolve的值然后执行
         cb(self.value)
       })
     }
@@ -41,7 +41,7 @@ function MyPromise(fn) {
 
 MyPromise.prototype.then = function (onFulfilled, onRejected) {
   const that = this
-  onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
+  onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v // 如果onFulfilled不是函数，则强行写成函数
   onRejected = typeof onRejected === 'function' ? onRejected : r => {throw r}
 
   if (that.state === PENDING) {
