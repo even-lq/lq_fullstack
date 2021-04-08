@@ -24,7 +24,7 @@
 //         max = sum
 //       }      
 //     }
-    
+
 //   }
 //   return max
 
@@ -45,21 +45,38 @@
 // 左边和右边的端点即可。
 
 // 因此我们可以每次都将数组分成左右两部分，然后分别计算上面三种情况的最大子序列和，取出最大的即可。
-var maxSubArray = function (nums) {
-  const len = nums.length
-  let max = -Infinity
-  let sum = 0
-  for (let i = 0; i < len; i++) {
-    sum = 0
-    for (let j = i; j < len; j++) {
-      sum += nums[j]
-      if (sum > max) {
-        max = sum
-      }
-    }
-
+function helper(list, n, m) {
+  if (m === n) {
+    return list[m]
   }
-  return max
+
+  let sum = 0;
+  let lmax = -Number.MAX_VALUE;
+  let rmax = -Number.MAX_VALUE;
+  let mid = ((m - n) >> 1) + n
+  let l = helper(list, n, mid)
+  let r = helper(list, mid + 1, m)
+
+  for (let i = mid; i >= n; i--) {
+    sum += list[i]
+    if (sum > lmax) {
+      lmax = sum
+    }
+  }
+
+  sum = 0
+
+  for (let i = mid + 1; i <= m; i++) {
+    sum += list[i]
+    if (sum > rmax) {
+      rmax = sum
+    }
+  }
+
+  return Math.max(l, r, lmax + rmax)
+}
+var maxSubArray = function (nums) {
+  return helper(nums, 0, nums.length - 1)
 
 };
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
