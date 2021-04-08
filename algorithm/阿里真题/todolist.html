@@ -1,0 +1,135 @@
+<!-- 设计一个TODO List, 页面结构如下图所示，要求:
+
+使用HTML与CSS完成界面开发
+实现添加功能: 输入框中可输入任意字符，按回车后将输入字符串添加到下方列表的最后，并清空输入框
+实现删除功能: 点击列表项后面的“X”号，可以删除该项
+实现模糊匹配: 在输入框中输入字符后，将当前输入字符串与已添加的列表项进行模糊匹配，将匹配到的结果显
+示在输入框下方。如匹配不到任何列表项，列表显示空 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style type="text/css">
+  body {
+    margin: 0;
+    background-color: #f5f5f5;
+  }
+
+  h1 {
+    margin: 30px 0 0 0;
+    color: #ff5550;
+    text-align: center;
+    font-size: 60px;
+  }
+
+  #back {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid #333;
+    box-shadow: 0px 0px 3px #999;
+    background-color: #fff;
+  }
+
+  #back input {
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 30px; /* 行高30不用写高度，增加padding可自动居中 */
+    border: none;
+    border-bottom: 1px solid #000;
+    padding: 5px 15px;
+    font-size: 18px;
+  }
+
+
+  #list_back .single {
+    position: relative;
+    border-bottom: 1px solid #000;
+  }
+
+  #list_back .single p {
+    width: 100%;
+    height: 30px;
+    margin: 0;
+    line-height: 30px;
+    padding: 5px 15px;
+  }
+
+  #list_back .single span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    color: #000;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <h1>todos</h1>
+  <div id="back">
+    <input type="text" id="addinput">
+    <div id="list_back"></div>
+  </div>
+  <script>
+    var oAddinput = document.getElementById('addinput')
+    var oList_back = document.getElementById('list_back')
+    var all = document.getElementsByClassName('single')
+      oAddinput.onkeyup = function (e) {
+      // console.log(e);
+      if (e.keyCode == '13') {
+        var oDiv = document.createElement('div')
+        var oSpan = document.createElement('span')
+        var oP = document.createElement('p')
+        oP.innerText = oAddinput.value
+        oDiv.appendChild(oP)
+        oDiv.appendChild(oSpan)
+        oDiv.className = 'single'
+        oSpan.innerHTML = 'x'
+        oList_back.appendChild(oDiv)
+        select()
+        oAddinput.value = ''
+        oSpan.onclick = function () {
+          // this指的是oSpan
+          oList_back.removeChild(this.parentNode)
+        }
+      }
+    }
+
+    // 模糊匹配
+    function select() {
+      oAddinput.addEventListener('keyup', function(e) {
+        var str = e.target.value
+        var reg = new RegExp('(' + str + ')', 'g')
+
+        for (let i = 0; i < all.length; i++) {
+          var one = all[i].getElementsByTagName('p')[0]
+          var newStr = one.innerHTML.replace(reg, '<font color="red">$1</font>')
+
+          if (one.innerText.indexOf(str) === -1) {
+            all[i].style.display = 'none'
+          } else {
+            one.innerText = newStr
+          }
+
+          if (str === '') {
+            for (var j = 0; j < all.length; i++) {
+              all[i].style.display = 'none'
+            }
+          }
+
+          
+        }
+      })
+    }
+
+  </script>
+</body>
+
+</html>
