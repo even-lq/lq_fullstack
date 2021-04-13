@@ -22,4 +22,20 @@ function reverseList(head) {
   }
   return pre
 }
+
+
+const myReverse = (head, tail) => {
+  let prev = tail.next;
+  let p = head;
+  while (prev !== tail) {
+    const nex = p.next;
+    p.next = prev;
+    prev = p;
+    p = nex;
+  }
+  return [tail, head];
+}
+
+
 console.log(reverseList(list));
+console.log(myReverse(list));
