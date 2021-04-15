@@ -1,52 +1,56 @@
 var rpxWindowWidth = 0,
   pxWindowWidth = 0,
-  diffX = 0; // swiper移动的距离
-startX = 0, // 鼠标按下的X坐标
-  translateX = 0, // 最终X的坐标
+  len = 0, // swiperItem的长度
   leftMargin = [], // tab边距数组
+  diffX = 0; // 移动的差值
+
+startPoint = null, // 鼠标按下的实例
+  startX = 0, // 起始的swiperX坐标
+  translateX = 0, // 最终的swiperX坐标
+
   multiple = 0, // tab移动距离相对于swiper的倍数
   distance = 0, // tab移动的最大距离
-  tabTranslateX = 0; // tab最终X坐标
-tempTabTranslateX = 0; // 暂时的tabX坐标
-index = 0, // 移动的下标
-  part = 0, // 移动的部分
-  startPoint = null, // 鼠标按下的实例
-  seconds = '' // transition的秒数
+  halfDistance = 0, // tab移动距离的中位
+  tabTranslateX = null; // 最终的tabX坐标
+starTabX = 0; // 起始的tabX坐标
+index = 0, // 移动的tab下标
+  part = 0, // 移动的tab部分（分子）
+  seconds = ''; // transition的秒数
+
 
 function touchstart(e, ins) {
-  startPoint = e.changedTouches[0] || e.touches[0]
-  startX = translateX;
-  leftMargin = ins.selectComponent('.tab').getDataset().leftmargin
-  tempTabTranslateX = tempTabTranslateX || leftMargin[0]
-  seconds = ''
+  leftMargin = ins.selectComponent('.tab').getDataset().leftmargin;
 
-  // console.log(index, 'start');
+  var data = {
+    windowWidth: e.target.dataset.width,
+    len: e.target.dataset.len
+  }
+  pxWindowWidth = pxWindowWidth || data.windowWidth;
+  rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth);
+  len = len || data.len
+
+  distance = leftMargin[1] - leftMargin[0];
+  halfDistance = (distance / 2);
+  multiple = (leftMargin[1] - leftMargin[0]) / rpxWindowWidth;
+
+  seconds = '';
+  startPoint = e.changedTouches[0] || e.touches[0];
+  startX = translateX;
+  starTabX = tabTranslateX || leftMargin[0];
+
   ins.selectComponent('.mySwiperList').setStyle({
     transition: transition(seconds),
     transform: translateXZ(translateX)
   })
   ins.selectComponent('.tab-line').setStyle({
     transition: transition(seconds),
-    transform: translateXZ(tempTabTranslateX)
+    transform: translateXZ(tabTranslateX)
   })
-
-  var data = {
-    windowWidth: e.target.dataset.width
-  }
-  pxWindowWidth = pxWindowWidth || data.windowWidth
-  rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
-
-  distance = leftMargin[1] - leftMargin[0]
-  halfDistance = (distance / 2)
-  multiple = (leftMargin[1] - leftMargin[0]) / rpxWindowWidth
 
   return false
 }
 function touchmove(e, ins) {
   var nowPoint = e.changedTouches[0];
-  var data = {
-    len: e.target.dataset.len
-  }
 
   if (startPoint) {
     diffX = (nowPoint.pageX - startPoint.pageX) * getRpx(pxWindowWidth)
@@ -56,21 +60,22 @@ function touchmove(e, ins) {
 
   var tabItem = ins.selectAllComponents('.tab-item')
   var move = - multiple * diffX // 移动的距离
+  var lastX = -rpxWindowWidth * (len - 1) // translateX的边距
 
   if (translateX >= 0) {
     ins.selectComponent('.mySwiperList').setStyle({
       transform: translateXZ()
     })
-  } else if (translateX < -rpxWindowWidth * (data.len - 1)) {
+  } else if (translateX < lastX) {
     ins.selectComponent('.mySwiperList').setStyle({
-      transform: translateXZ(-rpxWindowWidth * (data.len - 1))
+      transform: translateXZ(lastX)
     })
   } else {
     ins.selectComponent('.mySwiperList').setStyle({
       transform: translateXZ(translateX)
     })
 
-    tabTranslateX = tempTabTranslateX + move
+    tabTranslateX = starTabX + move
     ins.selectComponent('.tab-line').setStyle({
       transform: translateXZ(tabTranslateX)
     })
@@ -85,13 +90,10 @@ function touchmove(e, ins) {
   return false
 }
 function touchend(e, ins) {
-  var data = {
-    len: e.target.dataset.len
-  }
 
   // 获取手指停止时的X
   translateX = Math.min(0, translateX) // 第一个不能往左滑
-  translateX = Math.max(-rpxWindowWidth * (data.len - 1), translateX) // 最后一个不能往右滑
+  translateX = Math.max(-rpxWindowWidth * (len - 1), translateX) // 最后一个不能往右滑
   var num = Math.round(translateX / rpxWindowWidth)
   seconds = '.3'
   translateX = num * rpxWindowWidth
@@ -103,7 +105,7 @@ function touchend(e, ins) {
   var maxLen = leftMargin.length - 1
   leftMargin[1] - tabTranslateX < tabTranslateX - leftMargin[0] ? (index < maxLen && ++index) : (index > 0 && --index)
   tabTranslateX = leftMargin[index]
-  tempTabTranslateX = tabTranslateX
+
   ins.selectComponent('.tab-line').setStyle({
     transition: transition(seconds),
     transform: translateXZ(tabTranslateX)
@@ -122,7 +124,7 @@ function clickTab(e, ins) {
   rpxWindowWidth = rpxWindowWidth || pxWindowWidth * getRpx(pxWindowWidth)
 
   if (!isNaN(index) && leftMargin.length !== 0) {
-    tabTranslateX = tempTabTranslateX = leftMargin[index]
+    tabTranslateX = leftMargin[index]
     ins.selectComponent('.tab-line').setStyle({
       transition: transition(seconds),
       transform: translateXZ(tabTranslateX)

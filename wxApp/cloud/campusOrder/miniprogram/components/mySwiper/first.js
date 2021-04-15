@@ -67,14 +67,8 @@ function touchmove(e, ins) {
     ins.selectComponent('.mySwiperList').setStyle({
       transform: translateXZ(translateX)
     })
-    // console.log(slide);
-
-    // console.log(slide, tabTranslateX + slide);
 
     var index = Math.abs(Math.round(moved / distance))
-    // tabTranslateX = diffX < 0 ? Math.min(leftMargin[1], leftMargin[0] - moved) : Math.max(leftMargin[0], leftMargin[1] - moved)
-    // console.log(tabTranslateX);
-    // console.log(tabTranslateX + slide);
     tabTranslateX = tempTabTranslateX + slide
     ins.selectComponent('.tab-line').setStyle({
       transform: translateXZ(tabTranslateX)
@@ -101,7 +95,6 @@ function touchmove(e, ins) {
     }
 
   }
-  // tabTranslateX = tabTranslateX + slide
 
 
   return false
@@ -122,7 +115,6 @@ function touchend(e, ins) {
     transform: translateXZ(translateX)
   })
 
-  console.log(leftMargin[1] - tabTranslateX < tabTranslateX - leftMargin[0] ? 'true' : 'false');
   // console.log(leftMargin[1] - tabTranslateX < tabTranslateX - leftMargin[0] ? 'true' : 'false');
   leftMargin[1] - tabTranslateX < tabTranslateX - leftMargin[0] ? tabTranslateX = leftMargin[1] : tabTranslateX = leftMargin[0]
 
@@ -183,19 +175,7 @@ function translateXZ(x, z) {
 function transition(seconds) {
   return '' + seconds + 's'
 }
-// function getNumerator(a, b) { // 获取分子 => 转变为下标
-//   var fenzi = parseInt(a.toFixed(2) * 100, 10); // 分子
-//   var fenmu = parseInt(b.toFixed(2) * 100, 10); // 分母
-//   var min = Math.min(fenzi, fenmu); // 较小的
-//   for (var i = min; i > 1; i--) {
-//     if (!(fenzi % i) && !(fenmu % i)) {
-//       fenzi = fenzi / i;
-//       fenmu = fenmu / i;
-//       min = Math.min(fenzi, fenmu);
-//     }
-//   }
-//   return fenzi - 1;
-// }
+
 module.exports = {
   touchstart: touchstart,
   touchmove: touchmove,
