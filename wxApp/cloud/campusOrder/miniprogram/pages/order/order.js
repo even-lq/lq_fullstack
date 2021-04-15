@@ -97,14 +97,7 @@ Page({
                 width: 20,
                 height: 20
               })
-              // ccs.push({
-              //  latitude: res.data[i].location.lat,
-              //  longitude: res.data[i].location.lng,
-              //  color: '#C16F7A',
-              //  fillColor: '#AECFF2',
-              //  radius: 160,
-              //  strokeWidth: 1
-              // })
+              
             }
 
 

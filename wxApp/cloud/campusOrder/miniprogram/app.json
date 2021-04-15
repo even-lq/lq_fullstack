@@ -31,26 +31,26 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "./images/plus-dark.png",
-        "selectedIconPath": "./images/plus-light.png"
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/home-color.png"
       },
       {
         "pagePath": "pages/map/map",
         "text": "点单",
-        "iconPath": "./images/group-dark.png",
-        "selectedIconPath": "./images/group-light.png"
+        "iconPath": "./images/meal.png",
+        "selectedIconPath": "./images/meal-color.png"
       },
       {
         "pagePath": "pages/indent/indent",
         "text": "订单",
-        "iconPath": "./images/user-dark.png",
-        "selectedIconPath": "./images/user-light.png"
+        "iconPath": "./images/order.png",
+        "selectedIconPath": "./images/order-color.png"
       },
       {
         "pagePath": "pages/mine/mine",
         "text": "我的",
-        "iconPath": "./images/user-dark.png",
-        "selectedIconPath": "./images/user-light.png"
+        "iconPath": "./images/user.png",
+        "selectedIconPath": "./images/user-color.png"
       }
     ]
   },

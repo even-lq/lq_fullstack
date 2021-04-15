@@ -2,7 +2,7 @@
   <view class="action" data-index="0" bindtap="switchTab">
     <!-- <view class="iconfont icon-shouye1"></view> -->
     <view class="tabIcon-icon-shouye1" wx:if="{{selected === 0}}">
-      <iconfont name="shouye1"></iconfont>
+      <iconfont name="shouye1-blue"></iconfont>
     </view>
     <view class="tabIcon-icon-shouye1" wx:else>
       <iconfont name="shouye1-copy"></iconfont>
@@ -12,7 +12,7 @@
   <view class="action" data-index="1" bindtap="switchTab">
     <navigator open-type="navigateTo" url='/pages/order/order' hover-class="none">
       <view class="tabIcon-icon-canyin" wx:if="{{selected === 1}}">
-        <iconfont name="canyin"></iconfont>
+        <iconfont name="canyin-blue"></iconfont>
       </view>
       <view class="tabIcon-icon-canyin" wx:else>
         <iconfont name="canyin-copy"></iconfont>
@@ -22,7 +22,7 @@
   </view>
   <view class="action" data-index="2" bindtap="switchTab">
     <view class="tabIcon-icon-dingdan" wx:if="{{selected === 2}}">
-      <iconfont name="dingdan"></iconfont>
+      <iconfont name="dingdan-blue"></iconfont>
     </view>
     <view class="tabIcon-icon-dingdan" wx:else>
       <iconfont name="dingdan-copy"></iconfont>
@@ -31,7 +31,7 @@
   </view>
   <view class="action" data-index="3" bindtap="switchTab">
     <view class="tabIcon-icon-wode" wx:if="{{selected === 3}}">
-      <iconfont name="wode"></iconfont>
+      <iconfont name="wode-blue"></iconfont>
     </view>
     <view class="tabIcon-icon-wode" wx:else>
       <iconfont name="wode-copy"></iconfont>

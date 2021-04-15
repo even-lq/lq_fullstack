@@ -89,10 +89,10 @@ Component({
     },
     clickTab(e) {
       // console.log(e);
-      let lastIndex = this.data.tabIndex
-      this.setData({
-        tabIndex: e.target.dataset.index ? e.target.dataset.index :lastIndex
-      })
+      // let lastIndex = this.data.tabIndex
+      // this.setData({
+      //   tabIndex: e.target.dataset.index ? e.target.dataset.index :lastIndex
+      // })
     }
   }
 })

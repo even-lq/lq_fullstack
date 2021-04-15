@@ -1,6 +1,6 @@
 Component({
   properties: {
-    // canyin-copy | dingdan-copy | wode-copy | shouye1-copy | canyin | shouye1 | dingdan | wode | shouye | dingwei | dianhua | xuexiao | sousuo
+    // meiyoudingdan | kezuofan | jiazaizhong | canyin-blue | canyin-copy | dingdan-copy | wode-copy | wode-blue | shouye1-copy | dingdan-blue | canyin | shouye1 | shouye1-blue | dingdan | wode | shouye | dingwei | dianhua | xuexiao | sousuo
     name: {
       type: String,
     },
