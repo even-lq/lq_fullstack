@@ -19,6 +19,15 @@ https://zhuanlan.zhihu.com/p/87684858
 
 #### 4. event-loop
 
+我们都知道 Js 是单线程都，但是一些高耗时操作就带来了进程阻塞问题。为了解决这个问题，Js 有两种任务的执行模式：**同步模式（Synchronous）和异步模式（Asynchronous）**。
+
+在异步模式下，创建**异步任务主要分为宏任务与微任务两种**。ES6 规范中，宏任务（Macrotask） 称为 Task， 微任务（Microtask） 称为 Jobs。宏任务是由宿主（浏览器、Node）发起的，而微任务由 JS 自身发起。
+
+> 作者：ITEM
+> 链接：https://juejin.cn/post/6945319439772434469
+> 来源：掘金
+> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 - 异步中的微任务和宏任务
 
   微任务：process.nextTick，promise的then，MutationObserver
@@ -30,7 +39,9 @@ https://zhuanlan.zhihu.com/p/87684858
   2. 当执行完所有的同步代码，执行栈为空，查看**是否有异步代码**需要执行，有则执行
   3. **执行所有微任务**
   4. 当所有微任务执行完后，有必要的话就**渲染页面**
-  5. 然后开始下一轮的**Event-Loop**，**执行（异步函数中的）宏任务（中的异步代码）**
+  5. 然后开始下一轮的**Event-Loop**，**执行宏任务**
+
+![event-loop](E:\study\StudyProjects\lq_fullstack\js\event-loop\event-loop.png)
 
 应用
 

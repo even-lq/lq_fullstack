@@ -14,13 +14,13 @@ async function testAsync() {
 }
 
 // 翻译结果
-function testAsync() {
-  return Promise().resolve().then(function () {
-    return getJson()
-  }).then((res) => {
-    let data = res
-    console.log(3);
-    console.log(data);
-  })
-}
+// function testAsync() {
+//   return Promise().resolve().then(function () {
+//     return getJson()
+//   }).then((res) => {
+//     let data = res
+//     console.log(3);
+//     console.log(data);
+//   })
+// }
 testAsync() // 2 3 333
