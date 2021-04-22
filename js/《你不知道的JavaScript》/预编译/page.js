@@ -22,7 +22,7 @@ fn(3)// 2
 
 
 function fn(a) {
-  console.log(a);
+  console.log(a);  
   var a = 123;
   function a() { };
   console.log(a);

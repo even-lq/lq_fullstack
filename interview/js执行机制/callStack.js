@@ -15,4 +15,5 @@ function addAll(b, c) {
   // }
   // add()
 }
-addAll(3, 6)
+console.log(addAll(1, 2));
+

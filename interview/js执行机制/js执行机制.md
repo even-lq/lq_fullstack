@@ -70,7 +70,7 @@ var myName = '周老板'
 foo()
 ```
 
-而add的外部执行上下文是addAll
+而add的外部执行上下文是全局
 
 ```js
 function addAll(b, c) {

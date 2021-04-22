@@ -12,11 +12,13 @@
     <button id="btn">click</button>
   </div>
   <script src="./index.js"></script>
+  <!-- <script src="../throttle.js"></script> -->
   <script>
     let btn = document.getElementById('btn');
     btn.addEventListener('click', throttle(show, 2000))
+    // btn.addEventListener('click', show)
     function show() {
-      console.log(this);
+      // console.log(this);
       console.log('hello');
     }
   </script>
