@@ -19,6 +19,7 @@
     let routeView = document.getElementById('routeView')
 
     window.addEventListener('popState', () => {
+      // console.log('?');
       routeView.innerHTML = location.pathname
     })
 

@@ -29,7 +29,7 @@ console.log('a' == true);
 // 所以![]运算后的结果就是false
 // 于是 [] == false
 // 所以 ![]是false，[] == false ->  [] == 0  ->  '' == 0  -> 0 == 0  -> true
-//结果就是true
+// 结果就是true
 
 
 // [] == [] // false

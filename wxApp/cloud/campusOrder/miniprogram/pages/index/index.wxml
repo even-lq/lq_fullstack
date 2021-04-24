@@ -1,3 +1,6 @@
 <!-- miniprogram/pages/index/index.wxml -->
 <van-button type="primary" bindtap="order">点单</van-button>
+<view style="width:20px;height:20px;background:red">
+
+</view>
 <i class="t-icon t-icon-shouye1"></i>

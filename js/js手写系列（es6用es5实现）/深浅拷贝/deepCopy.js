@@ -14,3 +14,15 @@ let deepCopy = function (obj) {
 }
 
 
+var object = {
+  name: "my",
+  getName: {
+    b: "fds",
+  },
+};
+
+let a = deepCopy(object);
+object.name = "fds";
+
+console.log(a);
+console.log(object);

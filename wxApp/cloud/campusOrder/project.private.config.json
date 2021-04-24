@@ -33,6 +33,12 @@
         {
           "name": "pages/indent/indent",
           "pathName": "pages/indent/indent",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "scene": null
         }
       ]
