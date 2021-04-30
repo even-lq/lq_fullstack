@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul class="list">
+    <li class="list-item"><a href="/home">home</a></li>
+    <li class="list-item"><a href="/about">about</a></li>
+  </ul>
+
+  <div id="routerView"></div>
+  <script>
+    window.addEventListener('DOMContentLoaded', onLoad)
+    // 点击a标签以及前进后退按钮
+    window.addEventListener('popstate', onPopState)
+
+    function onLoad() {
+      onPopState();
+      
+      var linkList = document.querySelectorAll('.list .list-item a[href]')
+      linkList.forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault()
+          history.pushState({
+            a: 'a'
+          }, '', el.getAttribute('href'))
+          onPopState();
+        })
+      })
+    }
+
+    function onPopState() {
+      console.log(location.pathname);
+      switch (location.pathname) {
+        case '/home':
+          document.getElementById('routerView').innerHTML = 'Home'
+          break;
+        case '/about':
+          document.getElementById('routerView').innerHTML = 'About'
+          break;
+        default:
+          document.getElementById('routerView').innerHTML = 'lq'
+          break;
+      }
+    }
+  </script>
+</body>
+
+</html>
