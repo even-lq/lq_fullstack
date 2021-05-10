@@ -17,7 +17,7 @@ module.exports = {
     req.session = captcha.text.toLowerCase();
     console.log(req.session); //0xtg 生成的验证码
     //保存到cookie 方便前端调用验证
-    res.cookie("captcha", req.session);
+    res.cookie("captcha", req.session); // express cookie， key-value形式，还可以设置options，本质上是响应头的Set-Cookie
     res.setHeader("Content-Type", "image/svg+xml");
 
     res.write(String(captcha.data)); // 响应体， String(captcha.data) svg标签
