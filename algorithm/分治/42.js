@@ -34,6 +34,7 @@ function helper(list, n, m) {
   let sum = 0;
   let lmax = -Number.MAX_VALUE;
   let rmax = -Number.MAX_VALUE;
+  // 跟/2相比，/2保留小数， >> 1向下取整
   let mid = ((m - n) >> 1) + n
   let l = helper(list, n, mid)
   let r = helper(list, mid + 1, m)

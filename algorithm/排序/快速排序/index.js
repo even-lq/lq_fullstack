@@ -11,6 +11,8 @@ function partition(arr, left, right) {
   while(i < j) {
     // 在右边找到 < pivot
     // 在左边找到 > pivot
+    // ↓
+    // 降序
     while (cb(arr[j], pivot) >= 0 && i < j) {
       j --;
     }

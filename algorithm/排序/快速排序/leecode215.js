@@ -1,5 +1,5 @@
 function partition(arr, left, right) {
-  // 此法需要去第一项为pivot
+  // 此法需要取第一项为pivot
   let i = left, j = right;
   let pivot = arr[i]
   while (i < j) {
@@ -32,8 +32,24 @@ var findKthLargest = function (nums, k) {
     }
     i = partition(nums, left, right)
   }
-  console.log(i);
-  console.log(nums);
+  // console.log(i);
+  // console.log(nums);
   return nums[i]
 };
-console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4));
+
+var getLeastNumbers = function (nums, k) {
+  let left = 0;
+  let right = nums.length - 1;
+  let i = partition(nums, left, right);
+  while (i != k) {
+    if (i < k) {
+      left = i + 1;
+    } else {
+      right = i - 1;
+    }
+    i = partition(nums, left, right);
+  }
+  return nums.slice(0, 4);
+};
+// console.log(findKthLargest([3, 2, 3, 1, 2, 4, 5, 5, 6], 4));
+console.log(getLeastNumbers([3, 2, 3, 1, 2, 4, 5, 5, 6], 4));

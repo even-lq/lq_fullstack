@@ -25,7 +25,6 @@ function selectSort(arr) {
     // minIndex对应的元素不是目前数组的头部元素，就交换位置
     if (minIndex !== i) {
       [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]
-
     }
 
   }

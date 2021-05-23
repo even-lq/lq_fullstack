@@ -24,13 +24,14 @@ let arr = [5, 3, 2, 4, 1, 0]
 // 3.在有序序列里定位元素的位置时，是从后往前定位的，只要发现一个比当前元素大的值，就需要为当前元素腾位置
 
 
+// 可以用二分法优化
 function insertSort(arr) {
   const len = arr.length
   // temp 用来保存当前需要插入的元素
   let temp;
   for (let i = 1; i < len; i++) {
-    temp = arr[i]
     let j = i
+    temp = arr[i];
     while (j > 0 && arr[j - 1] > temp) {
       arr[j] = arr[ j - 1 ]
       j--

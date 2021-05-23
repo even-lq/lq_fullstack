@@ -8,14 +8,15 @@
 // 链接：https://leetcode-cn.com/problems/two-sum
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 let nums = [2, 7, 11, 15], target = 9
-let target = 9
+// let target = 9
 //[0，1]
 var twoSum = function (nums, target) {
   for (let i = 0; i < nums.length; i++) {
-    for (letj = i + 1; j < nums.length; j++) {
+    for (let j = i + 1; j < nums.length; j++) {
       if (nums[i] === target - nums[j]) {
         return [i, j]
       }
     }
   };
 }
+console.log(twoSum(nums, target));

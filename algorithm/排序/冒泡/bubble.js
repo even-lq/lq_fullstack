@@ -12,18 +12,18 @@ let arr = [5, 3, 2, 4, 1, 0]
 // 重复上述步骤，每次都会把最大的元素冒到末尾
 
 
-// function bubble(arr) {
-//   let len = arr.length
+function bubble(arr) {
+  let len = arr.length
 
-//   for (let i = 0; i < len; i++) { // 让思想重复5次
-//     for (let j = 0; j < len - 1; j++) { // 前后对比4轮
-//       if (arr[j] > arr[j + 1]) {
-//         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
-//       }
-//     }
-//   }
-//   return arr
-// }
+  for (let i = 0; i < len; i++) { // 让思想重复5次
+    for (let j = 0; j < len - 1; j++) { // 前后对比4轮
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]]
+      }
+    }
+  }
+  return arr
+}
 
 // 优化1：每次都把最大的排在末尾，所以每次都少一轮比较(已经排好的不用再比较了)
 function bubble1(arr) {
@@ -43,7 +43,7 @@ function bubble1(arr) {
 function bubble2(arr) {
   let len = arr.length
 
-  for (let i = 0; i < len; i++) { // 让思想重复5次
+  for (let i = 0; i < len - 1; i++) { // 让思想重复5次
     let flag = false
     for (let j = 0; j < len - 1 - i; j++) { // 前后对比4轮
       if (arr[j] > arr[j + 1]) {
