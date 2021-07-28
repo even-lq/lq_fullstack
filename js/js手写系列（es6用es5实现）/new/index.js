@@ -26,7 +26,7 @@ function myNew() {
   // call 需要把参数按顺序传递进去，而 apply 则是把参数放在数组里。
 
   let result = Constructor.apply(obj, arguments)
-  console.log(typeof result);
+  console.log(typeof result, '?');
   return typeof result === 'object' ? result : obj
 }
 let myPerson = myNew(Person, 'xm')

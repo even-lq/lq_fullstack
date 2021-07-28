@@ -52,8 +52,20 @@ a.bind(b) 意思是让a的this能够访问b的内容
 
 ## 注意事项
 
-1. bind操作只有第一次绑定有效果，之后再次进行绑定，不会有效果
+> [javascript中bind多次绑定无效——从源码角度看看bind到底做了什么](https://blog.csdn.net/handsomexiaominge/article/details/90814810?utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromMachineLearnPai2%7Edefault-1.control)
 
-   简单来说，再次bind的时候，我们已经无法对最原始的待绑定函数进行操作了，我们操作的只是它的代理。
+1. bind二次绑定
 
-2. new操作的绑定操作优先度要高于bind，事实上，也会高于apply和call
+   bind操作只有第一次绑定有效果，之后再次进行绑定，不会有效果
+
+   由于bind的实现是由闭包实现的，第二次bind形成了闭包的调用栈，执行后最终只是回到了最原始的绑定上面
+
+2. bind后new
+
+   对于bind操作之后返回的函数（x）进行new操作有如下结果：
+
+   - `x.prototype === undefined`
+
+     > 使用Function.prototype.bind创建的函数对象是`exotic objects`(外来对象)。它们也没有`prototype`属性。
+
+   - new操作的绑定操作优先度要高于bind，事实上，也会高于apply和call
