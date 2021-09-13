@@ -6,6 +6,26 @@
 vue create vue3-initial // 选择vue3 preview版
 ```
 
+## 为什么要用vue3
+
+1. 随着项目复杂度的提升，组件逻辑分散在各个地方，难以维护
+
+2. Mixin的缺点
+
+   - 命名冲突
+   - 不清楚暴露出来变量的作用
+
+3. 响应式
+
+   vue2不能使data中某个对象的新增属性变成响应式（Object.defineProperty）的，vue3可以（proxy）
+
+4. 全局api
+   - 在单元测试中，全局配置非常容易污染全局环境
+   - 在不同的apps中，共享一份有不同配置的Vue对象变得非常困难
+   - vue3：
+     - 在Vue全局对象上修改的配置变为在某个vue实例上修改配置
+     - 支持treeshaking，减少export default的导出，将具名的函数、对象等导出使得打包工具在打包时，不会打包没用到的函数、对象等。
+
 ## 与vue2的区别
 
 1. js
@@ -110,7 +130,23 @@ vue create vue3-initial // 选择vue3 preview版
          };
          ```
      
-         
+     - watch
+     
+       监听响应式对象
+     
+       ```js
+       watch( [greetings, data], (newValue, oldValue) = {
+       console.log( 'old', oldValue)
+       console.log( 'new', newValue) 
+       document.title = 'updated' + greetings.value + data.count
+       })
+       ```
+     
+       监听响应式对象的属性
+     
+       ```js
+       watch( [greetings, () => data.count], ...)
+       ```
    
 2. main.js
 
